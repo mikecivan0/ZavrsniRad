@@ -2,15 +2,12 @@
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
         
-        <!-- 
-        Potrebno je ručno kreirati bazu
-        create database edunovajp24_hib default character set utf8;
--->
+       
 <hibernate-configuration>
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mariadb://localhost:3306/raspored_rada</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/raspored_rada_hibernate</property>
         <property name="connection.username">edunova</property>
         <property name="connection.password">edunova</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
@@ -30,7 +27,7 @@
         create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
         none: does nothing with the schema, makes no changes to the database
         
-        1. puta create-drop, poslije update
+       
         
         -->
         <property name="hbm2ddl.auto">create-drop</property>
@@ -42,11 +39,13 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
 
-        <!-- Ovdje navodimo mapirane klase -->
+        
         <mapping class="mikec.rasporedrada.model.Osoba" />  
-         <mapping class="mikec.rasporedrada.model.Korisnik" />  
-         <mapping class="mikec.rasporedrada.model.OznakaUnosaURaspored" />  
-         <mapping class="mikec.rasporedrada.model.Raspored" />  
+        <mapping class="mikec.rasporedrada.model.Korisnik" />  
+        <mapping class="mikec.rasporedrada.model.OznakaUnosaURaspored" />  
+        <mapping class="mikec.rasporedrada.model.Raspored" />  
+        <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanima" />  
+        <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanimaStavka" />  
          
     </session-factory>
 </hibernate-configuration>
