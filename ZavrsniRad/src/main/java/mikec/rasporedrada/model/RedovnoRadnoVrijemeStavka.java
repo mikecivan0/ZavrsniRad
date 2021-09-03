@@ -13,8 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "redovnaRadnaVremenaStavke")
-class RedovnoRadnoVrijemeStavke {
+public class RedovnoRadnoVrijemeStavka {
 
+    public RedovnoRadnoVrijemeStavka(String naziv) {
+        this.naziv = naziv;
+    }
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -45,7 +45,9 @@
         <mapping class="mikec.rasporedrada.model.OznakaUnosaURaspored" />  
         <mapping class="mikec.rasporedrada.model.Raspored" />  
         <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanima" />  
-        <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanimaStavka" />  
+        <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanimaStavka" />
+        <mapping class="mikec.rasporedrada.model.RedovnoRadnoVrijeme" />  
+        <mapping class="mikec.rasporedrada.model.RedovnoRadnoVrijemeStavka" />   
          
     </session-factory>
 </hibernate-configuration>

@@ -6,7 +6,7 @@
 
 package mikec.rasporedrada.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +18,18 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "brojRadnikaPoDanima")
 public class BrojRadnikaPoDanima {
+
+    public BrojRadnikaPoDanima(
+            BrojRadnikaPoDanimaStavka brojRadnikaPoDanimaStavka, 
+            int vrijednost, 
+            LocalDate vrijediOd, 
+            LocalDate vrijediDo) 
+    {
+        this.brojRadnikaPoDanimaStavka = brojRadnikaPoDanimaStavka;
+        this.vrijednost = vrijednost;
+        this.vrijediOd = vrijediOd;
+        this.vrijediDo = vrijediDo;
+    }    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,11 +47,11 @@ public class BrojRadnikaPoDanima {
     @Column(
             nullable = false
     )
-    private Date vrijediOd;
+    private LocalDate vrijediOd;
     
     @Column(
             nullable = false
     )
-    private Date vrijediDo;
+    private LocalDate vrijediDo;
 
 }

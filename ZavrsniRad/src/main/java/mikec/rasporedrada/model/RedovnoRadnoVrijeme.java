@@ -6,7 +6,9 @@
 
 package mikec.rasporedrada.model;
 
-import java.util.Date;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,21 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "redovnaRadnaVremena")
 public class RedovnoRadnoVrijeme {
+
+    public RedovnoRadnoVrijeme(
+            RedovnoRadnoVrijemeStavka redovnaRadnaVremenaStavka, 
+            LocalTime vrijednost, 
+            LocalDate vrijediOd, 
+            LocalDate vrijediDo, 
+            int trajanjePauzeUMinutama) {
+        this.redovnaRadnaVremenaStavka = redovnaRadnaVremenaStavka;
+        this.vrijednost = vrijednost;
+        this.vrijediOd = vrijediOd;
+        this.vrijediDo = vrijediDo;
+        this.trajanjePauzeUMinutama = trajanjePauzeUMinutama;
+    }
+    
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,22 +42,22 @@ public class RedovnoRadnoVrijeme {
     
     @ManyToOne
     @JoinColumn(name = "redovnaRadnaVremenaStavkaId")
-    private RedovnoRadnoVrijemeStavke redovnaRadnaVremenaStavka;
+    private RedovnoRadnoVrijemeStavka redovnaRadnaVremenaStavka;
     
     @Column(
             nullable = false
     )
-    private int vrijednost;
+    private LocalTime vrijednost;
     
     @Column(
             nullable = false
     )
-    private Date vrijediOd;
+    private LocalDate vrijediOd;
     
     @Column(
             nullable = false
     )
-    private Date vrijediDo;
+    private LocalDate vrijediDo;
     
     @Column(
             nullable = false
