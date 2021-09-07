@@ -46,12 +46,13 @@ public class OsnovniUnosi {
         for(String stavka : popis){
            rrvStavke.add(new RedovnoRadnoVrijemeStavka(stavka)); 
         }
-
-        rrvStavke.forEach(rrvs -> {
-            session.beginTransaction();
-            session.save(rrvs);
-            session.getTransaction().commit();
-        });
+        
+        
+        session.beginTransaction();        
+        rrvStavke.forEach(rrvs -> {            
+            session.save(rrvs);            
+        });        
+        session.getTransaction().commit();
     }
 
     private void ucitajRedovnoRadnoVrijeme() {
@@ -70,11 +71,12 @@ public class OsnovniUnosi {
             );
         }
         
-        redovnaRadnaVremena.forEach(rrv -> {
-            session.beginTransaction();
-            session.save(rrv);
-            session.getTransaction().commit();
+        
+        session.beginTransaction();
+        redovnaRadnaVremena.forEach(rrv -> {           
+            session.save(rrv);           
         });
+        session.getTransaction().commit();
     }
     
     private void ucitajBrojRadnikaPoDanimaStavke() {
@@ -87,12 +89,13 @@ public class OsnovniUnosi {
         for(String stavka : popis){
            brdStavke.add(new BrojRadnikaPoDanimaStavka(stavka)); 
         }
-
-        brdStavke.forEach(brds -> {
-            session.beginTransaction();
-            session.save(brds);
-            session.getTransaction().commit();
+        
+        
+        session.beginTransaction();
+        brdStavke.forEach(brds -> {            
+            session.save(brds);            
         });
+        session.getTransaction().commit();
     }
     
     private void ucitajBrojRadnikaPoDanima() {
@@ -110,11 +113,12 @@ public class OsnovniUnosi {
             );
         }
         
-        brojRadnika.forEach(brd -> {
-            session.beginTransaction();
-            session.save(brd);
-            session.getTransaction().commit();
+        
+        session.beginTransaction();
+        brojRadnika.forEach(brd -> {            
+            session.save(brd);            
         });
+        session.getTransaction().commit();
     }
     
     private static int getRandomNumberInRange(int min, int max) {
