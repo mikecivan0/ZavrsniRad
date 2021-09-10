@@ -1,4 +1,4 @@
-package mikec.rasporedrada.main;
+package mikec.rasporedrada.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

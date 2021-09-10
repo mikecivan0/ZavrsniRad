@@ -11,18 +11,16 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-/**
- *
- * @author Korisnik
- */
+
 // singleton pattern
 public class HibernateUtil {
     
     private static StandardServiceRegistry registry;
     private static Session session;
     // factory principle
-    public static Session getSession() {
-        if (session == null) {
+    
+    public static void createSession(){
+         if (session == null) {
             
             try {
                 // Create registry
@@ -46,6 +44,8 @@ public class HibernateUtil {
                 }
             }
         }
+    }
+    public static Session getSession() {       
         return session;
     }
 
