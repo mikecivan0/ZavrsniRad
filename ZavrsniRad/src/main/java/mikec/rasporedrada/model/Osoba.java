@@ -17,6 +17,16 @@ import javax.persistence.Id;
 @Entity(name = "osobe")
 public class Osoba {
 
+    public Osoba(String ime, String prezime, String telefon, String email, String adresa) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.telefon = telefon;
+        this.email = email;
+        this.adresa = adresa;
+    }
+    
+    
+
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY )
     private Long id;
