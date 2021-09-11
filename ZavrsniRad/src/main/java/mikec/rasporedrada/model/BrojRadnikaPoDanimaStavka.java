@@ -15,6 +15,9 @@ import javax.persistence.Id;
 @Entity(name = "brojRadnikaPoDanimaStavke")
 public class BrojRadnikaPoDanimaStavka {
 
+    public BrojRadnikaPoDanimaStavka() {
+    }
+
     public BrojRadnikaPoDanimaStavka(String naziv) {
         this.naziv = naziv;
     }   

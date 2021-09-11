@@ -33,7 +33,7 @@ public class PersonController extends BaseController<Osoba>{
 
     @Override
     protected void updateControll() throws BaseException {
-
+        this.createControll();
     }
 
     @Override
@@ -41,12 +41,10 @@ public class PersonController extends BaseController<Osoba>{
 
     }
 
-    private void lengthControll(String variable, Integer length) throws BaseException{
-   
+    private void lengthControll(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Unos '" + variable + "' ne može biti duži od " + length + " znakova");
-        }
-    
+        }    
     }
     
     private void notEmptyControll(String variable) throws BaseException{        
@@ -63,8 +61,7 @@ public class PersonController extends BaseController<Osoba>{
             case "adresa" -> text = entity.getAdresa();
             case "telefon" -> text = entity.getTelefon();
             case "email" -> text = entity.getEmail();
-            default -> {
-            }
+            default -> {}
         }
         return text;
     }

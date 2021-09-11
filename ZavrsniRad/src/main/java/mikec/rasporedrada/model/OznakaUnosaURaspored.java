@@ -19,6 +19,15 @@ import javax.persistence.OneToMany;
 @Entity(name = "oznakeUnosaURaspored")
 public class OznakaUnosaURaspored {
 
+    public OznakaUnosaURaspored() {
+    }
+
+    public OznakaUnosaURaspored(Long id, String naziv, String skracenica) {
+        this.id = id;
+        this.naziv = naziv;
+        this.skracenica = skracenica;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

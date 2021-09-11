@@ -60,5 +60,11 @@ public abstract class BaseController<T> {
     public void setEntity(T entity) {
         this.entity = entity;
     }   
+
+    public Session getSession() {
+        return session;
+    }
+    
+    
     
 }

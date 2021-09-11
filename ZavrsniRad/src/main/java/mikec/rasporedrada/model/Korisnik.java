@@ -18,6 +18,19 @@ import javax.persistence.OneToOne;
 @Entity(name = "korisnici")
 public class Korisnik{
 
+    public Korisnik() {
+    }
+
+    public Korisnik(Long id, Osoba osoba, String username, String pass, String prs_id, int razina, boolean aktivan) {
+        this.id = id;
+        this.osoba = osoba;
+        this.username = username;
+        this.pass = pass;
+        this.prs_id = prs_id;
+        this.razina = razina;
+        this.aktivan = aktivan;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

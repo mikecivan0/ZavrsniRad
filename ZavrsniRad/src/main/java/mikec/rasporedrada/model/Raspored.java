@@ -7,7 +7,6 @@
 package mikec.rasporedrada.model;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +14,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity(name = "raspored")
 public class Raspored {
+
+    public Raspored() {
+    }
+
+    public Raspored(Long id, Korisnik korisnik, OznakaUnosaURaspored oznakaUnosaURaspored, Date datum, boolean radSaPauzom) {
+        this.id = id;
+        this.korisnik = korisnik;
+        this.oznakaUnosaURaspored = oznakaUnosaURaspored;
+        this.datum = datum;
+        this.radSaPauzom = radSaPauzom;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

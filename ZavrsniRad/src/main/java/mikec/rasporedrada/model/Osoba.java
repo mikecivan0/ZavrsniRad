@@ -17,6 +17,9 @@ import javax.persistence.Id;
 @Entity(name = "osobe")
 public class Osoba {
 
+    public Osoba() {
+    }
+
     public Osoba(String ime, String prezime, String telefon, String email, String adresa) {
         this.ime = ime;
         this.prezime = prezime;

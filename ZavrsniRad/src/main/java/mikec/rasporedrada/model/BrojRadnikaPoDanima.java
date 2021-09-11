@@ -19,6 +19,9 @@ import javax.persistence.ManyToOne;
 @Entity(name = "brojRadnikaPoDanima")
 public class BrojRadnikaPoDanima {
 
+    public BrojRadnikaPoDanima() {
+    }
+
     public BrojRadnikaPoDanima(
             BrojRadnikaPoDanimaStavka brojRadnikaPoDanimaStavka, 
             int vrijednost, 

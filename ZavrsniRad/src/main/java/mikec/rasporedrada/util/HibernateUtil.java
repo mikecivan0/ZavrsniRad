@@ -19,8 +19,8 @@ public class HibernateUtil {
     private static Session session;
     // factory principle
     
-    public static void createSession(){
-         if (session == null) {
+    public static Session getSession() { 
+        if (session == null) {
             
             try {
                 // Create registry
@@ -44,8 +44,6 @@ public class HibernateUtil {
                 }
             }
         }
-    }
-    public static Session getSession() {       
         return session;
     }
 

@@ -21,6 +21,9 @@ import javax.persistence.ManyToOne;
 @Entity(name = "redovnaRadnaVremena")
 public class RedovnoRadnoVrijeme {
 
+    public RedovnoRadnoVrijeme() {
+    }
+
     public RedovnoRadnoVrijeme(
             RedovnoRadnoVrijemeStavka redovnaRadnaVremenaStavka, 
             LocalTime vrijednost, 
