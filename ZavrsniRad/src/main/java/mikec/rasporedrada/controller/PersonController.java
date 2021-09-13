@@ -17,7 +17,7 @@ public class PersonController extends BaseController<Osoba>{
 
     @Override
     public List<Osoba> read() {
-        return session.createQuery("from osobe").list();
+        return session.createQuery("from Osoba").list();
     }
 
     @Override
