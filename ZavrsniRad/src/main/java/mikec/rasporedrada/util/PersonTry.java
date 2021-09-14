@@ -10,7 +10,7 @@ public class PersonTry {
     
     public static void addPerson(){
         prsCont = new PersonController();
-        osoba = new Osoba("Ivan", "Mikec", "", "", "");
+        osoba = new Osoba("Miki", "asdhfiuasdhofuihasoidufhosauidfhoiuasdhofiuashodfiuhaosidufhoasuidhfouiashdofiuahsodiufh", "", "", "");
         prsCont.setEntity(osoba);     
         
         try {

@@ -5,7 +5,11 @@
  */
 package mikec.rasporedrada.controller;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mikec.rasporedrada.model.Osoba;
 import mikec.rasporedrada.util.BaseException;
 
@@ -22,13 +26,13 @@ public class PersonController extends BaseController<Osoba>{
 
     @Override
     protected void createControll() throws BaseException {
-        notEmptyControll("ime");
-        notEmptyControll("prezime");
-        lengthControll("ime",25);
-        lengthControll("prezime",25);
-        lengthControll("adresa",100);
-        lengthControll("telefon",50);
-        lengthControll("email",50);
+        notEmptyControll("Ime");
+        notEmptyControll("Prezime");
+        lengthControll("Ime",25);
+        lengthControll("Prezime",25);
+        lengthControll("Adresa",100);
+        lengthControll("Telefon",50);
+        lengthControll("Email",50);
     }
 
     @Override
@@ -53,17 +57,27 @@ public class PersonController extends BaseController<Osoba>{
        }    
     }
     
-    private String getVariable(String variable){         
-        String text = "";        
-        if(null != variable) switch (variable) {
-            case "ime" -> text = entity.getIme();
-            case "prezime" -> text = entity.getPrezime();
-            case "adresa" -> text = entity.getAdresa();
-            case "telefon" -> text = entity.getTelefon();
-            case "email" -> text = entity.getEmail();
-            default -> {}
+    private String getVariable(String variable){ 
+        
+        String text = "";
+        try { 
+            Method method = Osoba.class.getDeclaredMethod("get" + variable, null);
+            try {
+                text = (String) method.invoke(entity, null);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return text;
+        
+       return text;
     }
     
 }
