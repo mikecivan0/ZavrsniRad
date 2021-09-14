@@ -57,26 +57,14 @@ public class PersonController extends BaseController<Osoba>{
        }    
     }
     
-    private String getVariable(String variable){ 
-        
+    private String getVariable(String variable){            
         String text = "";
         try { 
             Method method = Osoba.class.getDeclaredMethod("get" + variable, null);
-            try {
-                text = (String) method.invoke(entity, null);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (NoSuchMethodException ex) {
+            text = (String) method.invoke(entity, null);           
+        } catch (Exception ex) {
             Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }        
        return text;
     }
     
