@@ -18,10 +18,8 @@ import javax.persistence.OneToOne;
 @Entity(name = "korisnici")
 public class Korisnik{
 
-    public Korisnik() {
-    }
 
-    public Korisnik(Long id, Osoba osoba, String username, String pass, String prs_id, int razina, boolean aktivan) {
+    public Korisnik(Osoba osoba, String username, String pass, String prs_id, int razina, boolean aktivan) {
         this.id = id;
         this.osoba = osoba;
         this.username = username;
