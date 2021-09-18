@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.view;
+package mikec.shedule.view;
 
-import mikec.rasporedrada.util.Application;
+import mikec.shedule.util.Application;
 
 /**
  *

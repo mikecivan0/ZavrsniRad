@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.controller;
+package mikec.shedule.controller;
 
 import java.util.List;
-import mikec.rasporedrada.util.BaseException;
-import mikec.rasporedrada.util.HibernateUtil;
+import mikec.shedule.util.BaseException;
+import mikec.shedule.util.HibernateUtil;
 import org.hibernate.Session;
 
 /**

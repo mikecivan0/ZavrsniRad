@@ -1,9 +1,9 @@
-package mikec.rasporedrada.util;
+package mikec.shedule.util;
 
-import mikec.rasporedrada.controller.PersonController;
-import mikec.rasporedrada.controller.UserController;
-import mikec.rasporedrada.model.User;
-import mikec.rasporedrada.model.Person;
+import mikec.shedule.controller.PersonController;
+import mikec.shedule.controller.UserController;
+import mikec.shedule.model.User;
+import mikec.shedule.model.Person;
 
 public class TestData {
     

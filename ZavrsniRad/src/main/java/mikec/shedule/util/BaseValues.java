@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.util;
+package mikec.shedule.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import mikec.rasporedrada.model.NumOfWorkersForDay;
-import mikec.rasporedrada.model.NumOfWorkersForDayItem;
-import mikec.rasporedrada.model.RegularWorkingHours;
-import mikec.rasporedrada.model.RegularWorkingHoursItem;
+import mikec.shedule.model.NumOfWorkersForDay;
+import mikec.shedule.model.NumOfWorkersForDayItem;
+import mikec.shedule.model.RegularWorkingHours;
+import mikec.shedule.model.RegularWorkingHoursItem;
 import org.hibernate.Session;
 
 public class BaseValues {
@@ -121,7 +121,7 @@ public class BaseValues {
     
     private static int getRandomNumberInRange(int min, int max) {
         if (min >= max) {
-            throw new IllegalArgumentException("max must be greater than min");
+            throw new IllegalArgumentException("max mora biti veći od min");
         }
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;

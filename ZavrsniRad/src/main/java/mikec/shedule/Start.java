@@ -1,9 +1,9 @@
-package mikec.rasporedrada;
+package mikec.shedule;
 
 //import mikec.rasporedrada.util.StartData;
-import mikec.rasporedrada.util.BaseValues;
-import mikec.rasporedrada.util.HibernateUtil;
-import mikec.rasporedrada.view.SplashScreen;
+import mikec.shedule.util.BaseValues;
+import mikec.shedule.util.HibernateUtil;
+import mikec.shedule.view.SplashScreen;
 public class Start {
     
     public static void main(String[] args) {

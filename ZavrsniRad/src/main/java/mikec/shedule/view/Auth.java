@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.view;
+package mikec.shedule.view;
 
 import javax.swing.JOptionPane;
-import mikec.rasporedrada.controller.UserController;
-import mikec.rasporedrada.model.User;
-import mikec.rasporedrada.util.Application;
+import mikec.shedule.controller.UserController;
+import mikec.shedule.model.User;
+import mikec.shedule.util.Application;
 
 /**
  *

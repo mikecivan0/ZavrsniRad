@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.model;
+package mikec.shedule.model;
 
 import java.time.LocalDate;
 import javax.persistence.Column;

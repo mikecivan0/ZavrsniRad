@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.util;
+package mikec.shedule.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

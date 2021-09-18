@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mikec.rasporedrada.model;
+package mikec.shedule.model;
 
 
 import javax.persistence.Column;

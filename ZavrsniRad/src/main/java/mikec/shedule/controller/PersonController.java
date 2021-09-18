@@ -3,26 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mikec.rasporedrada.controller;
+package mikec.shedule.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.NoResultException;
-import mikec.rasporedrada.model.User;
-import mikec.rasporedrada.util.Alati;
-import mikec.rasporedrada.util.BaseException;
+import mikec.shedule.model.Person;
+import mikec.shedule.util.BaseException;
 
 /**
  *
  * @author Ivan
  */
-public class UserController extends BaseController<User>{
+public class PersonController extends BaseController<Person>{
+
+    @Override
+    public List<Person> read() {
+        return session.createQuery("from Osoba").list();
+    }
+
+    @Override
+    protected void createControll() throws BaseException {
+        notEmptyControll("Ime");
+        notEmptyControll("Prezime");
+        lengthControll("Ime",25);
+        lengthControll("Prezime",25);
+        lengthControll("Adresa",100);
+        lengthControll("Telefon",50);
+        lengthControll("Email",50);
+    }
 
     @Override
     protected void updateControll() throws BaseException {
-
+        this.createControll();
     }
 
     @Override
@@ -30,37 +45,6 @@ public class UserController extends BaseController<User>{
 
     }
 
-    @Override
-    public List<User> read() {
-        return session.createQuery("from Korisnik").list();
-    }
-    
-    public User authorize(String username, String pass){
-        User user = null;
-        
-        try {
-            user = (User) session.createQuery("from korisnici where username=:username")
-                .setParameter("username", username).getSingleResult();
-        } catch (NoResultException e) {
-            System.out.println(e.getMessage());
-        }
-        
-        if(user==null){
-            return null;
-        }
-        
-        return Alati.verifyPass(user.getPass(), pass) ? user : null;       
-    }
-
-    @Override
-    protected void createControll() throws BaseException {
-        notEmptyControll("Username");
-        notEmptyControll("Pass");
-        notEmptyControll("Prs_id");
-        lengthControll("Username", 50);
-    }
-    
-    
     private void lengthControll(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Unos '" + variable + "' ne može biti duži od " + length + " znakova");
@@ -76,13 +60,12 @@ public class UserController extends BaseController<User>{
     private String getVariable(String variable){            
         String text = "";
         try { 
-            Method method = User.class.getDeclaredMethod("get" + variable, null);
+            Method method = Person.class.getDeclaredMethod("get" + variable, null);
             text = (String) method.invoke(entity, null);           
         } catch (Exception ex) {
             Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
         }        
        return text;
     }
-
     
 }
