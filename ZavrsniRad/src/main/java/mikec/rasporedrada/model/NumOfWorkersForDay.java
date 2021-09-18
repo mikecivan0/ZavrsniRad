@@ -16,22 +16,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-@Entity(name = "brojRadnikaPoDanima")
-public class BrojRadnikaPoDanima {
+@Entity(name = "numsOfWorkersForDay")
+public class NumOfWorkersForDay {
 
-    public BrojRadnikaPoDanima() {
+    public NumOfWorkersForDay() {
     }
 
-    public BrojRadnikaPoDanima(
-            BrojRadnikaPoDanimaStavka brojRadnikaPoDanimaStavka, 
-            int vrijednost, 
-            LocalDate vrijediOd, 
-            LocalDate vrijediDo) 
+    public NumOfWorkersForDay(
+            NumOfWorkersForDayItem numOfWorkersForDayItem, 
+            int value, 
+            LocalDate starts, 
+            LocalDate expires) 
     {
-        this.brojRadnikaPoDanimaStavka = brojRadnikaPoDanimaStavka;
-        this.vrijednost = vrijednost;
-        this.vrijediOd = vrijediOd;
-        this.vrijediDo = vrijediDo;
+        this.numOfWorkersForDayItem = numOfWorkersForDayItem;
+        this.value = value;
+        this.starts = starts;
+        this.expires = expires;
     }    
     
     @Id
@@ -39,22 +39,22 @@ public class BrojRadnikaPoDanima {
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "brojRadnikaPoDanimaStavkaId")
-    private BrojRadnikaPoDanimaStavka brojRadnikaPoDanimaStavka;    
+    @JoinColumn(name = "numOfWorkersForDayItemId")
+    private NumOfWorkersForDayItem numOfWorkersForDayItem;    
     
     @Column(
             nullable = false
     )
-    private int vrijednost;
+    private int value;
     
     @Column(
             nullable = false
     )
-    private LocalDate vrijediOd;
+    private LocalDate starts;
     
     @Column(
             nullable = false
     )
-    private LocalDate vrijediDo;
+    private LocalDate expires;
 
 }

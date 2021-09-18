@@ -12,14 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "redovnaRadnaVremenaStavke")
-public class RedovnoRadnoVrijemeStavka {
+@Entity(name = "regularWorkingHoursItems")
+public class RegularWorkingHoursItem {
 
-    public RedovnoRadnoVrijemeStavka() {
+    public RegularWorkingHoursItem() {
     }
 
-    public RedovnoRadnoVrijemeStavka(String naziv) {
-        this.naziv = naziv;
+    public RegularWorkingHoursItem(String name) {
+        this.name = name;
     }
 
     
@@ -31,7 +31,7 @@ public class RedovnoRadnoVrijemeStavka {
             columnDefinition = "VARCHAR(20)",
             nullable = false
             )
-    private String naziv;
+    private String name;
 
     public Long getId() {
         return id;
@@ -41,12 +41,12 @@ public class RedovnoRadnoVrijemeStavka {
         this.id = id;
     }
 
-    public String getNaziv() {
-        return naziv;
+    public String getName() {
+        return name;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
+    public void setName(String name) {
+        this.name = name;
     }
     
     

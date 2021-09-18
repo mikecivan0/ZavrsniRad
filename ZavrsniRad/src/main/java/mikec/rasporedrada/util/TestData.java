@@ -2,21 +2,21 @@ package mikec.rasporedrada.util;
 
 import mikec.rasporedrada.controller.PersonController;
 import mikec.rasporedrada.controller.UserController;
-import mikec.rasporedrada.model.Korisnik;
-import mikec.rasporedrada.model.Osoba;
+import mikec.rasporedrada.model.User;
+import mikec.rasporedrada.model.Person;
 
-public class StartData {
+public class TestData {
     
     private static PersonController prsCont;
     private static UserController usrCont;    
-    private static Osoba person;
-    private static Korisnik user;
+    private static Person person;
+    private static User user;
    
     
     
     public static void addPerson(){
         prsCont = new PersonController();
-        person = new Osoba("user", "novi", "", "", "");
+        person = new Person("user", "novi", "", "", "");
         prsCont.setEntity(person);     
         
         try {
@@ -30,8 +30,8 @@ public class StartData {
     
     public static void changePerson(){
         prsCont = new PersonController();
-        person = prsCont.getSession().load(Osoba.class, (long)1);
-        person.setIme("Marko");
+        person = prsCont.getSession().load(Person.class, (long)1);
+        person.setFirstName("Marko");
         prsCont.setEntity(person);     
         
         try {
@@ -41,11 +41,11 @@ public class StartData {
         }
     }
 
-    private static void addUser(Osoba osoba) {
+    private static void addUser(Person osoba) {
         
 
         usrCont = new UserController();
-        user = new Korisnik(osoba, "usr", Alati.hashPass("12345"), "123-5", 1, true);
+        user = new User(osoba, "usr", Alati.hashPass("12345"), "123-5", 1, true);
         usrCont.setEntity(user);     
         
         try {

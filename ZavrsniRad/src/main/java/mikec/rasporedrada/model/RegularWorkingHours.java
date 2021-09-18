@@ -18,23 +18,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-@Entity(name = "redovnaRadnaVremena")
-public class RedovnoRadnoVrijeme {
+@Entity(name = "regularWorkingHours")
+public class RegularWorkingHours {
 
-    public RedovnoRadnoVrijeme() {
+    public RegularWorkingHours() {
     }
 
-    public RedovnoRadnoVrijeme(
-            RedovnoRadnoVrijemeStavka redovnaRadnaVremenaStavka, 
-            LocalTime vrijednost, 
-            LocalDate vrijediOd, 
-            LocalDate vrijediDo, 
-            int trajanjePauzeUMinutama) {
-        this.redovnaRadnaVremenaStavka = redovnaRadnaVremenaStavka;
-        this.vrijednost = vrijednost;
-        this.vrijediOd = vrijediOd;
-        this.vrijediDo = vrijediDo;
-        this.trajanjePauzeUMinutama = trajanjePauzeUMinutama;
+    public RegularWorkingHours(
+            RegularWorkingHoursItem regularWorkingHoursItem, 
+            LocalTime value, 
+            LocalDate starts, 
+            LocalDate expires, 
+            int breakDurationInMinutes) {
+        this.regularWorkingHoursItem = regularWorkingHoursItem;
+        this.value = value;
+        this.starts = starts;
+        this.expires = expires;
+        this.breakDurationInMinutes = breakDurationInMinutes;
     }
     
     
@@ -44,27 +44,27 @@ public class RedovnoRadnoVrijeme {
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "redovnaRadnaVremenaStavkaId")
-    private RedovnoRadnoVrijemeStavka redovnaRadnaVremenaStavka;
+    @JoinColumn(name = "regularWorkingHoursItemId")
+    private RegularWorkingHoursItem regularWorkingHoursItem;
     
     @Column(
             nullable = false
     )
-    private LocalTime vrijednost;
+    private LocalTime value;
     
     @Column(
             nullable = false
     )
-    private LocalDate vrijediOd;
+    private LocalDate starts;
     
     @Column(
             nullable = false
     )
-    private LocalDate vrijediDo;
+    private LocalDate expires;
     
     @Column(
             nullable = false
     )
-    private int trajanjePauzeUMinutama;
+    private int breakDurationInMinutes;
 
 }

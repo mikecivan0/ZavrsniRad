@@ -5,7 +5,7 @@
  */
 package mikec.rasporedrada.util;
 
-import mikec.rasporedrada.model.Korisnik;
+import mikec.rasporedrada.model.User;
 
 /**
  *
@@ -14,6 +14,6 @@ import mikec.rasporedrada.model.Korisnik;
 public class Application {
     
     public static final String APP_TITLE = "Raspored Rada App";
-    public static Korisnik user;
+    public static User user;
     
 }

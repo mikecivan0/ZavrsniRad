@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.NoResultException;
-import mikec.rasporedrada.model.Korisnik;
+import mikec.rasporedrada.model.User;
 import mikec.rasporedrada.util.Alati;
 import mikec.rasporedrada.util.BaseException;
 
@@ -18,7 +18,7 @@ import mikec.rasporedrada.util.BaseException;
  *
  * @author Ivan
  */
-public class UserController extends BaseController<Korisnik>{
+public class UserController extends BaseController<User>{
 
     @Override
     protected void updateControll() throws BaseException {
@@ -31,15 +31,15 @@ public class UserController extends BaseController<Korisnik>{
     }
 
     @Override
-    public List<Korisnik> read() {
+    public List<User> read() {
         return session.createQuery("from Korisnik").list();
     }
     
-    public Korisnik authorize(String username, String pass){
-        Korisnik user = null;
+    public User authorize(String username, String pass){
+        User user = null;
         
         try {
-            user = (Korisnik) session.createQuery("from korisnici where username=:username")
+            user = (User) session.createQuery("from korisnici where username=:username")
                 .setParameter("username", username).getSingleResult();
         } catch (NoResultException e) {
             System.out.println(e.getMessage());
@@ -76,7 +76,7 @@ public class UserController extends BaseController<Korisnik>{
     private String getVariable(String variable){            
         String text = "";
         try { 
-            Method method = Korisnik.class.getDeclaredMethod("get" + variable, null);
+            Method method = User.class.getDeclaredMethod("get" + variable, null);
             text = (String) method.invoke(entity, null);           
         } catch (Exception ex) {
             Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);

@@ -14,18 +14,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-@Entity(name = "osobe")
-public class Osoba {
+@Entity(name = "persons")
+public class Person {
 
-    public Osoba() {
+    public Person() {
     }
 
-    public Osoba(String ime, String prezime, String telefon, String email, String adresa) {
-        this.ime = ime;
-        this.prezime = prezime;
-        this.telefon = telefon;
+    public Person(String firstName, String lastName, String phoneNr, String email, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNr = phoneNr;
         this.email = email;
-        this.adresa = adresa;
+        this.address = address;
     }
     
     
@@ -38,44 +38,44 @@ public class Osoba {
             columnDefinition = "VARCHAR(25)",
             nullable = false
     )
-    private String ime;
+    private String firstName;
     
     @Column(columnDefinition = "VARCHAR(25)",
             nullable = false
     )
-    private String prezime;
+    private String lastName;
     
     @Column(columnDefinition = "VARCHAR(20)")
-    private String telefon;
+    private String phoneNr;
     
     @Column(columnDefinition = "VARCHAR(50)")
     private String email;
     
     @Column(columnDefinition = "VARCHAR(100)")
-    private String adresa;
+    private String address;
 
-    public String getIme() {
-        return ime;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPrezime() {
-        return prezime;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getTelefon() {
-        return telefon;
+    public String getPhoneNr() {
+        return phoneNr;
     }
 
-    public void setTelefon(String telefon) {
-        this.telefon = telefon;
+    public void setPhoneNr(String phoneNr) {
+        this.phoneNr = phoneNr;
     }
 
     public String getEmail() {
@@ -86,12 +86,12 @@ public class Osoba {
         this.email = email;
     }
 
-    public String getAdresa() {
-        return adresa;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
+    public void setAddress(String address) {
+        this.address = address;
     }
     
 

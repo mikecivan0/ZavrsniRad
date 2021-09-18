@@ -16,24 +16,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 
-@Entity(name = "oznakeUnosaURaspored")
-public class OznakaUnosaURaspored {
+@Entity(name = "labels")
+public class Label {
 
-    public OznakaUnosaURaspored() {
+    public Label() {
     }
 
-    public OznakaUnosaURaspored(Long id, String naziv, String skracenica) {
+    public Label(Long id, String name, String abbreviation) {
         this.id = id;
-        this.naziv = naziv;
-        this.skracenica = skracenica;
+        this.name = name;
+        this.abbreviation = abbreviation;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany(mappedBy = "oznakaUnosaURaspored")
-    private Set<Raspored> rasporedi = new HashSet<>();
+    @OneToMany(mappedBy = "label")
+    private Set<Record> rasporedi = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -43,28 +43,28 @@ public class OznakaUnosaURaspored {
         this.id = id;
     }
 
-    public Set<Raspored> getRasporedi() {
+    public Set<Record> getRasporedi() {
         return rasporedi;
     }
 
-    public void setRasporedi(Set<Raspored> rasporedi) {
+    public void setRasporedi(Set<Record> rasporedi) {
         this.rasporedi = rasporedi;
     }
 
-    public String getNaziv() {
-        return naziv;
+    public String getName() {
+        return name;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSkracenica() {
-        return skracenica;
+    public String getAbbreviation() {
+        return abbreviation;
     }
 
-    public void setSkracenica(String skracenica) {
-        this.skracenica = skracenica;
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
     
     @Column(
@@ -72,13 +72,13 @@ public class OznakaUnosaURaspored {
             unique = true,
             nullable = false
     )
-    private String naziv;
+    private String name;
     
     @Column(
             columnDefinition = "VARCHAR(3)",
             unique = true,
             nullable = false
     )
-    private String skracenica;
+    private String abbreviation;
     
 }

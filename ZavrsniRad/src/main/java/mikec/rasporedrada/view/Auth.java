@@ -7,7 +7,7 @@ package mikec.rasporedrada.view;
 
 import javax.swing.JOptionPane;
 import mikec.rasporedrada.controller.UserController;
-import mikec.rasporedrada.model.Korisnik;
+import mikec.rasporedrada.model.User;
 import mikec.rasporedrada.util.Application;
 
 /**
@@ -111,7 +111,7 @@ public class Auth extends javax.swing.JFrame {
             return;
         }
         
-        Korisnik oper = userController.authorize(txtUsername.getText(), lozinka);
+        User oper = userController.authorize(txtUsername.getText(), lozinka);
         
         if(oper==null){
             JOptionPane.showMessageDialog(getRootPane(), "Neispravna kombinacija korisničkog imena i lozinke");

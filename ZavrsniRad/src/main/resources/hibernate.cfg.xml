@@ -7,7 +7,7 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mariadb://localhost:3306/raspored_rada_hibernate</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/shedule</property>
         <property name="connection.username">edunova</property>
         <property name="connection.password">edunova</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
@@ -30,7 +30,7 @@
        
         
         -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
         <!-- dbcp connection pool configuration -->
         <property name="hibernate.dbcp.initialSize">5</property>
         <property name="hibernate.dbcp.maxTotal">20</property>
@@ -40,15 +40,15 @@
 
 
         
-        <mapping class="mikec.rasporedrada.model.Osoba" />  
-        <mapping class="mikec.rasporedrada.model.Korisnik" />  
-        <mapping class="mikec.rasporedrada.model.OznakaUnosaURaspored" />  
-        <mapping class="mikec.rasporedrada.model.Raspored" />  
-        <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanima" />  
-        <mapping class="mikec.rasporedrada.model.BrojRadnikaPoDanimaStavka" />
-        <mapping class="mikec.rasporedrada.model.RedovnoRadnoVrijeme" />  
-        <mapping class="mikec.rasporedrada.model.RedovnoRadnoVrijemeStavka" />   
-        <mapping class="mikec.rasporedrada.model.IznimnoRadnoVrijeme" />   
+        <mapping class="mikec.rasporedrada.model.Person" />  
+        <mapping class="mikec.rasporedrada.model.User" />  
+        <mapping class="mikec.rasporedrada.model.Label" />  
+        <mapping class="mikec.rasporedrada.model.Record" />  
+        <mapping class="mikec.rasporedrada.model.NumOfWorkersForDay" />  
+        <mapping class="mikec.rasporedrada.model.NumOfWorkersForDayItem" />
+        <mapping class="mikec.rasporedrada.model.RegularWorkingHours" />  
+        <mapping class="mikec.rasporedrada.model.RegularWorkingHoursItem" />   
+        <mapping class="mikec.rasporedrada.model.ExceptionalWorkingHours" />   
          
     </session-factory>
 </hibernate-configuration>

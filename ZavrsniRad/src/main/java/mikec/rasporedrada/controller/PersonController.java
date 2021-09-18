@@ -10,17 +10,17 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mikec.rasporedrada.model.Osoba;
+import mikec.rasporedrada.model.Person;
 import mikec.rasporedrada.util.BaseException;
 
 /**
  *
  * @author Ivan
  */
-public class PersonController extends BaseController<Osoba>{
+public class PersonController extends BaseController<Person>{
 
     @Override
-    public List<Osoba> read() {
+    public List<Person> read() {
         return session.createQuery("from Osoba").list();
     }
 
@@ -60,7 +60,7 @@ public class PersonController extends BaseController<Osoba>{
     private String getVariable(String variable){            
         String text = "";
         try { 
-            Method method = Osoba.class.getDeclaredMethod("get" + variable, null);
+            Method method = Person.class.getDeclaredMethod("get" + variable, null);
             text = (String) method.invoke(entity, null);           
         } catch (Exception ex) {
             Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,32 +10,32 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import mikec.rasporedrada.model.BrojRadnikaPoDanima;
-import mikec.rasporedrada.model.BrojRadnikaPoDanimaStavka;
-import mikec.rasporedrada.model.RedovnoRadnoVrijeme;
-import mikec.rasporedrada.model.RedovnoRadnoVrijemeStavka;
+import mikec.rasporedrada.model.NumOfWorkersForDay;
+import mikec.rasporedrada.model.NumOfWorkersForDayItem;
+import mikec.rasporedrada.model.RegularWorkingHours;
+import mikec.rasporedrada.model.RegularWorkingHoursItem;
 import org.hibernate.Session;
 
-public class OsnovniUnosi {
+public class BaseValues {
 
     private Session session;
-    List<RedovnoRadnoVrijemeStavka> rrvStavke;
-    List<BrojRadnikaPoDanimaStavka> brdStavke;
+    private List<RegularWorkingHoursItem> rwhItems;
+    private List<NumOfWorkersForDayItem> nwfdItems;
 
-    public OsnovniUnosi(Session session) {
+    public BaseValues(Session session) {
         this.session = session;
     }
 
-    public void ucitaj() {
-        ucitajRedovnoRadnoVrijemeStavke();
-        ucitajRedovnoRadnoVrijeme();
-        ucitajBrojRadnikaPoDanimaStavke();
-        ucitajBrojRadnikaPoDanima();
+    public void load() {
+        loadRegularWorkingHoursItems();
+        loadRegularWorkingHours();
+        loadNumOfWorkersForDayItem();
+        loadNumOfWorkersForDay();
 
     }
 
-    private void ucitajRedovnoRadnoVrijemeStavke() {
-        rrvStavke = new ArrayList<RedovnoRadnoVrijemeStavka>();
+    private void loadRegularWorkingHoursItems() {
+        rwhItems = new ArrayList<RegularWorkingHoursItem>();
         String[] popis = {
             "ponedjeljakOd","ponedjeljakDo",
             "utorakOd","utorakDo","srijedaOd","srijedaDo",
@@ -44,25 +44,24 @@ public class OsnovniUnosi {
         };
         
         for(String stavka : popis){
-           rrvStavke.add(new RedovnoRadnoVrijemeStavka(stavka)); 
+           rwhItems.add(new RegularWorkingHoursItem(stavka)); 
         }
         
         
         session.beginTransaction();        
-        rrvStavke.forEach(rrvs -> {            
+        rwhItems.forEach(rrvs -> {            
             session.save(rrvs);            
         });        
         session.getTransaction().commit();
     }
 
-    private void ucitajRedovnoRadnoVrijeme() {
-        List<RedovnoRadnoVrijeme> redovnaRadnaVremena = new ArrayList<RedovnoRadnoVrijeme>();
+    private void loadRegularWorkingHours() {
+        List<RegularWorkingHours> redovnaRadnaVremena = new ArrayList<RegularWorkingHours>();
 
         for (int i = 0; i < 14; i++) {
             String vrijeme = (i%2==0 || i==0) ? "22:00" : "00:00";
-            redovnaRadnaVremena.add(
-                    new RedovnoRadnoVrijeme(
-                            rrvStavke.get(i),
+            redovnaRadnaVremena.add(new RegularWorkingHours(
+                            rwhItems.get(i),
                             LocalTime.parse(vrijeme),
                             LocalDate.parse("2017-11-15"),
                             LocalDate.parse("2017-12-15"),
@@ -79,33 +78,32 @@ public class OsnovniUnosi {
         session.getTransaction().commit();
     }
     
-    private void ucitajBrojRadnikaPoDanimaStavke() {
-        brdStavke = new ArrayList<BrojRadnikaPoDanimaStavka>();
-        String[] popis = {
+    private void loadNumOfWorkersForDayItem() {
+        nwfdItems = new ArrayList<NumOfWorkersForDayItem>();
+        String[] list = {
             "ponedjeljak","utorak","srijeda","cetvrtak",
             "petak","subota","nedjelja"
         };
         
-        for(String stavka : popis){
-           brdStavke.add(new BrojRadnikaPoDanimaStavka(stavka)); 
+        for(String item : list){
+           nwfdItems.add(new NumOfWorkersForDayItem(item)); 
         }
         
         
         session.beginTransaction();
-        brdStavke.forEach(brds -> {            
-            session.save(brds);            
+        nwfdItems.forEach(nwfdItem -> {            
+            session.save(nwfdItem);            
         });
         session.getTransaction().commit();
     }
     
-    private void ucitajBrojRadnikaPoDanima() {
-        List<BrojRadnikaPoDanima> brojRadnika = new ArrayList<BrojRadnikaPoDanima>();
+    private void loadNumOfWorkersForDay() {
+        List<NumOfWorkersForDay> numOfWorkersForDay = new ArrayList<NumOfWorkersForDay>();
 
         for (int i = 0; i < 7; i++) {
             
-            brojRadnika.add(
-                    new BrojRadnikaPoDanima(
-                            brdStavke.get(i),
+            numOfWorkersForDay.add(new NumOfWorkersForDay(
+                            nwfdItems.get(i),
                             getRandomNumberInRange(1, 7),
                             LocalDate.parse("2017-11-15"),
                             LocalDate.parse("2017-12-15")
@@ -115,8 +113,8 @@ public class OsnovniUnosi {
         
         
         session.beginTransaction();
-        brojRadnika.forEach(brd -> {            
-            session.save(brd);            
+        numOfWorkersForDay.forEach(nwfd -> {            
+            session.save(nwfd);            
         });
         session.getTransaction().commit();
     }

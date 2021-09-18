@@ -12,14 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "brojRadnikaPoDanimaStavke")
-public class BrojRadnikaPoDanimaStavka {
+@Entity(name = "numOfWorkersForDayItems")
+public class NumOfWorkersForDayItem {
 
-    public BrojRadnikaPoDanimaStavka() {
+    public NumOfWorkersForDayItem() {
     }
 
-    public BrojRadnikaPoDanimaStavka(String naziv) {
-        this.naziv = naziv;
+    public NumOfWorkersForDayItem(String name) {
+        this.name = name;
     }   
 
     @Id
@@ -30,7 +30,7 @@ public class BrojRadnikaPoDanimaStavka {
             columnDefinition = "VARCHAR(20)",
             nullable = false
             )
-    private String naziv;
+    private String name;
 
     public Long getId() {
         return id;
@@ -40,12 +40,12 @@ public class BrojRadnikaPoDanimaStavka {
         this.id = id;
     }
 
-    public String getNaziv() {
-        return naziv;
+    public String getName() {
+        return name;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
+    public void setName(String name) {
+        this.name = name;
     }
     
     

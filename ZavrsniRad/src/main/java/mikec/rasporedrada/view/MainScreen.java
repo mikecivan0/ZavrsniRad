@@ -22,7 +22,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
    private void postavke(){
-        setTitle(Application.APP_TITLE + " Izbornik: " + Application.user.getOsoba().getPrezime());
+        setTitle(Application.APP_TITLE + " Izbornik: " + Application.user.getPerson().getLastName());
     }
 
     /**

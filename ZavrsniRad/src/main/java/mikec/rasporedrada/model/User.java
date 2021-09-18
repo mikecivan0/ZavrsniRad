@@ -15,20 +15,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@Entity(name = "korisnici")
-public class Korisnik{
+@Entity(name = "users")
+public class User{
 
-    public Korisnik() {
+    public User() {
     }
     
-    public Korisnik(Osoba osoba, String username, String pass, String prs_id, int razina, boolean aktivan) {
+    public User(Person person, String username, String pass, String prs_id, int level, boolean aktiv) {
         this.id = id;
-        this.osoba = osoba;
+        this.person = person;
         this.username = username;
         this.pass = pass;
         this.prs_id = prs_id;
-        this.razina = razina;
-        this.aktivan = aktivan;
+        this.level = level;
+        this.aktiv = aktiv;
     }
     
     @Id
@@ -36,16 +36,16 @@ public class Korisnik{
     private Long id;
     
     @OneToOne()
-    private Osoba osoba;
+    private Person person;
     
-    @OneToMany(mappedBy = "korisnik")
-    private Set<Raspored> rasporedi = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<Record> rasporedi = new HashSet<>();
 
-    public Set<Raspored> getRasporedi() {
+    public Set<Record> getRasporedi() {
         return rasporedi;
     }
 
-    public void setRasporedi(Set<Raspored> rasporedi) {
+    public void setRasporedi(Set<Record> rasporedi) {
         this.rasporedi = rasporedi;
     }
     
@@ -71,10 +71,10 @@ public class Korisnik{
             columnDefinition = "TINYINT",
             nullable = false
     )    
-    private int razina;
+    private int level;
     
     @Column(nullable = false)
-    private boolean aktivan;
+    private boolean aktiv;
 
     public Long getId() {
         return id;
@@ -84,12 +84,12 @@ public class Korisnik{
         this.id = id;
     }
 
-     public Osoba getOsoba() {
-        return osoba;
+     public Person getPerson() {
+        return person;
     }
 
-    public void setOsoba(Osoba osoba) {
-        this.osoba = osoba;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getUsername() {
@@ -116,20 +116,20 @@ public class Korisnik{
         this.prs_id = prs_id;
     }
 
-    public int getRazina() {
-        return razina;
+    public int getLevel() {
+        return level;
     }
 
-    public void setRazina(int razina) {
-        this.razina = razina;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
-    public boolean isAktivan() {
-        return aktivan;
+    public boolean isAktiv() {
+        return aktiv;
     }
 
-    public void setAktivan(boolean aktivan) {
-        this.aktivan = aktivan;
+    public void setAktiv(boolean aktiv) {
+        this.aktiv = aktiv;
     }
 
 }
