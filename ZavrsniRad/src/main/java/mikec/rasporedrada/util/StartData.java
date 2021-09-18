@@ -4,7 +4,6 @@ import mikec.rasporedrada.controller.PersonController;
 import mikec.rasporedrada.controller.UserController;
 import mikec.rasporedrada.model.Korisnik;
 import mikec.rasporedrada.model.Osoba;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class StartData {
     
@@ -12,6 +11,7 @@ public class StartData {
     private static UserController usrCont;    
     private static Osoba person;
     private static Korisnik user;
+   
     
     
     public static void addPerson(){
@@ -42,8 +42,10 @@ public class StartData {
     }
 
     private static void addUser(Osoba osoba) {
+        
+
         usrCont = new UserController();
-        user = new Korisnik(osoba, "usr", BCrypt.hashpw("12345", BCrypt.gensalt()), "123-5", 1, true);
+        user = new Korisnik(osoba, "usr", Alati.hashPass("12345"), "123-5", 1, true);
         usrCont.setEntity(user);     
         
         try {

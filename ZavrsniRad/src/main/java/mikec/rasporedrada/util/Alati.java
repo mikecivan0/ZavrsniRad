@@ -3,6 +3,8 @@ package mikec.rasporedrada.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 public class Alati {
 
@@ -19,6 +21,13 @@ public class Alati {
 	private static SimpleDateFormat formatMjeseca;
 	private static SimpleDateFormat formatDana;
 	private static SimpleDateFormat formatDanaUTjednu;
+        private static Argon2 argon2;
+
+    public Alati() {
+        argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+    }
+        
+        
 
 	public static Date ucitajDatum(String poruka) {
 
@@ -159,5 +168,13 @@ public class Alati {
 	public static String parseBool(boolean bool) {
 		return (bool) ? "da" : "ne";
 	}
+        
+        public static String hashPass(String pass){          
+            return argon2.hash(4, 1024*1024, 8, pass.getBytes());
+        }
+        
+        public static boolean verifyPass(String hash, String pass){
+            return argon2.verify(hash, pass.getBytes());
+        }
 
 }

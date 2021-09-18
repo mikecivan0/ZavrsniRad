@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.NoResultException;
-import org.mindrot.jbcrypt.BCrypt;
 import mikec.rasporedrada.model.Korisnik;
+import mikec.rasporedrada.util.Alati;
 import mikec.rasporedrada.util.BaseException;
 
 /**
@@ -19,11 +19,6 @@ import mikec.rasporedrada.util.BaseException;
  * @author Ivan
  */
 public class UserController extends BaseController<Korisnik>{
-
-    public UserController() {
-    }
-    
-    
 
     @Override
     protected void updateControll() throws BaseException {
@@ -53,7 +48,7 @@ public class UserController extends BaseController<Korisnik>{
         if(user==null){
             return null;
         }
-        return BCrypt.checkpw(pass, user.getPass()) ? user : null;       
+        return Alati.verifyPass(user.getPass(), pass) ? user : null;       
     }
 
     @Override
