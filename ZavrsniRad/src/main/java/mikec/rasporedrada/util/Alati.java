@@ -21,12 +21,8 @@ public class Alati {
 	private static SimpleDateFormat formatMjeseca;
 	private static SimpleDateFormat formatDana;
 	private static SimpleDateFormat formatDanaUTjednu;
-        private static Argon2 argon2;
+        private static Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
 
-    public Alati() {
-        argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-    }
-        
         
 
 	public static Date ucitajDatum(String poruka) {
@@ -170,7 +166,7 @@ public class Alati {
 	}
         
         public static String hashPass(String pass){          
-            return argon2.hash(4, 1024*1024, 8, pass.getBytes());
+            return argon2.hash(4, 1024*10, 8, pass.getBytes());
         }
         
         public static boolean verifyPass(String hash, String pass){

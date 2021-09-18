@@ -18,7 +18,9 @@ import javax.persistence.OneToOne;
 @Entity(name = "korisnici")
 public class Korisnik{
 
-
+    public Korisnik() {
+    }
+    
     public Korisnik(Osoba osoba, String username, String pass, String prs_id, int razina, boolean aktivan) {
         this.id = id;
         this.osoba = osoba;
@@ -54,7 +56,7 @@ public class Korisnik{
     private String username;
     
     @Column(
-            columnDefinition = "VARCHAR(100)",
+            columnDefinition = "VARCHAR(256)",
             nullable = false
     )
     private String pass;

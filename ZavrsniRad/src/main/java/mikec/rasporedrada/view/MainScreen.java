@@ -11,12 +11,12 @@ import mikec.rasporedrada.util.Application;
  *
  * @author Ivan
  */
-public class Izbornik extends javax.swing.JFrame {
+public class MainScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form Izbornik
      */
-    public Izbornik() {
+    public MainScreen() {
         initComponents();
         postavke();
     }

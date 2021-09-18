@@ -39,15 +39,16 @@ public class UserController extends BaseController<Korisnik>{
         Korisnik user = null;
         
         try {
-            user = (Korisnik) session.createQuery("from korisnici 0 where o.username=:username")
+            user = (Korisnik) session.createQuery("from korisnici where username=:username")
                 .setParameter("username", username).getSingleResult();
         } catch (NoResultException e) {
-            return null;
+            System.out.println(e.getMessage());
         }
         
         if(user==null){
             return null;
         }
+        
         return Alati.verifyPass(user.getPass(), pass) ? user : null;       
     }
 
@@ -55,6 +56,8 @@ public class UserController extends BaseController<Korisnik>{
     protected void createControll() throws BaseException {
         notEmptyControll("Username");
         notEmptyControll("Pass");
+        notEmptyControll("Prs_id");
+        lengthControll("Username", 50);
     }
     
     

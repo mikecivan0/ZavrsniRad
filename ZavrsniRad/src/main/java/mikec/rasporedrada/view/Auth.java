@@ -14,14 +14,14 @@ import mikec.rasporedrada.util.Application;
  *
  * @author Ivan
  */
-public class Autorizacija extends javax.swing.JFrame {
+public class Auth extends javax.swing.JFrame {
     
     private UserController userController;
 
     /**
      * Creates new form Azrotizacija
      */
-    public Autorizacija() {
+    public Auth() {
         initComponents();
         userController = new UserController();
         postavke();
@@ -105,7 +105,7 @@ public class Autorizacija extends javax.swing.JFrame {
         }
         
         String lozinka = String.copyValueOf(pswPass.getPassword());
-        
+        System.out.println(lozinka);
         if(lozinka.trim().length()==0){
             JOptionPane.showMessageDialog(getRootPane(), "Loznika obavezno");
             return;
@@ -120,7 +120,7 @@ public class Autorizacija extends javax.swing.JFrame {
         
         // ovdje smo autorizirani  
         Application.user = oper;
-        new Izbornik().setVisible(true);
+        new MainScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 

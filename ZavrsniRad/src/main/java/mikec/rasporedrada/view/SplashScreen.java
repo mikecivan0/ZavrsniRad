@@ -20,16 +20,16 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public SplashScreen() {
         initComponents();  
-        Ucitanje ucitanje = new Ucitanje();
-        ucitanje.start();
+        Load load = new Load();
+        load.start();
     }
     
-    private class Ucitanje extends Thread{          
+    private class Load extends Thread{          
         @Override
         public void run() {
             Session s = HibernateUtil.getSession();
             if(s.getMetamodel().getEntities().size()>0){
-                new Autorizacija().setVisible(true);
+                new Auth().setVisible(true);
                 dispose();
             }else{
                 JOptionPane.showMessageDialog(getRootPane(), "Proglem s bazom podataka");
@@ -78,6 +78,5 @@ public class SplashScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
-    private void load() {
-           }
+
 }
