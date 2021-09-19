@@ -32,14 +32,14 @@ public class UserController extends BaseController<User>{
 
     @Override
     public List<User> read() {
-        return session.createQuery("from Korisnik").list();
+        return session.createQuery("from User").list();
     }
     
     public User authorize(String username, String pass){
         User user = null;
         
         try {
-            user = (User) session.createQuery("from korisnici where username=:username")
+            user = (User) session.createQuery("from users where username=:username")
                 .setParameter("username", username).getSingleResult();
         } catch (NoResultException e) {
             System.out.println(e.getMessage());

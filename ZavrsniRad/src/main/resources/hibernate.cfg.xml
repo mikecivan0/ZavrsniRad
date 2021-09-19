@@ -30,7 +30,7 @@
        
         
         -->
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">update</property>
         <!-- dbcp connection pool configuration -->
         <property name="hibernate.dbcp.initialSize">5</property>
         <property name="hibernate.dbcp.maxTotal">20</property>
@@ -40,15 +40,15 @@
 
 
         
-        <mapping class="mikec.rasporedrada.model.Person" />  
-        <mapping class="mikec.rasporedrada.model.User" />  
-        <mapping class="mikec.rasporedrada.model.Label" />  
-        <mapping class="mikec.rasporedrada.model.Record" />  
-        <mapping class="mikec.rasporedrada.model.NumOfWorkersForDay" />  
-        <mapping class="mikec.rasporedrada.model.NumOfWorkersForDayItem" />
-        <mapping class="mikec.rasporedrada.model.RegularWorkingHours" />  
-        <mapping class="mikec.rasporedrada.model.RegularWorkingHoursItem" />   
-        <mapping class="mikec.rasporedrada.model.ExceptionalWorkingHours" />   
+        <mapping class="mikec.shedule.model.Person" />  
+        <mapping class="mikec.shedule.model.User" />  
+        <mapping class="mikec.shedule.model.Label" />  
+        <mapping class="mikec.shedule.model.Record" />  
+        <mapping class="mikec.shedule.model.NumOfWorkersForDay" />  
+        <mapping class="mikec.shedule.model.NumOfWorkersForDayItem" />
+        <mapping class="mikec.shedule.model.RegularWorkingHours" />  
+        <mapping class="mikec.shedule.model.RegularWorkingHoursItem" />   
+        <mapping class="mikec.shedule.model.ExceptionalWorkingHours" />   
          
     </session-factory>
 </hibernate-configuration>

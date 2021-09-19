@@ -14,7 +14,7 @@ public class TestData {
    
     
     
-    public static void addPerson(){
+    public static void load(){
         prsCont = new PersonController();
         person = new Person("user", "novi", "", "", "");
         prsCont.setEntity(person);     
@@ -25,7 +25,7 @@ public class TestData {
             System.out.println(ex.getPoruka());
         }
         
-        addUser(person);
+        loadUser(person);
     }
     
     public static void changePerson(){
@@ -41,11 +41,11 @@ public class TestData {
         }
     }
 
-    private static void addUser(Person osoba) {
+    private static void loadUser(Person person) {
         
 
         usrCont = new UserController();
-        user = new User(osoba, "usr", Alati.hashPass("12345"), "123-5", 1, true);
+        user = new User(person, "usr", Alati.hashPass("12345"), "123-5", 1, true);
         usrCont.setEntity(user);     
         
         try {

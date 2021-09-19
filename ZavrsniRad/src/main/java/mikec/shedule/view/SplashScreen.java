@@ -19,22 +19,50 @@ public class SplashScreen extends javax.swing.JFrame {
      * Creates new form SplashScreen
      */
     public SplashScreen() {
-        initComponents();  
+        initComponents();       
         Load load = new Load();
-        load.start();
+        load.start(); 
+        UpdateHeader updateHeader = new UpdateHeader();        
+        updateHeader.start();        
     }
     
     private class Load extends Thread{          
         @Override
-        public void run() {
+        public void run() {  
             Session s = HibernateUtil.getSession();
             if(s.getMetamodel().getEntities().size()>0){
                 new Auth().setVisible(true);
-                dispose();
+                dispose();               
             }else{
-                JOptionPane.showMessageDialog(getRootPane(), "Proglem s bazom podataka");
+                JOptionPane.showMessageDialog(getRootPane(), "Problem s bazom podataka");
             } 
         }       
+    }
+    
+    private class UpdateHeader extends Thread{  
+        private String sufix = "";
+        @Override
+        public void run() {          
+            while (true) { 
+                txtHeader.setText(generateHeaderMessage());
+                try {                    
+                    Thread.sleep(500);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }            
+        }          
+        
+        private String generateHeaderMessage(){
+            String hederBaseText = "Loadnig Shedule App";
+            switch(sufix){
+                case "" -> { sufix = "."; }
+                case "." -> { sufix = ".."; }
+                case ".." -> { sufix = "..."; }
+                case "..." -> { sufix = ""; }
+            }            
+            return hederBaseText + sufix;
+        }
     }
 
     /**
@@ -47,25 +75,40 @@ public class SplashScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        txtHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivan\\Documents\\NetBeansProjects\\polaznikJP24\\src\\main\\resources\\logo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/schedule.jpg"))); // NOI18N
+
+        txtHeader.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtHeader.setText("Starting Shedule App");
+        txtHeader.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(179, 179, 179)
+                        .addComponent(txtHeader)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txtHeader)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,6 +119,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel txtHeader;
     // End of variables declaration//GEN-END:variables
 
 

@@ -5,7 +5,6 @@
  */
 package mikec.shedule.controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,17 +20,17 @@ public class PersonController extends BaseController<Person>{
 
     @Override
     public List<Person> read() {
-        return session.createQuery("from Osoba").list();
+        return session.createQuery("from Person").list();
     }
 
     @Override
     protected void createControll() throws BaseException {
-        notEmptyControll("Ime");
-        notEmptyControll("Prezime");
-        lengthControll("Ime",25);
-        lengthControll("Prezime",25);
-        lengthControll("Adresa",100);
-        lengthControll("Telefon",50);
+        notEmptyControll("FirstName");
+        notEmptyControll("LastName");
+        lengthControll("FirstName",25);
+        lengthControll("LastName",25);
+        lengthControll("Address",100);
+        lengthControll("PhoneNr",50);
         lengthControll("Email",50);
     }
 
