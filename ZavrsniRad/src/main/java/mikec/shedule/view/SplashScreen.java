@@ -14,6 +14,8 @@ import mikec.shedule.util.HibernateUtil;
  * @author Ivan
  */
 public class SplashScreen extends javax.swing.JFrame {
+    
+    private boolean loadEnd;
 
     /**
      * Creates new form SplashScreen
@@ -22,6 +24,7 @@ public class SplashScreen extends javax.swing.JFrame {
         initComponents();       
         Load load = new Load();
         load.start(); 
+        loadEnd = false;
         UpdateHeader updateHeader = new UpdateHeader();        
         updateHeader.start();        
     }
@@ -31,6 +34,7 @@ public class SplashScreen extends javax.swing.JFrame {
         public void run() {  
             Session s = HibernateUtil.getSession();
             if(s.getMetamodel().getEntities().size()>0){
+                loadEnd = true;
                 new Auth().setVisible(true);
                 dispose();               
             }else{
@@ -44,6 +48,9 @@ public class SplashScreen extends javax.swing.JFrame {
         @Override
         public void run() {          
             while (true) { 
+                if(loadEnd){
+                    break;
+                }
                 txtHeader.setText(generateHeaderMessage());
                 try {                    
                     Thread.sleep(500);
