@@ -15,5 +15,15 @@ public class Application {
     
     public static final String APP_TITLE = "Shedule App";
     public static User user;
+    public static final String LINK_GITHUB = "https://github.com/mikecivan0/ZavrsniRad";
+    public static final String LINK_ER_DIAGRAM = "https://github.com/mikecivan0/ZavrsniRad/blob/main/ZavrsniRad/database.png";
+    
+    public static String getTitle(String title){
+        if(Application.user==null){
+            return Application.APP_TITLE;
+        }
+        return Application.APP_TITLE + " " + title +": " 
+                + Application.user.getPerson().getLastName();
+    }
     
 }
