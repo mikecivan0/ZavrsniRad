@@ -5,10 +5,12 @@
  */
 package mikec.shedule.view;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.User;
 import mikec.shedule.util.Application;
+import mikec.shedule.util.Tools;
 
 /**
  *
@@ -28,7 +30,7 @@ public class Auth extends javax.swing.JFrame {
     }
     
     private void postavke(){
-        setTitle(Application.APP_TITLE + " Autorizacija");
+        setTitle(Application.getTitle("Authorization"));
     }
 
     /**
@@ -45,12 +47,26 @@ public class Auth extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         pswPass = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
+        btnLinkGitCode = new javax.swing.JButton();
+        btnLinkErDiagram = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Korisničko ime");
+        jLabel1.setText("Username");
 
-        jLabel2.setText("Lozinka");
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
+
+        jLabel2.setText("Password");
+
+        pswPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pswPassKeyPressed(evt);
+            }
+        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -59,23 +75,42 @@ public class Auth extends javax.swing.JFrame {
             }
         });
 
+        btnLinkGitCode.setText("View app code on GitHub");
+        btnLinkGitCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLinkGitCodeActionPerformed(evt);
+            }
+        });
+
+        btnLinkErDiagram.setText("View app database on GitHub");
+        btnLinkErDiagram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLinkErDiagramActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(txtUsername)
-                            .addComponent(pswPass, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnLinkGitCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLinkErDiagram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pswPass, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 27, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,9 +123,13 @@ public class Auth extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pswPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(btnLinkGitCode)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLinkErDiagram)
+                .addContainerGap())
         );
 
         pack();
@@ -100,29 +139,52 @@ public class Auth extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         if(txtUsername.getText().trim().length()==0){
-            JOptionPane.showMessageDialog(getRootPane(), "Korisničko ime obavezno");
+            JOptionPane.showMessageDialog(getRootPane(), "Username is required");
             return;
         }
         
         String lozinka = String.copyValueOf(pswPass.getPassword());
         System.out.println(lozinka);
         if(lozinka.trim().length()==0){
-            JOptionPane.showMessageDialog(getRootPane(), "Loznika obavezno");
+            JOptionPane.showMessageDialog(getRootPane(), "Password is required");
             return;
         }
         
         User oper = userController.authorize(txtUsername.getText(), lozinka);
         
         if(oper==null){
-            JOptionPane.showMessageDialog(getRootPane(), "Neispravna kombinacija korisničkog imena i lozinke");
+            JOptionPane.showMessageDialog(getRootPane(), "Username and password do not match");
             return;
         }
-        
-        // ovdje smo autorizirani  
+         
         Application.user = oper;
-        new MainScreen().setVisible(true);
+        if(oper.getLevel()==1){
+            new UserMainScreen().setVisible(true);
+        }else if(oper.getLevel()==2){
+            new AdminMainScreen().setVisible(true);
+        }       
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLinkGitCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkGitCodeActionPerformed
+        Tools.openLink(Application.LINK_GITHUB);
+    }//GEN-LAST:event_btnLinkGitCodeActionPerformed
+
+    private void btnLinkErDiagramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkErDiagramActionPerformed
+         Tools.openLink(Application.LINK_ER_DIAGRAM);
+    }//GEN-LAST:event_btnLinkErDiagramActionPerformed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pswPass.requestFocus();
+        }
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void pswPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswPassKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnLoginActionPerformed(null);
+        }
+    }//GEN-LAST:event_pswPassKeyPressed
 
     /**
      * @param args the command line arguments
@@ -130,6 +192,8 @@ public class Auth extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLinkErDiagram;
+    private javax.swing.JButton btnLinkGitCode;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
