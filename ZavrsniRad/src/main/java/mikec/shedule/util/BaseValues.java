@@ -10,10 +10,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import mikec.shedule.controller.PersonController;
+import mikec.shedule.controller.UserController;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.model.NumOfWorkersForDayItem;
+import mikec.shedule.model.Person;
 import mikec.shedule.model.RegularWorkingHours;
 import mikec.shedule.model.RegularWorkingHoursItem;
+import mikec.shedule.model.User;
 import org.hibernate.Session;
 
 public class BaseValues {
@@ -21,17 +25,47 @@ public class BaseValues {
     private Session session;
     private List<RegularWorkingHoursItem> rwhItems;
     private List<NumOfWorkersForDayItem> nwfdItems;
+    private static PersonController personController;
+    private static UserController userConttroler;    
+    private static Person person;
+    private static User user;    
 
     public BaseValues(Session session) {
         this.session = session;
     }
 
     public void load() {
+        loadPerson();
+        loadUser(person);
         loadRegularWorkingHoursItems();
         loadRegularWorkingHours();
         loadNumOfWorkersForDayItem();
         loadNumOfWorkersForDay();
 
+    }  
+    
+    public static void loadPerson(){
+        personController = new PersonController();
+        person = new Person("PersonName", "PersonSurname", "", "", "");
+        personController.setEntity(person);     
+        
+        try {
+            personController.create();
+        } catch (BaseException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private static void loadUser(Person person) {
+        userConttroler = new UserController();
+        user = new User(person, "user", Tools.hashPass("user"), "123-5", 1, true);
+        userConttroler.setEntity(user);     
+        
+        try {
+            userConttroler.create();
+        } catch (BaseException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     private void loadRegularWorkingHoursItems() {
@@ -125,4 +159,5 @@ public class BaseValues {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
+    
 }
