@@ -36,44 +36,46 @@ public class BaseValues {
 
     private void loadRegularWorkingHoursItems() {
         rwhItems = new ArrayList<RegularWorkingHoursItem>();
-        String[] popis = {
-            "ponedjeljakOd","ponedjeljakDo",
-            "utorakOd","utorakDo","srijedaOd","srijedaDo",
-            "cetvrtakOd","cetvrtakDo","petakOd","petakDo",
-            "subotaOd","subotaDo","nedjeljaOd","nedjeljaDo"
+        String[] listOfItems = {
+            "monStart","monEnd",
+            "tueStart","tueEnd",
+            "wedStart","wedEnd",
+            "thuStart","thuEnd",
+            "friStart","friEnd",
+            "satStart","satEnd",
+            "sunStart","sunEnd"
         };
         
-        for(String stavka : popis){
-           rwhItems.add(new RegularWorkingHoursItem(stavka)); 
+        for(String item : listOfItems){
+           rwhItems.add(new RegularWorkingHoursItem(item)); 
         }
         
         
         session.beginTransaction();        
-        rwhItems.forEach(rrvs -> {            
-            session.save(rrvs);            
+        rwhItems.forEach(rwh -> {            
+            session.save(rwh);            
         });        
         session.getTransaction().commit();
     }
 
     private void loadRegularWorkingHours() {
-        List<RegularWorkingHours> redovnaRadnaVremena = new ArrayList<RegularWorkingHours>();
+        List<RegularWorkingHours> regularWorkingHours = new ArrayList<RegularWorkingHours>();
 
         for (int i = 0; i < 14; i++) {
-            String vrijeme = (i%2==0 || i==0) ? "22:00" : "00:00";
-            redovnaRadnaVremena.add(new RegularWorkingHours(
+            String time = (i%2==0 || i==0) ? "22:00" : "00:00";
+            regularWorkingHours.add(new RegularWorkingHours(
                             rwhItems.get(i),
-                            LocalTime.parse(vrijeme),
+                            LocalTime.parse(time),
                             LocalDate.parse("2017-11-15"),
                             LocalDate.parse("2017-12-15"),
                             30
                     )
             );
-        }
-        
+        }        
         
         session.beginTransaction();
-        redovnaRadnaVremena.forEach(rrv -> {           
-            session.save(rrv);           
+        regularWorkingHours.forEach(rwh -> {           
+            session.save(rwh);           
         });
         session.getTransaction().commit();
     }
@@ -81,8 +83,8 @@ public class BaseValues {
     private void loadNumOfWorkersForDayItem() {
         nwfdItems = new ArrayList<NumOfWorkersForDayItem>();
         String[] list = {
-            "ponedjeljak","utorak","srijeda","cetvrtak",
-            "petak","subota","nedjelja"
+            "monday","tuesday","wdnesday","thursday",
+            "friday","saturday","sunday"
         };
         
         for(String item : list){
@@ -120,9 +122,6 @@ public class BaseValues {
     }
     
     private static int getRandomNumberInRange(int min, int max) {
-        if (min >= max) {
-            throw new IllegalArgumentException("max mora biti veći od min");
-        }
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }

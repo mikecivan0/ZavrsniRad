@@ -11,15 +11,15 @@ package mikec.shedule.util;
  */
 public class BaseException extends Exception{
     
-    private String poruka;
+    private String message;
 
-    public BaseException(String poruka) {
+    public BaseException(String message) {
         super();
-        this.poruka = poruka;
+        this.message = message;
     }
 
-    public String getPoruka() {
-        return poruka;
+    public String getMessage() {
+        return message;
     }   
     
 }

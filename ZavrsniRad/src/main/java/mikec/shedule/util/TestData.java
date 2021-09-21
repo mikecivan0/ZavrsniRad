@@ -22,7 +22,7 @@ public class TestData {
         try {
             prsCont.create();
         } catch (BaseException ex) {
-            System.out.println(ex.getPoruka());
+            System.out.println(ex.getMessage());
         }
         
         loadUser(person);
@@ -37,7 +37,7 @@ public class TestData {
         try {
             prsCont.update();
         } catch (BaseException ex) {
-            System.out.println(ex.getPoruka());
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -45,13 +45,13 @@ public class TestData {
         
 
         usrCont = new UserController();
-        user = new User(person, "usr", Alati.hashPass("12345"), "123-5", 1, true);
+        user = new User(person, "usr", Tools.hashPass("12345"), "123-5", 1, true);
         usrCont.setEntity(user);     
         
         try {
             usrCont.create();
         } catch (BaseException ex) {
-            System.out.println(ex.getPoruka());
+            System.out.println(ex.getMessage());
         }
     }
     

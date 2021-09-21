@@ -6,6 +6,7 @@
 package mikec.shedule.view;
 
 import javax.swing.JOptionPane;
+import mikec.shedule.util.Application;
 import org.hibernate.Session;
 import mikec.shedule.util.HibernateUtil;
 
@@ -21,10 +22,10 @@ public class SplashScreen extends javax.swing.JFrame {
      * Creates new form SplashScreen
      */
     public SplashScreen() {
-        initComponents();       
+        initComponents();          
+        loadEnd = false;
         Load load = new Load();
         load.start(); 
-        loadEnd = false;
         UpdateHeader updateHeader = new UpdateHeader();        
         updateHeader.start();        
     }
@@ -38,7 +39,7 @@ public class SplashScreen extends javax.swing.JFrame {
                 new Auth().setVisible(true);
                 dispose();               
             }else{
-                JOptionPane.showMessageDialog(getRootPane(), "Problem s bazom podataka");
+                JOptionPane.showMessageDialog(getRootPane(), "A database error has occurred" );
             } 
         }       
     }
@@ -61,7 +62,7 @@ public class SplashScreen extends javax.swing.JFrame {
         }          
         
         private String generateHeaderMessage(){
-            String hederBaseText = "Loadnig Shedule App";
+            String hederBaseText = "Loadnig " + Application.APP_TITLE;
             switch(sufix){
                 case "" -> { sufix = "."; }
                 case "." -> { sufix = ".."; }

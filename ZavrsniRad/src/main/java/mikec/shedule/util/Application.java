@@ -13,7 +13,7 @@ import mikec.shedule.model.User;
  */
 public class Application {
     
-    public static final String APP_TITLE = "Raspored Rada App";
+    public static final String APP_TITLE = "Shedule App";
     public static User user;
     
 }

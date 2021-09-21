@@ -46,13 +46,14 @@ public class PersonController extends BaseController<Person>{
 
     private void lengthControll(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
-            throw new BaseException("Unos '" + variable + "' ne može biti duži od " + length + " znakova");
+            throw new BaseException("Value of input field '" + variable + 
+                    "' must not exceed " + length + " characters");
         }    
     }
     
     private void notEmptyControll(String variable) throws BaseException{        
         if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
-           throw new BaseException("Unos '" + variable + "' ne smije biti prazan");
+           throw new BaseException("Input '" + variable + "' cannot be empty");
        }    
     }
     

@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import mikec.shedule.model.User;
-import mikec.shedule.util.Alati;
+import mikec.shedule.util.Tools;
 import mikec.shedule.util.BaseException;
 
 /**
@@ -49,7 +49,7 @@ public class UserController extends BaseController<User>{
             return null;
         }
         
-        return Alati.verifyPass(user.getPass(), pass) ? user : null;       
+        return Tools.verifyPass(user.getPass(), pass) ? user : null;       
     }
 
     @Override
