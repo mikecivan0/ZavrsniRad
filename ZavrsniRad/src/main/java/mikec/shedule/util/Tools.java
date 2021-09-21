@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Scanner;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import java.awt.Desktop;
+import java.net.URI;
+import javax.swing.JOptionPane;
 
 public class Tools {
 
@@ -21,99 +24,72 @@ public class Tools {
 	private static SimpleDateFormat monthFormat;
 	private static SimpleDateFormat dayFormat;
 	private static SimpleDateFormat dayInWeekFormat;
-        private static Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
+        private static Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);        
 
-        
+	public static Date checkDate(String input) {
+            dateFormat = new SimpleDateFormat(DATE_FORMAT);
+            while (true) {
+                try {
+                    return dateFormat.parse(input);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Enter date in format " + dateFormat.format(new Date()));
+                }
+            }
+        }
 
-	public static Date takeDate(String message) {
-
-		dateFormat = new SimpleDateFormat(DATE_FORMAT);
-
-		while (true) {
-			System.out.print(message);
-			try {
-				return dateFormat.parse(scanner.nextLine());
-			} catch (Exception e) {
-				System.out.println("Enter date in format " + dateFormat.format(new Date()));
-			}
+	public static Date checkTime(String input) {
+            timeFormat = new SimpleDateFormat(TIME_FORMAT);
+            while (true) {
+		try {
+                    return timeFormat.parse(input);
+		} catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Enter time in format " + timeFormat.format(new Date()));
 		}
-
+            }
 	}
 
-	public static Date takeTime(String message) {
-
-		timeFormat = new SimpleDateFormat(TIME_FORMAT);
-
-		while (true) {
-			System.out.print(message);
-			try {
-				return timeFormat.parse(scanner.nextLine());
-			} catch (Exception e) {
-				System.out.println("Enter time in format " + timeFormat.format(new Date()));
-			}
-		}
-
+	public static int checkNumber(String input, String errorMessage, int min, int max) {
+            int number = Integer.parseInt(input);
+            while (true) {
+		try {
+                    if (number < min || number > max) {
+			JOptionPane.showMessageDialog(null, "Enter number between " + min + " and " + max);
+			continue;
+                    }
+                    break;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, errorMessage);
+                }
+            }
+            return number;
 	}
 
-	public static int takeNumber(String message, String errorMessage, int min, int max) {
-
-		int broj = 0;
-
-		while (true) {
-			System.out.print(message);
-			try {
-				broj = Integer.parseInt(scanner.nextLine());
-
-				if (broj < min || broj > max) {
-					System.out.println("Enter number between " + min + " and " + max);
-					continue;
-				}
-				break;
-			} catch (Exception e) {
-				System.out.println(errorMessage);
-			}
+	public static String checkString(String input, String errorMessage, int minLength, int maxLength) {
+            while (true) {
+		if (input.trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, errorMessage);
+                }
+		if (input.length() < minLength || input.length() > maxLength) {
+                    JOptionPane.showMessageDialog(null, "Input length must bee between " 
+                                    + minLength + " and " + maxLength + " characters"
+                    );
+                    continue;
 		}
-
-		return broj;
+		break;
+            }
+            return input;
 	}
 
-	public static String takeString(String message, String errorMessage, int minLength, int maxLength) {
-
-		String unos = "";
-
-		while (true) {
-			System.out.print(message);
-
-			unos = scanner.nextLine();
-			if (unos.trim().equals("")) {
-				System.out.println(errorMessage);
-			}
-			if (unos.length() < minLength || unos.length() > maxLength) {
-				System.out.println("Input length must bee between " 
-                                        + minLength + " and " + maxLength + " characters");
-				continue;
-			}
-			break;
+	public static boolean yesNo(String input, String errorMessage) {
+            while (true) {
+		if (input.equals("yes")) {
+                    return true;
 		}
-
-		return unos;
-	}
-
-	public static boolean yesNo(String message, String errorMessage) {
-		String unos;
-
-		while (true) {
-			System.out.print(message);
-
-			unos = scanner.nextLine().trim().toLowerCase();
-			if (unos.equals("yes")) {
-				return true;
-			}
-			if (unos.equals("no")) {
-				return false;
-			}
-			System.out.println(errorMessage);
+		if (input.equals("no")) {
+                    return false;
 		}
+                JOptionPane.showMessageDialog(null, errorMessage);
+            }
 	}
 
 	public static String formatYear(Date datum) {
@@ -156,6 +132,15 @@ public class Tools {
         
         public static boolean verifyPass(String hash, String pass){
             return argon2.verify(hash, pass.getBytes());
+        }
+        
+        public static void openLink(String link){
+            try {
+                Desktop desktop = java.awt.Desktop.getDesktop();
+                desktop.browse(new URI(link));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "An error is occured. Try open link later.");
+            }
         }
 
 }
