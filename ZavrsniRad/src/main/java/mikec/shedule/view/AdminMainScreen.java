@@ -5,6 +5,7 @@
  */
 package mikec.shedule.view;
 
+import mikec.shedule.controller.PersonController;
 import mikec.shedule.util.Application;
 
 /**
@@ -18,10 +19,12 @@ public class AdminMainScreen extends javax.swing.JFrame {
      */
     public AdminMainScreen() {
         initComponents();
-        postavke();
+        settings();
+        PersonController pc = new PersonController();
+        System.out.println(pc.read().toString());
     }
     
-   private void postavke(){
+   private void settings(){
         setTitle(Application.getTitle("Admin main window"));
     }
 
@@ -47,7 +50,6 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jMenu1.setMnemonic('m');
         jMenu1.setText("Menu");
@@ -63,6 +65,11 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Persons");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -125,6 +132,10 @@ public class AdminMainScreen extends javax.swing.JFrame {
         new Auth().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       new PersonScreen().setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
