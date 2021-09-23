@@ -35,8 +35,10 @@ public class BaseValues {
     }
 
     public void load() {
-        loadPerson();
-        loadUser(person);
+        loadPerson("PersonName", "PersonSurname", "", "", "");
+        loadUser(person, "user1", Tools.hashPass("user1"), "123-5", 1, true);
+        loadPerson("PersonName2", "PersonSurname2", "", "", "");
+        loadUser(person, "user2", Tools.hashPass("user2"), "123-56", 2, true);
         loadRegularWorkingHoursItems();
         loadRegularWorkingHours();
         loadNumOfWorkersForDayItem();
@@ -44,9 +46,9 @@ public class BaseValues {
 
     }  
     
-    public static void loadPerson(){
+    public static void loadPerson(String firstName, String lastName, String phoneNr, String email, String address){
         personController = new PersonController();
-        person = new Person("PersonName", "PersonSurname", "", "", "");
+        person = new Person(firstName, lastName, phoneNr, email, address);
         personController.setEntity(person);     
         
         try {
@@ -56,9 +58,9 @@ public class BaseValues {
         }
     }
 
-    private static void loadUser(Person person) {
+    private static void loadUser(Person person, String username, String pass, String prs_id, int level, boolean aktiv) {
         userConttroler = new UserController();
-        user = new User(person, "user", Tools.hashPass("user"), "123-5", 1, true);
+        user = new User(person, username, pass, prs_id, level, aktiv);
         userConttroler.setEntity(user);     
         
         try {
