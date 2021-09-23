@@ -91,6 +91,7 @@ public class UserMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new Auth().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

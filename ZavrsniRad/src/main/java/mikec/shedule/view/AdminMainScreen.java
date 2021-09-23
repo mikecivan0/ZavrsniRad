@@ -122,6 +122,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        new Auth().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
