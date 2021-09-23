@@ -20,7 +20,7 @@ public class Application {
     
     public static String getTitle(String title){
         if(Application.user==null){
-            return Application.APP_TITLE;
+            return Application.APP_TITLE + " " + title;
         }
         return Application.APP_TITLE + " " + title +": " 
                 + Application.user.getPerson().getLastName();
