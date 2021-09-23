@@ -18,10 +18,10 @@ public class UserMainScreen extends javax.swing.JFrame {
      */
     public UserMainScreen() {
         initComponents();
-        postavke();
+        settings();
     }
     
-   private void postavke(){
+   private void settings(){
         setTitle(Application.getTitle("User main window"));
     }
 
