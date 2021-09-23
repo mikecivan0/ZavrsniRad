@@ -27,7 +27,9 @@ public class SplashScreen extends javax.swing.JFrame {
         Load load = new Load();
         load.start(); 
         UpdateHeader updateHeader = new UpdateHeader();        
-        updateHeader.start();        
+        updateHeader.start(); 
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.start();;
     }
     
     private class Load extends Thread{          
@@ -72,6 +74,24 @@ public class SplashScreen extends javax.swing.JFrame {
             return hederBaseText + sufix;
         }
     }
+    
+    private class ProgressBar extends Thread{  
+        int progress = 0;
+        @Override
+        public void run() {          
+            while (true) { 
+                if(loadEnd){
+                    break;
+                }
+                prgbarLoad.setValue(progress++);
+                try {                    
+                    Thread.sleep(70);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }            
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,6 +104,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtHeader = new javax.swing.JLabel();
+        prgbarLoad = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -102,12 +123,18 @@ public class SplashScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(179, 179, 179)
+                                .addComponent(txtHeader)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(txtHeader)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(prgbarLoad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +143,9 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addComponent(txtHeader)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(prgbarLoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,6 +156,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JProgressBar prgbarLoad;
     private javax.swing.JLabel txtHeader;
     // End of variables declaration//GEN-END:variables
 
