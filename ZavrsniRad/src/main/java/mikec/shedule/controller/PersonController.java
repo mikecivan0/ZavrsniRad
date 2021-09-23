@@ -20,7 +20,7 @@ public class PersonController extends BaseController<Person>{
 
     @Override
     public List<Person> read() {
-        return session.createQuery("from Person").list();
+        return session.createQuery("from persons").list();
     }
 
     @Override
@@ -32,18 +32,69 @@ public class PersonController extends BaseController<Person>{
         lengthControll("Address",100);
         lengthControll("PhoneNr",50);
         lengthControll("Email",50);
+        
+        Long personExists = (Long) session.createQuery(
+                "select count(id) from persons where "
+                        + "firstName=:firstName "
+                        + "and lastName=:lastName "
+                        + "and phoneNr=:phoneNr "
+                        + "and email=:email "
+                        + "and address=:address")
+               .setParameter("firstName", entity.getFirstName())
+               .setParameter("lastName", entity.getLastName())
+               .setParameter("phoneNr", entity.getPhoneNr())
+               .setParameter("email", entity.getEmail())
+               .setParameter("address", entity.getAddress())
+               .uniqueResult();
+        
+        if(personExists!=0){
+            throw new BaseException("Person already exists in database");
+        }
     }
 
     @Override
     protected void updateControll() throws BaseException {
-        this.createControll();
+        notEmptyControll("FirstName");
+        notEmptyControll("LastName");
+        lengthControll("FirstName",25);
+        lengthControll("LastName",25);
+        lengthControll("Address",100);
+        lengthControll("PhoneNr",50);
+        lengthControll("Email",50);
+        
+        Long personExists = (Long) session.createQuery(
+                "select count(id) from persons where "
+                        + "firstName=:firstName "
+                        + "and lastName=:lastName "
+                        + "and phoneNr=:phoneNr "
+                        + "and email=:email "
+                        + "and address=:address "
+                        + "and id!=:id")
+               .setParameter("firstName", entity.getFirstName())
+               .setParameter("lastName", entity.getLastName())
+               .setParameter("phoneNr", entity.getPhoneNr())
+               .setParameter("email", entity.getEmail())
+               .setParameter("address", entity.getAddress())
+               .setParameter("id", entity.getId())
+               .uniqueResult();
+        
+        if(personExists!=0){
+            throw new BaseException("Person already exists in database");
+        }
     }
 
     @Override
     protected void deleteControll() throws BaseException {
-
+        Long personExistsAsUser = (Long) session.createQuery(
+                "select count(id) from users where person_id=:id")
+                .setParameter("id", entity.getId())
+                .uniqueResult();
+        
+        if(personExistsAsUser!=0){
+            throw new BaseException("Person cannot be deleted because it is a user");
+        }
     }
-
+    
     private void lengthControll(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Value of input field '" + variable + 
