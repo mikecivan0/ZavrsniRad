@@ -7,7 +7,6 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.awt.Desktop;
 import java.net.URI;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 
@@ -28,7 +27,7 @@ public class Tools {
 	private static SimpleDateFormat dayInWeekFormat;
         private static Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);        
 
-	public static Date checkDate(String input) {
+	public static Date parseDate(String input) {
             dateFormat = new SimpleDateFormat(DATE_FORMAT);
             while (true) {
                 try {
@@ -39,7 +38,7 @@ public class Tools {
             }
         }
 
-	public static Date checkTime(String input) {
+	public static Date parseTime(String input) {
             timeFormat = new SimpleDateFormat(TIME_FORMAT);
             while (true) {
 		try {
@@ -50,7 +49,7 @@ public class Tools {
             }
 	}
 
-	public static int checkNumber(String input, String errorMessage, int min, int max) {
+	public static int parseNumber(String input, String errorMessage, int min, int max) {
             int number = Integer.parseInt(input);
             while (true) {
 		try {
@@ -66,7 +65,7 @@ public class Tools {
             return number;
 	}
 
-	public static String checkString(String input, String errorMessage, int minLength, int maxLength) {
+	public static String parseString(String input, String errorMessage, int minLength, int maxLength) {
             while (true) {
 		if (input.trim().equals("")) {
                     JOptionPane.showMessageDialog(null, errorMessage);
@@ -143,11 +142,6 @@ public class Tools {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "An error is occured. Try open link later.");
             }
-        }
-        
-        public static Date LocalDateToDate(LocalDate localDate){
-            ZoneId defaultZoneId = ZoneId.systemDefault();
-            return Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         }
 
 }
