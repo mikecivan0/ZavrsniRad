@@ -7,6 +7,7 @@
 package mikec.shedule.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import mikec.shedule.util.Tools;
 
 
 @Entity(name = "numsOfWorkersForDay")
@@ -96,6 +98,16 @@ public class NumOfWorkersForDay {
     public void setExpires(LocalDate expires) {
         this.expires = expires;
     }
+
+    @Override
+    public String toString() {
+        return Tools.formatDate(Tools.LocalDateToDate(starts)) + "-" +
+               Tools.formatDate(Tools.LocalDateToDate(expires));
+    }
+    
+    
+    
+           
 
     
 }
