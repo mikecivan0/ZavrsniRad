@@ -57,4 +57,45 @@ public class NumOfWorkersForDay {
     )
     private LocalDate expires;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public NumOfWorkersForDayItem getNumOfWorkersForDayItem() {
+        return numOfWorkersForDayItem;
+    }
+
+    public void setNumOfWorkersForDayItem(NumOfWorkersForDayItem numOfWorkersForDayItem) {
+        this.numOfWorkersForDayItem = numOfWorkersForDayItem;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public LocalDate getStarts() {
+        return starts;
+    }
+
+    public void setStarts(LocalDate starts) {
+        this.starts = starts;
+    }
+
+    public LocalDate getExpires() {
+        return expires;
+    }
+
+    public void setExpires(LocalDate expires) {
+        this.expires = expires;
+    }
+
+    
 }
