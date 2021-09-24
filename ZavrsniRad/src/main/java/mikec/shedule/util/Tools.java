@@ -7,6 +7,8 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.awt.Desktop;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 
 public class Tools {
@@ -141,6 +143,11 @@ public class Tools {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "An error is occured. Try open link later.");
             }
+        }
+        
+        public static Date LocalDateToDate(LocalDate localDate){
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+            return Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         }
 
 }
