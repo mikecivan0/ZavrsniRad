@@ -39,14 +39,14 @@ public class User{
     private Person person;
     
     @OneToMany(mappedBy = "user")
-    private Set<Record> rasporedi = new HashSet<>();
+    private Set<Record> records = new HashSet<>();
 
-    public Set<Record> getRasporedi() {
-        return rasporedi;
+    public Set<Record> getRecords() {
+        return records;
     }
 
-    public void setRasporedi(Set<Record> rasporedi) {
-        this.rasporedi = rasporedi;
+    public void setRecords(Set<Record> records) {
+        this.records = records;
     }
     
     @Column(
