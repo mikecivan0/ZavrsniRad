@@ -5,8 +5,6 @@
  */
 package mikec.shedule.util;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -101,9 +99,9 @@ public class BaseValues {
             String time = (i%2==0 || i==0) ? "22:00" : "00:00";
             regularWorkingHours.add(new RegularWorkingHours(
                             rwhItems.get(i),
-                            LocalTime.parse(time),
-                            LocalDate.parse("2017-11-15"),
-                            LocalDate.parse("2017-12-15"),
+                            time,
+                            Tools.parseDate("15.11.2017."),
+                            Tools.parseDate("15.12.2017."),
                             30
                     )
             );
@@ -143,8 +141,16 @@ public class BaseValues {
             numOfWorkersForDay.add(new NumOfWorkersForDay(
                             nwfdItems.get(i),
                             getRandomNumberInRange(1, 7),
-                            LocalDate.parse("2017-11-15"),
-                            LocalDate.parse("2017-12-15")
+                            Tools.parseDate("15.10.2017."),
+                            Tools.parseDate("14.11.2017.")
+                    )
+            );
+            
+            numOfWorkersForDay.add(new NumOfWorkersForDay(
+                            nwfdItems.get(i),
+                            getRandomNumberInRange(1, 7),
+                            Tools.parseDate("15.11.2018."),
+                            Tools.parseDate("15.12.2018.")
                     )
             );
         }
