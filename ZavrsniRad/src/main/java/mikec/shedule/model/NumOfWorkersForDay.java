@@ -6,7 +6,6 @@
 
 package mikec.shedule.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,8 +26,8 @@ public class NumOfWorkersForDay {
     public NumOfWorkersForDay(
             NumOfWorkersForDayItem numOfWorkersForDayItem, 
             int value, 
-            LocalDate starts, 
-            LocalDate expires) 
+            Date starts, 
+            Date expires) 
     {
         this.numOfWorkersForDayItem = numOfWorkersForDayItem;
         this.value = value;
@@ -52,12 +51,12 @@ public class NumOfWorkersForDay {
     @Column(
             nullable = false
     )
-    private LocalDate starts;
+    private Date starts;
     
     @Column(
             nullable = false
     )
-    private LocalDate expires;
+    private Date expires;
 
     public Long getId() {
         return id;
@@ -83,26 +82,26 @@ public class NumOfWorkersForDay {
         this.value = value;
     }
 
-    public LocalDate getStarts() {
+    public Date getStarts() {
         return starts;
     }
 
-    public void setStarts(LocalDate starts) {
+    public void setStarts(Date starts) {
         this.starts = starts;
     }
 
-    public LocalDate getExpires() {
+    public Date getExpires() {
         return expires;
     }
 
-    public void setExpires(LocalDate expires) {
+    public void setExpires(Date expires) {
         this.expires = expires;
     }
 
     @Override
     public String toString() {
-        return Tools.formatDate(Tools.LocalDateToDate(starts)) + "-" +
-               Tools.formatDate(Tools.LocalDateToDate(expires));
+        return Tools.formatDate(starts) + "-" +
+               Tools.formatDate(expires);
     }
     
     

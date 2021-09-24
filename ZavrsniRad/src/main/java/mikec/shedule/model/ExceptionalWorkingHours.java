@@ -5,7 +5,7 @@
  */
 package mikec.shedule.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,13 +20,13 @@ public class ExceptionalWorkingHours {
         private Long id;
         
         @Column(nullable = false)
-	private LocalDate date;
+	private Date date;
         
         @Column(nullable = false)
-	private LocalDate startTime;
+	private Date startTime;
         
         @Column(nullable = false)
-	private LocalDate endTime;
+	private Date endTime;
         
         @Column(nullable = false)
 	private String footnote;
@@ -38,7 +38,7 @@ public class ExceptionalWorkingHours {
 		
 	}
 	
-	public ExceptionalWorkingHours(LocalDate date, LocalDate startTime, LocalDate endTime, String footnote, int breakDuration) {
+	public ExceptionalWorkingHours(Date date, Date startTime, Date endTime, String footnote, int breakDuration) {
 		this.date = date;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -46,22 +46,22 @@ public class ExceptionalWorkingHours {
 		this.breakDuration = breakDuration;
 	}
 	
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
-	public LocalDate getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(LocalDate startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	public LocalDate getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(LocalDate endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 	public String getFootnote() {

@@ -7,8 +7,7 @@
 package mikec.shedule.model;
 
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,9 +25,9 @@ public class RegularWorkingHours {
 
     public RegularWorkingHours(
             RegularWorkingHoursItem regularWorkingHoursItem, 
-            LocalTime value, 
-            LocalDate starts, 
-            LocalDate expires, 
+            String value, 
+            Date starts, 
+            Date expires, 
             int breakDurationInMinutes) {
         this.regularWorkingHoursItem = regularWorkingHoursItem;
         this.value = value;
@@ -50,17 +49,17 @@ public class RegularWorkingHours {
     @Column(
             nullable = false
     )
-    private LocalTime value;
+    private String value;
     
     @Column(
             nullable = false
     )
-    private LocalDate starts;
+    private Date starts;
     
     @Column(
             nullable = false
     )
-    private LocalDate expires;
+    private Date expires;
     
     @Column(
             nullable = false
