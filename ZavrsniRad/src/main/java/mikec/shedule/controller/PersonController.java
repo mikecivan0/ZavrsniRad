@@ -33,7 +33,7 @@ public class PersonController extends BaseController<Person>{
         lengthControll("PhoneNr",50);
         lengthControll("Email",50);
         
-        Long personExists = (Long) session.createQuery(
+        Long recordExists = (Long) session.createQuery(
                 "select count(id) from persons where "
                         + "firstName=:firstName "
                         + "and lastName=:lastName "
@@ -47,7 +47,7 @@ public class PersonController extends BaseController<Person>{
                .setParameter("address", entity.getAddress())
                .uniqueResult();
         
-        if(personExists!=0){
+        if(recordExists!=0){
             throw new BaseException("Person already exists in database");
         }
     }
