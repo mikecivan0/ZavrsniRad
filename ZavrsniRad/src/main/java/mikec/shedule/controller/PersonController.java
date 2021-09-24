@@ -32,24 +32,7 @@ public class PersonController extends BaseController<Person>{
         lengthControll("Address",100);
         lengthControll("PhoneNr",50);
         lengthControll("Email",50);
-        
-        Long recordExists = (Long) session.createQuery(
-                "select count(id) from persons where "
-                        + "firstName=:firstName "
-                        + "and lastName=:lastName "
-                        + "and phoneNr=:phoneNr "
-                        + "and email=:email "
-                        + "and address=:address")
-               .setParameter("firstName", entity.getFirstName())
-               .setParameter("lastName", entity.getLastName())
-               .setParameter("phoneNr", entity.getPhoneNr())
-               .setParameter("email", entity.getEmail())
-               .setParameter("address", entity.getAddress())
-               .uniqueResult();
-        
-        if(recordExists!=0){
-            throw new BaseException("Person already exists in database");
-        }
+        createExistsControll();
     }
 
     @Override
@@ -61,26 +44,7 @@ public class PersonController extends BaseController<Person>{
         lengthControll("Address",100);
         lengthControll("PhoneNr",50);
         lengthControll("Email",50);
-        
-        Long personExists = (Long) session.createQuery(
-                "select count(id) from persons where "
-                        + "firstName=:firstName "
-                        + "and lastName=:lastName "
-                        + "and phoneNr=:phoneNr "
-                        + "and email=:email "
-                        + "and address=:address "
-                        + "and id!=:id")
-               .setParameter("firstName", entity.getFirstName())
-               .setParameter("lastName", entity.getLastName())
-               .setParameter("phoneNr", entity.getPhoneNr())
-               .setParameter("email", entity.getEmail())
-               .setParameter("address", entity.getAddress())
-               .setParameter("id", entity.getId())
-               .uniqueResult();
-        
-        if(personExists!=0){
-            throw new BaseException("Person already exists in database");
-        }
+        updateExistsControll();        
     }
 
     @Override
@@ -119,4 +83,43 @@ public class PersonController extends BaseController<Person>{
        return text;
     }
     
+    private void createExistsControll() throws BaseException{         
+        Long recordExists = (Long) session.createQuery(
+                "select count(id) from persons where "
+                        + "firstName=:firstName "
+                        + "and lastName=:lastName "
+                        + "and phoneNr=:phoneNr "
+                        + "and email=:email "
+                        + "and address=:address")
+               .setParameter("firstName", entity.getFirstName())
+               .setParameter("lastName", entity.getLastName())
+               .setParameter("phoneNr", entity.getPhoneNr())
+               .setParameter("email", entity.getEmail())
+               .setParameter("address", entity.getAddress())
+               .uniqueResult();      
+        if(recordExists!=0){
+            throw new BaseException("Person already exists in database");
+        }
+    }
+    
+    private void updateExistsControll() throws BaseException{         
+       Long personExists = (Long) session.createQuery(
+                "select count(id) from persons where "
+                        + "firstName=:firstName "
+                        + "and lastName=:lastName "
+                        + "and phoneNr=:phoneNr "
+                        + "and email=:email "
+                        + "and address=:address "
+                        + "and id!=:id")
+               .setParameter("firstName", entity.getFirstName())
+               .setParameter("lastName", entity.getLastName())
+               .setParameter("phoneNr", entity.getPhoneNr())
+               .setParameter("email", entity.getEmail())
+               .setParameter("address", entity.getAddress())
+               .setParameter("id", entity.getId())
+               .uniqueResult();        
+        if(personExists!=0){
+            throw new BaseException("Person already exists in database");
+        }
+    }
 }
