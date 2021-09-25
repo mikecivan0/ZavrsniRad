@@ -5,7 +5,6 @@
  */
 package mikec.shedule.view;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import mikec.shedule.util.Application;
@@ -15,6 +14,7 @@ import javax.swing.JOptionPane;
 import mikec.shedule.controller.NumOfWorkersForDayController;
 import mikec.shedule.controller.NumOfWorkersForDayItemController;
 import mikec.shedule.model.NumOfWorkersForDay;
+import mikec.shedule.model.NumOfWorkersForDayItem;
 import mikec.shedule.util.Tools;
 
 /**
@@ -24,10 +24,14 @@ import mikec.shedule.util.Tools;
 public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     
     private NumOfWorkersForDayController controller;
+    private NumOfWorkersForDayItemController nwfdItemController;
+    private List<NumOfWorkersForDayItem> nwfdItems;
 
     public NumOfWorkersForDayScreen() {
         initComponents();
         controller = new NumOfWorkersForDayController();
+        nwfdItemController = new NumOfWorkersForDayItemController();
+        nwfdItems = nwfdItemController.read();
         settings();
         loadList();
     }
@@ -232,30 +236,57 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        int i = 1;
-        while(i<=7){
-            controller.setEntity(new NumOfWorkersForDay());
-            setEntityValues(i);        
-            try {
-                controller.create();
-            } catch (BaseException ex) {
-                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
-            }     
+        try {
+            checkAreDatesEmpty();
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+            return;
         }
-        loadList(); 
+        int i = 1;
+        boolean proceed = true;
+        for(NumOfWorkersForDayItem nwfdItem : nwfdItems){
+            if(proceed){
+                controller.setEntity(new NumOfWorkersForDay());
+                try {        
+                   setEntityValues(nwfdItem, i++);
+               } catch (BaseException ex) {
+                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+               }
+               try {
+                   controller.create();
+               } catch (BaseException ex) {
+                   JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+                   proceed=false;
+               }      
+            }            
+        }
+       loadList(); 
     }//GEN-LAST:event_btnAddActionPerformed
-   
+   private void checkAreDatesEmpty() throws BaseException{
+    if(txtStarts.getText().trim().length()==0){
+        throw new BaseException("Stars date must not be empty");
+    }
+    if(txtExpires.getText().trim().length()==0){
+        throw new BaseException("Expires date must not be empty");
+    }
+   }
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         int i = 1;
-        while(i<=7){
-            setEntityValues(i);        
+        for(NumOfWorkersForDayItem nwfdItem : nwfdItems){
+             try {        
+                setEntityValues(nwfdItem, i++);
+            } catch (BaseException ex) {
+                 JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+                 break;
+            }
             try {
                 controller.update();
             } catch (BaseException ex) {
                 JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             }     
         }
-        loadList(); 
+       loadList(); 
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -294,11 +325,11 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         });       
     }//GEN-LAST:event_lstEntitesValueChanged
    
-    public void setEntityValues(int i){         
+    public void setEntityValues(NumOfWorkersForDayItem nwfdItem, int i) throws BaseException{   
         var e = controller.getEntity();
         e.setStarts(Tools.parseDate(txtStarts.getText()));
         e.setExpires(Tools.parseDate(txtExpires.getText()));
-        e.setNumOfWorkersForDayItem(new NumOfWorkersForDayItemController().find(i));
+        e.setNumOfWorkersForDayItem(nwfdItem);
         e.setValue(loadValueForField(i));
     }
      
@@ -317,13 +348,48 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
      private int loadValueForField(int i){
          int val = 0;
          switch(i){
-             case 1 -> val = Integer.parseInt(txtMondayNum.getText());
-             case 2 -> val = Integer.parseInt(txtTuesdayNum.getText());
-             case 3 -> val = Integer.parseInt(txtWednesdayNum.getText());
-             case 4 -> val = Integer.parseInt(txtThursdayNum.getText());
-             case 5 -> val = Integer.parseInt(txtFridayNum.getText());
-             case 6 -> val = Integer.parseInt(txtSaturdayNum.getText());
-             case 7 -> val = Integer.parseInt(txtSundayNum.getText());                     
+             case 1 -> {
+                try {
+                    val = Integer.parseInt(txtMondayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }
+             case 2 -> {
+                try {
+                    val = Integer.parseInt(txtTuesdayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }
+             case 3 -> {
+                try {
+                    val = Integer.parseInt(txtWednesdayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }
+             case 4 -> {
+                try {
+                    val = Integer.parseInt(txtThursdayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }
+             case 5 -> {
+                try {
+                    val = Integer.parseInt(txtFridayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }
+             case 6 -> {
+                try {
+                    val = Integer.parseInt(txtSaturdayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }
+             case 7 -> {
+                try {
+                    val = Integer.parseInt(txtSundayNum.getText());
+                } catch (Exception e) {
+                }                    
+            }                   
          }
          return val;
      }

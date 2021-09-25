@@ -6,13 +6,11 @@
 package mikec.shedule.controller;
 
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.util.BaseException;
-import mikec.shedule.util.Tools;
 
 /**
  *
@@ -31,17 +29,11 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
 
     @Override
     protected void createControll() throws BaseException {
-        notEmptyControll("Value");
-        notEmptyControll("Starts");
-        notEmptyControll("Expires");
         createExistsControll();       
     }
 
     @Override
     protected void updateControll() throws BaseException {
-        notEmptyControll("Value");
-        notEmptyControll("Starts");
-        notEmptyControll("Expires");
         updateExistsControll();
     }
 
@@ -50,37 +42,24 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
        
     }
     
-    private void notEmptyControll(String variable) throws BaseException{        
-        if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
-           throw new BaseException("Input '" + variable + "' cannot be empty");
-       }    
-    }
-    
-    private String getVariable(String variable){            
-        String text = "";
-        try { 
-            Method method = NumOfWorkersForDay.class.getDeclaredMethod("get" + variable, null);
-            text = (String) method.invoke(entity, null);           
-        } catch (Exception ex) {
-            Logger.getLogger(NumOfWorkersForDayController.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-       return text;
-    }
-    
     private void createExistsControll() throws BaseException {
         Long startRecordExists = (Long) session.createQuery(
                 "select count(id) from numsOfWorkersForDay where "
-                        + ":starts between starts and expires")
+                        + ":starts between starts and expires "
+                        + "and numOfWorkersForDayItemId=:nwfdItem")
                .setParameter("starts", entity.getStarts())
+               .setParameter("nwfdItem", entity.getNumOfWorkersForDayItem())
                .uniqueResult();        
-        if(startRecordExists!=0){
+        if(startRecordExists>0){
             throw new BaseException("Starts date overlap existing records");
         }
         
         Long expiresRecordExists = (Long) session.createQuery(
                 "select count(id) from numsOfWorkersForDay where "
-                        + ":expires between starts and expires")
+                        + ":expires between starts and expires "
+                        + "and numOfWorkersForDayItemId=:nwfdItem")
                .setParameter("expires", entity.getExpires())
+               .setParameter("nwfdItem", entity.getNumOfWorkersForDayItem())
                .uniqueResult();        
         if(expiresRecordExists!=0){
             throw new BaseException("Expires date overlap existing records");
