@@ -5,10 +5,8 @@
  */
 package mikec.shedule.controller;
 
-import java.lang.reflect.Method;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mikec.shedule.model.NumOfWorkersForDayItem;
 import mikec.shedule.util.BaseException;
 
@@ -20,47 +18,31 @@ public class NumOfWorkersForDayItemController extends BaseController<NumOfWorker
 
     @Override
     public List<NumOfWorkersForDayItem> read() {
-        return session.createQuery("from NumOfWorkersForDayItem").list();
+        return session.createQuery("from numOfWorkersForDayItems").list();
     }
 
     @Override
     protected void createControll() throws BaseException {
-        notEmptyControll("Name");
-        lengthControll("Name",20);
+           
     }
 
     @Override
     protected void updateControll() throws BaseException {
-        createControll();
+      
     }
 
     @Override
     protected void deleteControll() throws BaseException {
-
+       
     }
     
-    private void lengthControll(String variable, Integer length) throws BaseException{   
-        if(getVariable(variable).length()>length){
-            throw new BaseException("Value of input field '" + variable + 
-                    "' must not exceed " + length + " characters");
-        }    
+    public NumOfWorkersForDayItem find(int i){
+        return (NumOfWorkersForDayItem) session.createQuery(
+                "from numOfWorkersForDayItems where id=:id")
+                .setParameter("id", i)
+                .uniqueResult();
     }
     
-    private void notEmptyControll(String variable) throws BaseException{        
-        if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
-           throw new BaseException("Input '" + variable + "' cannot be empty");
-       }    
-    }
-    
-    private String getVariable(String variable){            
-        String text = "";
-        try { 
-            Method method = NumOfWorkersForDayItem.class.getDeclaredMethod("get" + variable, null);
-            text = (String) method.invoke(entity, null);           
-        } catch (Exception ex) {
-            Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-       return text;
-    }
-    
+   
+ 
 }
