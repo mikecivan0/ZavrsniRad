@@ -7,7 +7,6 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.awt.Desktop;
 import java.net.URI;
-import java.time.ZoneId;
 import javax.swing.JOptionPane;
 
 public class Tools {
@@ -27,14 +26,12 @@ public class Tools {
 	private static SimpleDateFormat dayInWeekFormat;
         private static Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);        
 
-	public static Date parseDate(String input) {
-            dateFormat = new SimpleDateFormat(DATE_FORMAT);
-            while (true) {
-                try {
-                    return dateFormat.parse(input);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Enter date in format " + dateFormat.format(new Date()));
-                }
+	public static Date parseDate(String input) throws BaseException{
+            dateFormat = new SimpleDateFormat(DATE_FORMAT);                
+            try {
+                return dateFormat.parse(input);
+            } catch (Exception e) {
+                throw new BaseException("Enter date in format " + dateFormat.format(new Date()));             
             }
         }
 
