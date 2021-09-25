@@ -117,7 +117,7 @@ public class BaseValues {
     private void loadNumOfWorkersForDayItem() {
         nwfdItems = new ArrayList<NumOfWorkersForDayItem>();
         String[] list = {
-            "monday","tuesday","wdnesday","thursday",
+            "monday","tuesday","wednesday","thursday",
             "friday","saturday","sunday"
         };
         
