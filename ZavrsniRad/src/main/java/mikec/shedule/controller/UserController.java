@@ -20,6 +20,10 @@ import mikec.shedule.util.BaseException;
  */
 public class UserController extends BaseController<User>{
 
+    public UserController() throws BaseException {
+        super();
+    }
+    
     @Override
     protected void updateControll() throws BaseException {
 

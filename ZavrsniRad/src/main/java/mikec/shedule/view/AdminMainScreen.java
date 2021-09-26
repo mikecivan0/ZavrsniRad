@@ -5,8 +5,12 @@
  */
 package mikec.shedule.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import mikec.shedule.controller.PersonController;
 import mikec.shedule.util.Application;
+import mikec.shedule.util.BaseException;
 
 /**
  *
@@ -17,7 +21,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
     /**
      * Creates new form Izbornik
      */
-    public AdminMainScreen() {
+    public AdminMainScreen() throws BaseException {
         initComponents();
         settings();
         PersonController pc = new PersonController();
@@ -139,11 +143,19 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       new PersonScreen().setVisible(true);
+        try {
+            new PersonScreen().setVisible(true);
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new NumOfWorkersForDayScreen().setVisible(true);
+        try {
+            new NumOfWorkersForDayScreen().setVisible(true);
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

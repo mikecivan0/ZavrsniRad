@@ -5,11 +5,8 @@
  */
 package mikec.shedule.controller;
 
-import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
@@ -20,6 +17,10 @@ import mikec.shedule.util.Tools;
  */
 public class NumOfWorkersForDayController extends BaseController<NumOfWorkersForDay>{
 
+    public NumOfWorkersForDayController() throws BaseException {
+        super();
+    }    
+    
     @Override
     public List<NumOfWorkersForDay> read() {
         return session.createQuery("from numsOfWorkersForDay group by starts order by starts").list();
@@ -36,7 +37,7 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
 
     @Override
     protected void updateControll() throws BaseException {
-        updateExistsControll();
+//        updateExistsControll();
     }
 
     @Override
@@ -54,6 +55,16 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
       }        
     }
     
+//    private void updateExistsControll() throws BaseException {
+//      List<Date> datesBetween = Tools.getDaysBetweenDates(entity.getStarts(), entity.getExpires());
+//      boolean overlap = false;
+//      for(Date date : datesBetween){
+//          if(!overlap){
+//             checkUpdateOverlap(date); 
+//          }          
+//      }        
+//    }
+    
     private boolean checkInsertOverlap(Date date) throws BaseException{
         boolean bool = false;
         Long startRecordExists = (Long) session.createQuery(
@@ -69,28 +80,21 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
         return bool;
     }
     
-    private void updateExistsControll() throws BaseException {
+//    private boolean checkUpdateOverlap(Date date) throws BaseException {
+//        boolean bool = false;
 //        Long startRecordExists = (Long) session.createQuery(
 //                "select count(id) from numsOfWorkersForDay where "
-//                        + ":starts between starts and expires "
+//                        + ":date between starts and expires "
+//                        + "and numOfWorkersForDayItemId=:nwfd "
 //                        + "and id!=:id")
-//               .setParameter("starts", entity.getStarts())
-//               .setParameter("id", entity.getId())
+//               .setParameter("date", date)
+//               .setParameter("nwfd", entity.getNumOfWorkersForDayItem())
+//                .setParameter("id", entity.getNumOfWorkersForDayItem().getId())
 //               .uniqueResult();        
-//        if(startRecordExists!=0){
-//            throw new BaseException("Starts date overlap existing records");
-//        }
-//        
-//        Long expiresRecordExists = (Long) session.createQuery(
-//                "select count(id) from numsOfWorkersForDay where "
-//                        + ":expires between starts and expires "
-//                        + "and id!=:id")
-//               .setParameter("expires", entity.getExpires())
-//               .setParameter("id", entity.getId())
-//               .uniqueResult();        
-//        if(expiresRecordExists!=0){
-//            throw new BaseException("Expires date overlap existing records");
-//        }
-    }
+//        if(startRecordExists>0){
+//            throw new BaseException("Dates range overlap existing records");
+//        }        
+//        return bool;
+//    }
     
 }

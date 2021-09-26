@@ -6,10 +6,13 @@
 package mikec.shedule.view;
 
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.User;
 import mikec.shedule.util.Application;
+import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
 
 /**
@@ -25,7 +28,11 @@ public class Auth extends javax.swing.JFrame {
      */
     public Auth() {
         initComponents();
-        userController = new UserController();
+        try {
+            userController = new UserController();
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        }
         postavke();
     }
     
@@ -161,7 +168,11 @@ public class Auth extends javax.swing.JFrame {
         if(oper.getLevel()==1){
             new UserMainScreen().setVisible(true);
         }else if(oper.getLevel()==2){
-            new AdminMainScreen().setVisible(true);
+            try {
+                new AdminMainScreen().setVisible(true);
+            } catch (BaseException ex) {
+               JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+            }
         }       
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed

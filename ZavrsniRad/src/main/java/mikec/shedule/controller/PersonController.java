@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import mikec.shedule.model.Person;
 import mikec.shedule.util.BaseException;
 
@@ -17,6 +18,10 @@ import mikec.shedule.util.BaseException;
  * @author Ivan
  */
 public class PersonController extends BaseController<Person>{
+
+    public PersonController() throws BaseException {        
+        super();
+    }
 
     @Override
     public List<Person> read() {
@@ -78,7 +83,7 @@ public class PersonController extends BaseController<Person>{
             Method method = Person.class.getDeclaredMethod("get" + variable, null);
             text = (String) method.invoke(entity, null);           
         } catch (Exception ex) {
-            Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }        
        return text;
     }

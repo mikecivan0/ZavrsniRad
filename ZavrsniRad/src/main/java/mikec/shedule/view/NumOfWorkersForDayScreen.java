@@ -27,7 +27,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     private NumOfWorkersForDayItemController nwfdItemController;
     private List<NumOfWorkersForDayItem> nwfdItems;
 
-    public NumOfWorkersForDayScreen() {
+    public NumOfWorkersForDayScreen() throws BaseException {
         initComponents();
         controller = new NumOfWorkersForDayController();
         nwfdItemController = new NumOfWorkersForDayItemController();

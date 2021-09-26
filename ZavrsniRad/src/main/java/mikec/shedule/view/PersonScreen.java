@@ -20,7 +20,7 @@ public class PersonScreen extends javax.swing.JFrame{
     
     private PersonController controller;
 
-    public PersonScreen() {
+    public PersonScreen() throws BaseException {
         initComponents();
         controller = new PersonController();
         settings();

@@ -44,7 +44,7 @@ public class BaseValues {
 
     }  
     
-    public static void loadPerson(String firstName, String lastName, String phoneNr, String email, String address){
+    public static void loadPerson(String firstName, String lastName, String phoneNr, String email, String address) throws BaseException{
         personController = new PersonController();
         person = new Person(firstName, lastName, phoneNr, email, address);
         personController.setEntity(person);     
@@ -56,7 +56,7 @@ public class BaseValues {
         }
     }
 
-    private static void loadUser(Person person, String username, String pass, String prs_id, int level, boolean aktiv) {
+    private static void loadUser(Person person, String username, String pass, String prs_id, int level, boolean aktiv) throws BaseException {
         userConttroler = new UserController();
         user = new User(person, username, pass, prs_id, level, aktiv);
         userConttroler.setEntity(user);     

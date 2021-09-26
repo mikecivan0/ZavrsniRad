@@ -32,7 +32,7 @@ public class SplashScreen extends javax.swing.JFrame {
         UpdateHeader updateHeader = new UpdateHeader();        
         updateHeader.start(); 
         ProgressBar progressBar = new ProgressBar();
-        progressBar.start();;
+        progressBar.start();
     }
     
     private class Load extends Thread{          
@@ -47,12 +47,12 @@ public class SplashScreen extends javax.swing.JFrame {
                     dispose();               
                 }
             } catch (BaseException ex) {
-                JOptionPane.showMessageDialog(getParent(), "Unable to connect database");
                 loadEnd = true;
-                dispose();
+                JOptionPane.showMessageDialog(getRootPane(), "A database error has occurred" );
+                dispose();  
             }
-            
-        }       
+        
+        }         
     }
     
     private class UpdateHeader extends Thread{  

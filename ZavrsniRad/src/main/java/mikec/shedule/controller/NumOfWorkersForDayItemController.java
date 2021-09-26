@@ -16,6 +16,10 @@ import mikec.shedule.util.BaseException;
  */
 public class NumOfWorkersForDayItemController extends BaseController<NumOfWorkersForDayItem>{
 
+    public NumOfWorkersForDayItemController() throws BaseException {
+        super();
+    }  
+
     @Override
     public List<NumOfWorkersForDayItem> read() {
         return session.createQuery("from numOfWorkersForDayItems").list();
