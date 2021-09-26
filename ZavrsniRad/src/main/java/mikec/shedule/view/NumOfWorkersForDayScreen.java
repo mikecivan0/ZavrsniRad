@@ -5,6 +5,7 @@
  */
 package mikec.shedule.view;
 
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
 import mikec.shedule.util.Application;
@@ -91,8 +92,20 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
 
         jLabel1.setText("Starts date");
 
+        txtStarts.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtStartsKeyPressed(evt);
+            }
+        });
+
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Monday");
+
+        txtMondayNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMondayNumKeyPressed(evt);
+            }
+        });
 
         btnAdd.setText("Add new");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -115,22 +128,58 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
             }
         });
 
+        txtExpires.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtExpiresKeyPressed(evt);
+            }
+        });
+
         jLabel6.setText("Expires date");
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Tuesday");
 
+        txtTuesdayNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTuesdayNumKeyPressed(evt);
+            }
+        });
+
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Wednesday");
+
+        txtWednesdayNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtWednesdayNumKeyPressed1(evt);
+            }
+        });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Thursday");
 
+        txtThursdayNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtThursdayNumKeyPressed(evt);
+            }
+        });
+
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Friday");
 
+        txtFridayNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFridayNumKeyPressed(evt);
+            }
+        });
+
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Saturday");
+
+        txtSaturdayNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSaturdayNumKeyPressed(evt);
+            }
+        });
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Sunday");
@@ -263,15 +312,15 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
        loadList(); 
     }//GEN-LAST:event_btnAddActionPerformed
    private void checkAreDatesValid() throws BaseException{
-    if(txtStarts.getText().trim().length()==0){
-        throw new BaseException("Stars date must not be empty");
-    }
-    if(txtExpires.getText().trim().length()==0){
-        throw new BaseException("Expires date must not be empty");
-    }
-    if(Tools.parseDate(txtStarts.getText()).after(Tools.parseDate(txtExpires.getText()))){
-        throw new BaseException("Starts date cannot be greather as expires date");
-    }
+        if(txtStarts.getText().trim().length()==0){
+            throw new BaseException("Stars date must not be empty");
+        }
+        if(txtExpires.getText().trim().length()==0){
+            throw new BaseException("Expires date must not be empty");
+        }
+        if(Tools.parseDate(txtStarts.getText()).after(Tools.parseDate(txtExpires.getText()))){
+            throw new BaseException("Starts date cannot be greather as expires date");
+        }
    }
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         int i = 1;
@@ -288,8 +337,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             }     
         }
-       loadList(); 
-        
+       loadList();         
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -327,6 +375,54 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                     loadFields(record);
         });       
     }//GEN-LAST:event_lstEntitesValueChanged
+
+    private void txtStartsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStartsKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtExpires.requestFocus();
+        }
+    }//GEN-LAST:event_txtStartsKeyPressed
+
+    private void txtExpiresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExpiresKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtMondayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtExpiresKeyPressed
+
+    private void txtMondayNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMondayNumKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtTuesdayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtMondayNumKeyPressed
+
+    private void txtTuesdayNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTuesdayNumKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtWednesdayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtTuesdayNumKeyPressed
+
+    private void txtWednesdayNumKeyPressed1(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWednesdayNumKeyPressed1
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtThursdayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtWednesdayNumKeyPressed1
+
+    private void txtThursdayNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtThursdayNumKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtFridayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtThursdayNumKeyPressed
+
+    private void txtFridayNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFridayNumKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtSaturdayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtFridayNumKeyPressed
+
+    private void txtSaturdayNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaturdayNumKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtSundayNum.requestFocus();
+        }
+    }//GEN-LAST:event_txtSaturdayNumKeyPressed
    
     public void setEntityValues(NumOfWorkersForDayItem nwfdItem, int i) throws BaseException{   
         var e = controller.getEntity();
