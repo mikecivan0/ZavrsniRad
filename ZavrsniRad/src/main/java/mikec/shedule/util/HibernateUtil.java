@@ -19,7 +19,7 @@ public class HibernateUtil {
     private static Session session;
     // factory principle
     
-    public static Session getSession() { 
+    public static Session getSession() throws BaseException { 
         if (session == null) {
             
             try {
@@ -37,11 +37,10 @@ public class HibernateUtil {
                 
                 session=sessionFactory.openSession();
             } catch (Exception e) {
-                
-                e.printStackTrace();
                 if (registry != null) {
                     StandardServiceRegistryBuilder.destroy(registry);
                 }
+               throw new BaseException(null);                
             }
         }
         return session;
