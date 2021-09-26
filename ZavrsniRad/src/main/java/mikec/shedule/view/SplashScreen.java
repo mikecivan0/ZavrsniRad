@@ -5,8 +5,11 @@
  */
 package mikec.shedule.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mikec.shedule.util.Application;
+import mikec.shedule.util.BaseException;
 import org.hibernate.Session;
 import mikec.shedule.util.HibernateUtil;
 
@@ -35,14 +38,20 @@ public class SplashScreen extends javax.swing.JFrame {
     private class Load extends Thread{          
         @Override
         public void run() {  
-            Session s = HibernateUtil.getSession();
-            if(s.getMetamodel().getEntities().size()>0){
+            Session s;
+            try {
+                s = HibernateUtil.getSession();
+                if(s.getMetamodel().getEntities().size()>0){
+                    loadEnd = true;
+                    new Auth().setVisible(true);
+                    dispose();               
+                }
+            } catch (BaseException ex) {
+                JOptionPane.showMessageDialog(getParent(), "Unable to connect database");
                 loadEnd = true;
-                new Auth().setVisible(true);
-                dispose();               
-            }else{
-                JOptionPane.showMessageDialog(getRootPane(), "A database error has occurred" );
-            } 
+                dispose();
+            }
+            
         }       
     }
     
