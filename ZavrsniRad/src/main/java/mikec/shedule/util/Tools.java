@@ -7,6 +7,10 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.awt.Desktop;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Tools {
@@ -140,5 +144,19 @@ public class Tools {
                 JOptionPane.showMessageDialog(null, "An error is occured. Try open link later.");
             }
         }
-
+public static List<Date> getDaysBetweenDates(Date startdate, Date enddate)
+{
+    List<Date> dates = new ArrayList<Date>();
+    Calendar calendar = new GregorianCalendar();
+    calendar.setTime(startdate);
+ 
+    while (calendar.getTime().before(enddate))
+    {
+        Date result = calendar.getTime();
+        dates.add(result);
+        calendar.add(Calendar.DATE, 1);
+    }
+    return dates;
+}
+  
 }
