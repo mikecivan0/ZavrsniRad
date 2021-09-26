@@ -237,7 +237,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try {
-            checkAreDatesEmpty();
+            checkAreDatesValid();
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             return;
@@ -262,12 +262,15 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         }
        loadList(); 
     }//GEN-LAST:event_btnAddActionPerformed
-   private void checkAreDatesEmpty() throws BaseException{
+   private void checkAreDatesValid() throws BaseException{
     if(txtStarts.getText().trim().length()==0){
         throw new BaseException("Stars date must not be empty");
     }
     if(txtExpires.getText().trim().length()==0){
         throw new BaseException("Expires date must not be empty");
+    }
+    if(Tools.parseDate(txtStarts.getText()).after(Tools.parseDate(txtExpires.getText()))){
+        throw new BaseException("Starts date cannot be greather as expires date");
     }
    }
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed

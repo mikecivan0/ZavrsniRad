@@ -6,11 +6,13 @@
 package mikec.shedule.controller;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.util.BaseException;
+import mikec.shedule.util.Tools;
 
 /**
  *
@@ -43,51 +45,52 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     }
     
     private void createExistsControll() throws BaseException {
+      List<Date> datesBetween = Tools.getDaysBetweenDates(entity.getStarts(), entity.getExpires());
+      boolean overlap = false;
+      for(Date date : datesBetween){
+          if(!overlap){
+             checkInsertOverlap(date); 
+          }          
+      }        
+    }
+    
+    private boolean checkInsertOverlap(Date date) throws BaseException{
+        boolean bool = false;
         Long startRecordExists = (Long) session.createQuery(
                 "select count(id) from numsOfWorkersForDay where "
-                        + ":starts between starts and expires "
-                        + "and numOfWorkersForDayItemId=:nwfdItem")
-               .setParameter("starts", entity.getStarts())
-               .setParameter("nwfdItem", entity.getNumOfWorkersForDayItem())
+                        + ":date between starts and expires "
+                        + "and numOfWorkersForDayItemId=:nwfd")
+               .setParameter("date", date)
+               .setParameter("nwfd", entity.getNumOfWorkersForDayItem())
                .uniqueResult();        
         if(startRecordExists>0){
-            throw new BaseException("Starts date overlap existing records");
-        }
-        
-        Long expiresRecordExists = (Long) session.createQuery(
-                "select count(id) from numsOfWorkersForDay where "
-                        + ":expires between starts and expires "
-                        + "and numOfWorkersForDayItemId=:nwfdItem")
-               .setParameter("expires", entity.getExpires())
-               .setParameter("nwfdItem", entity.getNumOfWorkersForDayItem())
-               .uniqueResult();        
-        if(expiresRecordExists!=0){
-            throw new BaseException("Expires date overlap existing records");
-        }
+            throw new BaseException("Dates range overlap existing records");
+        }        
+        return bool;
     }
     
     private void updateExistsControll() throws BaseException {
-        Long startRecordExists = (Long) session.createQuery(
-                "select count(id) from numsOfWorkersForDay where "
-                        + ":starts between starts and expires "
-                        + "and id!=:id")
-               .setParameter("starts", entity.getStarts())
-               .setParameter("id", entity.getId())
-               .uniqueResult();        
-        if(startRecordExists!=0){
-            throw new BaseException("Starts date overlap existing records");
-        }
-        
-        Long expiresRecordExists = (Long) session.createQuery(
-                "select count(id) from numsOfWorkersForDay where "
-                        + ":expires between starts and expires "
-                        + "and id!=:id")
-               .setParameter("expires", entity.getExpires())
-               .setParameter("id", entity.getId())
-               .uniqueResult();        
-        if(expiresRecordExists!=0){
-            throw new BaseException("Expires date overlap existing records");
-        }
+//        Long startRecordExists = (Long) session.createQuery(
+//                "select count(id) from numsOfWorkersForDay where "
+//                        + ":starts between starts and expires "
+//                        + "and id!=:id")
+//               .setParameter("starts", entity.getStarts())
+//               .setParameter("id", entity.getId())
+//               .uniqueResult();        
+//        if(startRecordExists!=0){
+//            throw new BaseException("Starts date overlap existing records");
+//        }
+//        
+//        Long expiresRecordExists = (Long) session.createQuery(
+//                "select count(id) from numsOfWorkersForDay where "
+//                        + ":expires between starts and expires "
+//                        + "and id!=:id")
+//               .setParameter("expires", entity.getExpires())
+//               .setParameter("id", entity.getId())
+//               .uniqueResult();        
+//        if(expiresRecordExists!=0){
+//            throw new BaseException("Expires date overlap existing records");
+//        }
     }
     
 }
