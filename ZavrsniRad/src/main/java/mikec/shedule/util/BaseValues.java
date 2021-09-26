@@ -32,7 +32,7 @@ public class BaseValues {
         this.session = session;
     }
 
-    public void load() {
+    public void load() throws BaseException {
         loadPerson("PersonName", "PersonSurname", "", "", "");
         loadUser(person, "user1", Tools.hashPass("user1"), "123-5", 1, true);
         loadPerson("PersonName2", "PersonSurname2", "", "", "");
@@ -92,7 +92,7 @@ public class BaseValues {
         session.getTransaction().commit();
     }
 
-    private void loadRegularWorkingHours() {
+    private void loadRegularWorkingHours() throws BaseException {
         List<RegularWorkingHours> regularWorkingHours = new ArrayList<RegularWorkingHours>();
 
         for (int i = 0; i < 14; i++) {
@@ -133,7 +133,7 @@ public class BaseValues {
         session.getTransaction().commit();
     }
     
-    private void loadNumOfWorkersForDay() {
+    private void loadNumOfWorkersForDay() throws BaseException {
         List<NumOfWorkersForDay> numOfWorkersForDay = new ArrayList<NumOfWorkersForDay>();
 
         for (int i = 0; i < 7; i++) {
