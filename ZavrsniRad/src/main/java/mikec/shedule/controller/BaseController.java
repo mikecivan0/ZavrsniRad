@@ -24,7 +24,7 @@ public abstract class BaseController<T> {
     protected abstract void updateControll() throws BaseException;
     protected abstract void deleteControll() throws BaseException;
 
-    public BaseController() {
+    public BaseController() throws BaseException {
         this.session = HibernateUtil.getSession();
     }
     
