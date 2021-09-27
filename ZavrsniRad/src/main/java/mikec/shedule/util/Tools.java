@@ -150,7 +150,7 @@ public static List<Date> getDatesBetweenTwoDates(Date startdate, Date enddate)
     Calendar calendar = new GregorianCalendar();
     calendar.setTime(startdate);
  
-    while (calendar.getTime().before(enddate))
+    while (calendar.getTime().before(enddate) || calendar.getTime().equals(enddate))
     {
         Date result = calendar.getTime();
         dates.add(result);
