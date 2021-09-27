@@ -26,7 +26,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     
     private NumOfWorkersForDayController controller;
     private NumOfWorkersForDayItemController nwfdItemController;
-    private List<NumOfWorkersForDayItem> nwfdItems;
+    private List<NumOfWorkersForDayItem> nwfdItems;  
 
     public NumOfWorkersForDayScreen() throws BaseException {
         initComponents();
@@ -310,6 +310,14 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
        selectItem(controller.getEntity().getStarts());
     }//GEN-LAST:event_btnAddActionPerformed
     
+    public void setEntityValuesInsert(NumOfWorkersForDayItem nwfdItem, int i) throws BaseException{   
+        var e = controller.getEntity();
+        e.setStarts(Tools.parseDate(txtStarts.getText()));
+        e.setExpires(Tools.parseDate(txtExpires.getText()));
+        e.setNumOfWorkersForDayItem(nwfdItem);
+        e.setValue(loadValueForField(i));
+    }
+    
     private void checkAreDatesValid() throws BaseException{
         if(txtStarts.getText().trim().length()==0){
             throw new BaseException("Stars date must not be empty");
@@ -320,21 +328,53 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         if(Tools.parseDate(txtStarts.getText()).after(Tools.parseDate(txtExpires.getText()))){
             throw new BaseException("Starts date cannot be greather as expires date");
         }
-   }
+    }
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-       try {
-            checkAreDatesValid();            
+        boolean proceed = true;
+        try {
+            checkAreDatesValid(); 
+            checkUpdateOverlap();
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
-            return;
+            proceed = false;
         }  
-       
-  //     if(!controller.checkUpdateOverlaping(date, selctedValueDate))
-
-//       loadList();   
-       selectItem(controller.getEntity().getStarts());
+        
+        if(proceed){
+            int i = 1;
+            List<NumOfWorkersForDay> nwfdByDateList = controller.fetchByStartsDate(lstEntites.getSelectedValue().getStarts());
+            for(NumOfWorkersForDay nwfd : nwfdByDateList){
+                controller.setEntity(nwfd);
+                try {        
+                    setEntityValuesUpdate(nwfd, i++);
+                    controller.update();
+                } catch (BaseException ex) {
+                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+                }
+            }
+            loadList();
+            selectItem(controller.getEntity().getStarts()); 
+        }     
     }//GEN-LAST:event_btnEditActionPerformed
-
+    
+    private void checkUpdateOverlap() throws BaseException{
+        List<Date> listOfDates = Tools.getDatesBetweenTwoDates(
+                Tools.parseDate(txtStarts.getText()), 
+                Tools.parseDate(txtExpires.getText())
+        );
+        for(Date date : listOfDates){
+            if(controller.checkUpdateOverlap(date, lstEntites.getSelectedValue().getStarts())){
+               throw new BaseException("Dates range overlap existing records");               
+            }
+        }        
+    }
+    
+    public void setEntityValuesUpdate(NumOfWorkersForDay nwfd, int i) throws BaseException{   
+        nwfd.setStarts(Tools.parseDate(txtStarts.getText()));
+        nwfd.setExpires(Tools.parseDate(txtExpires.getText()));
+        nwfd.setValue(loadValueForField(i));
+    }
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
        if(JOptionPane.showConfirmDialog(
                rootPane, 
@@ -430,21 +470,6 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
             }
         }
     }
-    
-    public void setEntityValuesInsert(NumOfWorkersForDayItem nwfdItem, int i) throws BaseException{   
-        var e = controller.getEntity();
-        e.setStarts(Tools.parseDate(txtStarts.getText()));
-        e.setExpires(Tools.parseDate(txtExpires.getText()));
-        e.setNumOfWorkersForDayItem(nwfdItem);
-        e.setValue(loadValueForField(i));
-    }
-    
-    public void setEntityValuesUpdate(NumOfWorkersForDay nwfd, int i) throws BaseException{   
-        var e = controller.getEntity();
-        e.setStarts(Tools.parseDate(txtStarts.getText()));
-        e.setExpires(Tools.parseDate(txtExpires.getText()));
-        e.setValue(loadValueForField(i));
-    }
      
     public void loadFields(NumOfWorkersForDay nwfd){
         switch(nwfd.getNumOfWorkersForDayItem().getName()){
@@ -532,4 +557,6 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     private javax.swing.JTextField txtTuesdayNum;
     private javax.swing.JTextField txtWednesdayNum;
     // End of variables declaration//GEN-END:variables
+
+    
 }

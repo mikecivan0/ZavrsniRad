@@ -44,7 +44,7 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
 
     @Override
     protected void updateControll() throws BaseException {
-        
+    
     }
 
     @Override
@@ -84,13 +84,13 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
         }
     }
     
-    public boolean checkUpdateOverlaping(Date date, Date selctedValueDate) {
+    public boolean checkUpdateOverlap(Date dateFromList, Date selctedValueDate) throws BaseException{
         boolean bool = false;
         Long startRecordExists = (Long) session.createQuery(
                 "select count(id) from numsOfWorkersForDay where "
-                        + ":date between starts and expires and id not in"
+                        + ":date between starts and expires and id not in "
                         + "(select id from numsOfWorkersForDay where starts=:starts)")
-               .setParameter("date", date)
+               .setParameter("date", dateFromList)
                .setParameter("starts", selctedValueDate)
                .uniqueResult();        
         if(startRecordExists>0){
