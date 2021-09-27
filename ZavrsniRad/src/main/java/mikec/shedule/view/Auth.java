@@ -61,6 +61,7 @@ public class Auth extends javax.swing.JFrame {
 
         jLabel1.setText("Username");
 
+        txtUsername.setText("user2");
         txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyPressed(evt);
@@ -69,6 +70,7 @@ public class Auth extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        pswPass.setText("user2");
         pswPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 pswPassKeyPressed(evt);
