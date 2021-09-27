@@ -7,6 +7,8 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.awt.Desktop;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -144,19 +146,29 @@ public class Tools {
                 JOptionPane.showMessageDialog(null, "An error is occured. Try open link later.");
             }
         }
-public static List<Date> getDatesBetweenTwoDates(Date startdate, Date enddate)
-{
-    List<Date> dates = new ArrayList<Date>();
-    Calendar calendar = new GregorianCalendar();
-    calendar.setTime(startdate);
- 
-    while (calendar.getTime().before(enddate) || calendar.getTime().equals(enddate))
-    {
-        Date result = calendar.getTime();
-        dates.add(result);
-        calendar.add(Calendar.DATE, 1);
+        public static List<Date> getDatesBetweenTwoDates(Date startdate, Date enddate){
+            List<Date> dates = new ArrayList<Date>();
+            Calendar calendar = new GregorianCalendar();
+            calendar.setTime(startdate);
+
+            while (calendar.getTime().before(enddate) || calendar.getTime().equals(enddate))
+            {
+                Date result = calendar.getTime();
+                dates.add(result);
+                calendar.add(Calendar.DATE, 1);
+            }
+            return dates;
+        }
+
+    public static Date LocalDateToDate(LocalDate localDate){
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        return Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
     }
-    return dates;
+    
+    public static LocalDate dateToLocalDate(Date dateToConvert) {
+    return dateToConvert.toInstant()
+      .atZone(ZoneId.systemDefault())
+      .toLocalDate();
 }
   
 }
