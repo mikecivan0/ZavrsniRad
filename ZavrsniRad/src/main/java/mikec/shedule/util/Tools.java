@@ -144,7 +144,7 @@ public class Tools {
                 JOptionPane.showMessageDialog(null, "An error is occured. Try open link later.");
             }
         }
-public static List<Date> getDaysBetweenDates(Date startdate, Date enddate)
+public static List<Date> getDatesBetweenTwoDates(Date startdate, Date enddate)
 {
     List<Date> dates = new ArrayList<Date>();
     Calendar calendar = new GregorianCalendar();
