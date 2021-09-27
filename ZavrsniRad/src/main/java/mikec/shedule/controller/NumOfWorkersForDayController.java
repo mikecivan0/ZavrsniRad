@@ -30,6 +30,12 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     public List<NumOfWorkersForDay> fetchAll() {
         return session.createQuery("from numsOfWorkersForDay").list();
     }
+    
+     public List<NumOfWorkersForDay> fetchByStartsDate(Date startsDate) {
+        return session.createQuery("from numsOfWorkersForDay where starts=:starts")
+                .setParameter("starts", startsDate)
+                .list();
+    }
 
     @Override
     protected void createControll() throws BaseException {
@@ -38,7 +44,7 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
 
     @Override
     protected void updateControll() throws BaseException {
-//        updateExistsControll();
+        
     }
 
     @Override
@@ -46,7 +52,7 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
        
     }
  
-    public void delete(Date date) throws BaseException {        
+    public void delete(Date date){        
           try {
            session.beginTransaction();
            session.createQuery("delete from numsOfWorkersForDay where starts=:starts")
@@ -55,34 +61,17 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
            session.getTransaction().commit();             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }     
-           
-    }
-    
-    
+        }             
+    }  
     
     private void createExistsControll() throws BaseException {
-      List<Date> datesBetween = Tools.getDaysBetweenDates(entity.getStarts(), entity.getExpires());
-      boolean overlap = false;
-      for(Date date : datesBetween){
-          if(!overlap){
-             checkInsertOverlap(date); 
-          }          
+      List<Date> datesBetween = Tools.getDatesBetweenTwoDates(entity.getStarts(), entity.getExpires());
+      for(Date date : datesBetween){      
+        checkInsertOverlap(date);        
       }        
     }
     
-//    private void updateExistsControll() throws BaseException {
-//      List<Date> datesBetween = Tools.getDaysBetweenDates(entity.getStarts(), entity.getExpires());
-//      boolean overlap = false;
-//      for(Date date : datesBetween){
-//          if(!overlap){
-//             checkUpdateOverlap(date); 
-//          }          
-//      }        
-//    }
-    
-    private boolean checkInsertOverlap(Date date) throws BaseException{
-        boolean bool = false;
+    private void checkInsertOverlap(Date date) throws BaseException{
         Long startRecordExists = (Long) session.createQuery(
                 "select count(id) from numsOfWorkersForDay where "
                         + ":date between starts and expires "
@@ -92,25 +81,22 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
                .uniqueResult();        
         if(startRecordExists>0){
             throw new BaseException("Dates range overlap existing records");
-        }        
-        return bool;
+        }
     }
     
-//    private boolean checkUpdateOverlap(Date date) throws BaseException {
-//        boolean bool = false;
-//        Long startRecordExists = (Long) session.createQuery(
-//                "select count(id) from numsOfWorkersForDay where "
-//                        + ":date between starts and expires "
-//                        + "and numOfWorkersForDayItemId=:nwfd "
-//                        + "and id!=:id")
-//               .setParameter("date", date)
-//               .setParameter("nwfd", entity.getNumOfWorkersForDayItem())
-//                .setParameter("id", entity.getNumOfWorkersForDayItem().getId())
-//               .uniqueResult();        
-//        if(startRecordExists>0){
-//            throw new BaseException("Dates range overlap existing records");
-//        }        
-//        return bool;
-//    }
+    public boolean checkUpdateOverlaping(Date date, Date selctedValueDate) {
+        boolean bool = false;
+        Long startRecordExists = (Long) session.createQuery(
+                "select count(id) from numsOfWorkersForDay where "
+                        + ":date between starts and expires and id not in"
+                        + "(select id from numsOfWorkersForDay where starts=:starts)")
+               .setParameter("date", date)
+               .setParameter("starts", selctedValueDate)
+               .uniqueResult();        
+        if(startRecordExists>0){
+            bool = true;
+        }   
+        return bool;
+    }
     
 }
