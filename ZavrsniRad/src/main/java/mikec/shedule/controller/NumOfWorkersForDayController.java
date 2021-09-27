@@ -84,19 +84,24 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
         }
     }
     
-    public boolean checkUpdateOverlap(Date dateFromList, Date selctedValueDate) throws BaseException{
-        boolean bool = false;
-        Long startRecordExists = (Long) session.createQuery(
-                "select count(id) from numsOfWorkersForDay where "
-                        + ":date between starts and expires and id not in "
-                        + "(select id from numsOfWorkersForDay where starts=:starts)")
-               .setParameter("date", dateFromList)
-               .setParameter("starts", selctedValueDate)
+    public void checkUpdateOverlap(String starts, String expires, Date selected) throws BaseException{
+        List<Date> listOfDates = Tools.getDatesBetweenTwoDates(
+                Tools.parseDate(starts), 
+                Tools.parseDate(expires)
+        );
+        for(Date date : listOfDates){
+             Long startRecordExists = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM numsOfWorkersForDay WHERE "
+                        + ":date BETWEEN starts AND expires "
+                        + "AND id NOT IN "
+                        + "(SELECT id FROM numsOfWorkersForDay WHERE starts=:starts)")
+               .setParameter("date", date)
+               .setParameter("starts", selected)
                .uniqueResult();        
-        if(startRecordExists>0){
-            bool = true;
-        }   
-        return bool;
+            if(startRecordExists>0){
+               throw new BaseException("Dates range overlap existing records");   
+            }          
+        }        
     }
     
 }

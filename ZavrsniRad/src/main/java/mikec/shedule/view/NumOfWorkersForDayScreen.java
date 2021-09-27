@@ -334,7 +334,10 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         boolean proceed = true;
         try {
             checkAreDatesValid(); 
-            checkUpdateOverlap();
+            controller.checkUpdateOverlap(
+                    txtStarts.getText(), 
+                    txtExpires.getText(), 
+                    lstEntites.getSelectedValue().getStarts());
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             proceed = false;
@@ -342,7 +345,10 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         
         if(proceed){
             int i = 1;
-            List<NumOfWorkersForDay> nwfdByDateList = controller.fetchByStartsDate(lstEntites.getSelectedValue().getStarts());
+            List<NumOfWorkersForDay> nwfdByDateList = 
+                    controller.fetchByStartsDate(
+                            lstEntites.getSelectedValue().getStarts()
+                    );
             for(NumOfWorkersForDay nwfd : nwfdByDateList){
                 controller.setEntity(nwfd);
                 try {        
@@ -356,19 +362,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
             selectItem(controller.getEntity().getStarts()); 
         }     
     }//GEN-LAST:event_btnEditActionPerformed
-    
-    private void checkUpdateOverlap() throws BaseException{
-        List<Date> listOfDates = Tools.getDatesBetweenTwoDates(
-                Tools.parseDate(txtStarts.getText()), 
-                Tools.parseDate(txtExpires.getText())
-        );
-        for(Date date : listOfDates){
-            if(controller.checkUpdateOverlap(date, lstEntites.getSelectedValue().getStarts())){
-               throw new BaseException("Dates range overlap existing records");               
-            }
-        }        
-    }
-    
+        
     public void setEntityValuesUpdate(NumOfWorkersForDay nwfd, int i) throws BaseException{   
         nwfd.setStarts(Tools.parseDate(txtStarts.getText()));
         nwfd.setExpires(Tools.parseDate(txtExpires.getText()));
