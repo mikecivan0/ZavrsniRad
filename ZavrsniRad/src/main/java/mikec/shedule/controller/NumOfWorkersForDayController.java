@@ -7,6 +7,7 @@ package mikec.shedule.controller;
 
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
@@ -41,9 +42,24 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControll() throws BaseException {      
        
     }
+ 
+    public void delete(Date date) throws BaseException {        
+          try {
+           session.beginTransaction();
+           session.createQuery("delete from numsOfWorkersForDay where starts=:starts")
+               .setParameter("starts", date)
+               .executeUpdate(); 
+           session.getTransaction().commit();             
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }     
+           
+    }
+    
+    
     
     private void createExistsControll() throws BaseException {
       List<Date> datesBetween = Tools.getDaysBetweenDates(entity.getStarts(), entity.getExpires());

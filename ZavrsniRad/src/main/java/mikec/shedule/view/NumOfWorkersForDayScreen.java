@@ -347,7 +347,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                "Record delete", 
                JOptionPane.WARNING_MESSAGE)==0){
             try {
-                controller.delete();
+                controller.delete(Tools.parseDate(txtStarts.getText()));
                 loadList();
             } catch (BaseException ex) {
                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
