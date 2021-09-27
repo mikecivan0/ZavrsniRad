@@ -5,6 +5,7 @@
  */
 package mikec.shedule.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +41,12 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Number of workers for day"));
+        DatePickerSettings datePickerStartsSettings = new DatePickerSettings();
+        DatePickerSettings datePickerExpiresSettings = new DatePickerSettings();
+        datePickerStartsSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
+        datePickerExpiresSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
+        dateStarts.setSettings(datePickerStartsSettings);
+        dateExpires.setSettings(datePickerExpiresSettings);
     }
     
     public void loadList(){
@@ -57,13 +64,11 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         lstEntites = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        txtStarts = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtMondayNum = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        txtExpires = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtTuesdayNum = new javax.swing.JTextField();
@@ -77,6 +82,8 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         txtSaturdayNum = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtSundayNum = new javax.swing.JTextField();
+        dateStarts = new com.github.lgooddatepicker.components.DatePicker();
+        dateExpires = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,12 +95,6 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         jScrollPane1.setViewportView(lstEntites);
 
         jLabel1.setText("Starts date");
-
-        txtStarts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtStartsKeyPressed(evt);
-            }
-        });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Monday");
@@ -122,12 +123,6 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
-            }
-        });
-
-        txtExpires.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtExpiresKeyPressed(evt);
             }
         });
 
@@ -189,41 +184,36 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnAdd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtStarts)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtExpires)
-                                    .addComponent(txtMondayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTuesdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtWednesdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtThursdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFridayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSaturdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSundayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateStarts, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMondayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTuesdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWednesdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtThursdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFridayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSaturdayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSundayNum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateExpires, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,13 +221,16 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtExpires, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStarts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateStarts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateExpires, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -272,9 +265,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnEdit)
                                 .addComponent(btnDelete)))
-                        .addGap(0, 32, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addGap(0, 43, Short.MAX_VALUE))))
         );
 
         pack();
@@ -312,20 +303,20 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     
     public void setEntityValuesInsert(NumOfWorkersForDayItem nwfdItem, int i) throws BaseException{   
         var e = controller.getEntity();
-        e.setStarts(Tools.parseDate(txtStarts.getText()));
-        e.setExpires(Tools.parseDate(txtExpires.getText()));
+        e.setStarts(Tools.LocalDateToDate(dateStarts.getDate()));
+        e.setExpires(Tools.LocalDateToDate(dateExpires.getDate()));
         e.setNumOfWorkersForDayItem(nwfdItem);
         e.setValue(loadValueForField(i));
     }
     
     private void checkAreDatesValid() throws BaseException{
-        if(txtStarts.getText().trim().length()==0){
+        if(dateStarts.getDate()==null){
             throw new BaseException("Stars date must not be empty");
         }
-        if(txtExpires.getText().trim().length()==0){
+        if(dateExpires.getDate()==null){
             throw new BaseException("Expires date must not be empty");
         }
-        if(Tools.parseDate(txtStarts.getText()).after(Tools.parseDate(txtExpires.getText()))){
+        if(Tools.LocalDateToDate(dateStarts.getDate()).after(Tools.LocalDateToDate(dateExpires.getDate()))){
             throw new BaseException("Starts date cannot be greather as expires date");
         }
     }
@@ -335,8 +326,8 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         try {
             checkAreDatesValid(); 
             controller.checkUpdateOverlap(
-                    txtStarts.getText(), 
-                    txtExpires.getText(), 
+                    Tools.LocalDateToDate(dateStarts.getDate()), 
+                    Tools.LocalDateToDate(dateExpires.getDate()), 
                     lstEntites.getSelectedValue().getStarts());
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
@@ -364,8 +355,8 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_btnEditActionPerformed
         
     public void setEntityValuesUpdate(NumOfWorkersForDay nwfd, int i) throws BaseException{   
-        nwfd.setStarts(Tools.parseDate(txtStarts.getText()));
-        nwfd.setExpires(Tools.parseDate(txtExpires.getText()));
+        nwfd.setStarts(Tools.LocalDateToDate(dateStarts.getDate()));
+        nwfd.setExpires(Tools.LocalDateToDate(dateExpires.getDate()));
         nwfd.setValue(loadValueForField(i));
     }
     
@@ -375,13 +366,9 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                "Do you really want to delete this record?", 
                "Record delete", 
                JOptionPane.WARNING_MESSAGE)==0){
-            try {
-                controller.delete(Tools.parseDate(txtStarts.getText()));
-                loadList();
-                selectFirstItemOnList();
-            } catch (BaseException ex) {
-               JOptionPane.showMessageDialog(getParent(), ex.getMessage());
-            }
+           controller.delete(lstEntites.getSelectedValue().getStarts());
+           loadList();
+           selectFirstItemOnList();
        }       
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -394,8 +381,8 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         Date starts = nwfd.getStarts();
         Date expires = nwfd.getExpires();        
        
-        txtStarts.setText(Tools.formatDate(starts));
-        txtExpires.setText(Tools.formatDate(expires));       
+        dateStarts.setDate(Tools.dateToLocalDate(starts));
+        dateExpires.setDate(Tools.dateToLocalDate(expires));   
    
         controller.fetchAll().stream()
                 .filter(record -> (Tools.formatDate(starts).contains(Tools.formatDate(record.getStarts()))))
@@ -403,18 +390,6 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                     loadFields(record);
         });       
     }//GEN-LAST:event_lstEntitesValueChanged
-
-    private void txtStartsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStartsKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtExpires.requestFocus();
-        }
-    }//GEN-LAST:event_txtStartsKeyPressed
-
-    private void txtExpiresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExpiresKeyPressed
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtMondayNum.requestFocus();
-        }
-    }//GEN-LAST:event_txtExpiresKeyPressed
 
     private void txtMondayNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMondayNumKeyPressed
          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -530,6 +505,8 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private com.github.lgooddatepicker.components.DatePicker dateExpires;
+    private com.github.lgooddatepicker.components.DatePicker dateStarts;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -541,11 +518,9 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<NumOfWorkersForDay> lstEntites;
-    private javax.swing.JTextField txtExpires;
     private javax.swing.JTextField txtFridayNum;
     private javax.swing.JTextField txtMondayNum;
     private javax.swing.JTextField txtSaturdayNum;
-    private javax.swing.JTextField txtStarts;
     private javax.swing.JTextField txtSundayNum;
     private javax.swing.JTextField txtThursdayNum;
     private javax.swing.JTextField txtTuesdayNum;

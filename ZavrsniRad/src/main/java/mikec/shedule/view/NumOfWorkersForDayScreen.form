@@ -27,50 +27,41 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="226" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnEdit" min="-2" pref="73" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnDelete" min="-2" pref="73" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtStarts" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" pref="95" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtExpires" max="32767" attributes="0"/>
-                                  <Component id="txtMondayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="txtTuesdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="txtWednesdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="txtThursdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="txtFridayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="txtSaturdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="txtSundayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" pref="95" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="15" max="32767" attributes="0"/>
+                      <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnEdit" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="95" max="-2" attributes="0"/>
+                          <Component id="dateStarts" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtMondayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="txtTuesdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="txtWednesdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="txtThursdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="txtFridayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="txtSaturdayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="txtSundayNum" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                          <Component id="dateExpires" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace min="79" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,15 +70,19 @@
           <Group type="102" attributes="0">
               <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtExpires" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dateStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dateExpires" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -132,11 +127,9 @@
                               <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -168,11 +161,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Starts date"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtStarts">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtStartsKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -207,11 +195,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtExpires">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtExpiresKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -281,6 +264,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSundayNum">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="dateStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="dateExpires">
     </Component>
   </SubComponents>
 </Form>

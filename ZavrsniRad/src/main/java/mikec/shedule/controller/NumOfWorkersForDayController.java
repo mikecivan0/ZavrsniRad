@@ -84,11 +84,8 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
         }
     }
     
-    public void checkUpdateOverlap(String starts, String expires, Date selected) throws BaseException{
-        List<Date> listOfDates = Tools.getDatesBetweenTwoDates(
-                Tools.parseDate(starts), 
-                Tools.parseDate(expires)
-        );
+    public void checkUpdateOverlap(Date starts, Date expires, Date selected) throws BaseException{
+        List<Date> listOfDates = Tools.getDatesBetweenTwoDates(starts, expires);
         for(Date date : listOfDates){
              Long startRecordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM numsOfWorkersForDay WHERE "
