@@ -9,6 +9,7 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -166,9 +167,17 @@ public class Tools {
     }
     
     public static LocalDate dateToLocalDate(Date dateToConvert) {
-    return dateToConvert.toInstant()
-      .atZone(ZoneId.systemDefault())
-      .toLocalDate();
-}
+        return dateToConvert.toInstant()
+                 .atZone(ZoneId.systemDefault())
+                 .toLocalDate();
+    }
+    
+    public static LocalTime timetoLocalTime(Time time) {
+        return time.toLocalTime();
+    }
+    
+    public static Time localTimeToTime(LocalTime localTime) {
+        return Time.valueOf(localTime);
+    }
   
 }
