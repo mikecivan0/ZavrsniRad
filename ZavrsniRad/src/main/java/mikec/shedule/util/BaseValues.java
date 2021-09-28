@@ -71,13 +71,13 @@ public class BaseValues {
     private void loadRegularWorkingHoursItems() {
         rwhItems = new ArrayList<RegularWorkingHoursItem>();
         String[] listOfItems = {
-            "monStart","monEnd",
-            "tueStart","tueEnd",
-            "wedStart","wedEnd",
-            "thuStart","thuEnd",
-            "friStart","friEnd",
-            "satStart","satEnd",
-            "sunStart","sunEnd"
+            "monStarts","monEnds",
+            "tueStarts","tueEnds",
+            "wedStarts","wedEnds",
+            "thuStarts","thuEnds",
+            "friStarts","friEnds",
+            "satStarts","satEnds",
+            "sunStarts","sunEnds"
         };
         
         for(String item : listOfItems){
