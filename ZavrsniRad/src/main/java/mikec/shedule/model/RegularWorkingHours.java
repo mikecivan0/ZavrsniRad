@@ -7,6 +7,7 @@
 package mikec.shedule.model;
 
 
+import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import mikec.shedule.util.Tools;
 
 
 @Entity(name = "regularWorkingHours")
@@ -25,7 +27,7 @@ public class RegularWorkingHours {
 
     public RegularWorkingHours(
             RegularWorkingHoursItem regularWorkingHoursItem, 
-            String value, 
+            Time value, 
             Date starts, 
             Date expires, 
             int breakDurationInMinutes) {
@@ -49,7 +51,7 @@ public class RegularWorkingHours {
     @Column(
             nullable = false
     )
-    private String value;
+    private Time value;
     
     @Column(
             nullable = false
@@ -82,11 +84,11 @@ public class RegularWorkingHours {
         this.regularWorkingHoursItem = regularWorkingHoursItem;
     }
 
-    public String getValue() {
+    public Time getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Time value) {
         this.value = value;
     }
 
@@ -112,6 +114,12 @@ public class RegularWorkingHours {
 
     public void setBreakDurationInMinutes(int breakDurationInMinutes) {
         this.breakDurationInMinutes = breakDurationInMinutes;
+    }
+
+    @Override
+    public String toString() {
+        return Tools.formatDate(starts) + "-" +
+               Tools.formatDate(expires);
     }
     
     
