@@ -5,11 +5,15 @@
  */
 package mikec.shedule.util;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import mikec.shedule.controller.ExceptionalWorkingHoursController;
 import mikec.shedule.controller.PersonController;
 import mikec.shedule.controller.UserController;
+import mikec.shedule.model.ExceptionalWorkingHours;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.model.NumOfWorkersForDayItem;
 import mikec.shedule.model.Person;
@@ -25,7 +29,9 @@ public class BaseValues {
     private List<NumOfWorkersForDayItem> nwfdItems;
     private static PersonController personController;
     private static UserController userConttroler;    
+    private static ExceptionalWorkingHoursController exceptionalWorkingHoursController;    
     private static Person person;
+    private static ExceptionalWorkingHours exceptionalWorkingHours;
     private static User user;    
 
     public BaseValues(Session session) {
@@ -37,6 +43,12 @@ public class BaseValues {
         loadUser(person, "user1", Tools.hashPass("user1"), "123-5", 1, true);
         loadPerson("PersonName2", "PersonSurname2", "", "", "");
         loadUser(person, "user2", Tools.hashPass("user2"), "123-56", 2, true);
+        loadExceptionalWorkingHours(
+                Tools.parseDate("12.12.2020."), 
+                Tools.parseTime("00:00:00"), 
+                Tools.parseTime("02:00:00"), 
+                "Test footnote", 
+                30);
         loadRegularWorkingHoursItems();
         loadRegularWorkingHours();
         loadNumOfWorkersForDayItem();
@@ -51,6 +63,23 @@ public class BaseValues {
         
         try {
             personController.create();
+        } catch (BaseException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static void loadExceptionalWorkingHours(
+                Date date, 
+                Time startTime, 
+                Time endTime, 
+                String footnote, 
+                int breakDuration) throws BaseException{
+        exceptionalWorkingHoursController = new ExceptionalWorkingHoursController();
+        exceptionalWorkingHours = new ExceptionalWorkingHours(date, startTime, endTime, footnote, breakDuration);
+        exceptionalWorkingHoursController.setEntity(exceptionalWorkingHours);     
+        
+        try {
+            exceptionalWorkingHoursController.create();
         } catch (BaseException ex) {
             System.out.println(ex.getMessage());
         }
