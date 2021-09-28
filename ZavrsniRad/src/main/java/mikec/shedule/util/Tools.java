@@ -21,7 +21,7 @@ public class Tools {
 
 	public static Scanner scanner;
 	public static final String DATE_FORMAT = "d.M.yyyy.";
-	public static final String TIME_FORMAT = "HH:mm";
+	public static final String TIME_FORMAT = "HH:mm:ss";
 	public static final String YEAR_FORMAT = "yyyy";
 	public static final String MONTH_FORMAT = "M";
 	public static final String DAY_FORMAT = "d";
