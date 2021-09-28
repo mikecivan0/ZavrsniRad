@@ -5,6 +5,7 @@
  */
 package mikec.shedule.model;
 
+import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,11 @@ import javax.persistence.Id;
 @Entity(name = "exceptionalWorkingHours")
 public class ExceptionalWorkingHours {
     
+        public ExceptionalWorkingHours() {		
+	}
+    
+        
+        
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -23,10 +29,10 @@ public class ExceptionalWorkingHours {
 	private Date date;
         
         @Column(nullable = false)
-	private Date startTime;
+	private Time startTime;
         
         @Column(nullable = false)
-	private Date endTime;
+	private Time endTime;
         
         @Column(nullable = false)
 	private String footnote;
@@ -34,11 +40,13 @@ public class ExceptionalWorkingHours {
         @Column(nullable = false)
 	private int breakDuration;
 	
-	public ExceptionalWorkingHours() {
-		
-	}
-	
-	public ExceptionalWorkingHours(Date date, Date startTime, Date endTime, String footnote, int breakDuration) {
+	public ExceptionalWorkingHours(
+                Date date, 
+                Time startTime, 
+                Time endTime, 
+                String footnote, 
+                int breakDuration) 
+        {
 		this.date = date;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -52,16 +60,16 @@ public class ExceptionalWorkingHours {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Date getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+	public Time getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 	public String getFootnote() {
