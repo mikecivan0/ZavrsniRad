@@ -96,7 +96,7 @@ public class BaseValues {
         List<RegularWorkingHours> regularWorkingHours = new ArrayList<RegularWorkingHours>();
 
         for (int i = 0; i < 14; i++) {
-            String time = (i%2==0 || i==0) ? "22:00" : "00:00";
+            String time = (i%2==0 || i==0) ? "22:00:00" : "00:00:00";
             regularWorkingHours.add(new RegularWorkingHours(
                             rwhItems.get(i),
                             Tools.parseTime(time),
