@@ -441,14 +441,15 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     }
      
     public void loadFields(NumOfWorkersForDay nwfd){
+        String value = String.valueOf(nwfd.getValue());
         switch(nwfd.getNumOfWorkersForDayItem().getName()){
-            case "monday" -> txtMondayNum.setText(String.valueOf(nwfd.getValue()));
-            case "tuesday" -> txtTuesdayNum.setText(String.valueOf(nwfd.getValue()));
-            case "wednesday" -> txtWednesdayNum.setText(String.valueOf(nwfd.getValue()));
-            case "thursday" -> txtThursdayNum.setText(String.valueOf(nwfd.getValue()));
-            case "friday" -> txtFridayNum.setText(String.valueOf(nwfd.getValue()));
-            case "saturday" -> txtSaturdayNum.setText(String.valueOf(nwfd.getValue()));
-            case "sunday" -> txtSundayNum.setText(String.valueOf(nwfd.getValue()));
+            case "monday" -> txtMondayNum.setText(value);
+            case "tuesday" -> txtTuesdayNum.setText(value);
+            case "wednesday" -> txtWednesdayNum.setText(value);
+            case "thursday" -> txtThursdayNum.setText(value);
+            case "friday" -> txtFridayNum.setText(value);
+            case "saturday" -> txtSaturdayNum.setText(value);
+            case "sunday" -> txtSundayNum.setText(value);
         }    
     }
      
