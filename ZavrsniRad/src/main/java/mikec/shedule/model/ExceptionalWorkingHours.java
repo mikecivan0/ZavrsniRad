@@ -19,7 +19,19 @@ public class ExceptionalWorkingHours {
         public ExceptionalWorkingHours() {		
 	}
     
-        
+        public ExceptionalWorkingHours(
+                Date date, 
+                Time startTime, 
+                Time endTime, 
+                String footnote, 
+                int breakDuration) 
+        {
+		this.date = date;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.footnote = footnote;
+		this.breakDuration = breakDuration;
+	}
         
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,20 +51,6 @@ public class ExceptionalWorkingHours {
         
         @Column(nullable = false)
 	private int breakDuration;
-	
-	public ExceptionalWorkingHours(
-                Date date, 
-                Time startTime, 
-                Time endTime, 
-                String footnote, 
-                int breakDuration) 
-        {
-		this.date = date;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.footnote = footnote;
-		this.breakDuration = breakDuration;
-	}
 	
 	public Date getDate() {
 		return date;
