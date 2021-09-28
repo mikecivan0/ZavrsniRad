@@ -25,7 +25,6 @@ public class AdminMainScreen extends javax.swing.JFrame {
         initComponents();
         settings();
         PersonController pc = new PersonController();
-        System.out.println(pc.read().toString());
     }
     
    private void settings(){
@@ -104,6 +103,11 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem7.setText("Exceptional working hours");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -170,6 +174,14 @@ public class AdminMainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }        
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        try {
+           new ExceptionalWorkingHoursScreen().setVisible(true);
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        }    
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
