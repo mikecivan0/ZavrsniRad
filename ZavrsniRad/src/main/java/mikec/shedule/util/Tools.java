@@ -7,6 +7,7 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.awt.Desktop;
 import java.net.URI;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -41,15 +42,14 @@ public class Tools {
             }
         }
 
-	public static Date parseTime(String input) {
-            timeFormat = new SimpleDateFormat(TIME_FORMAT);
-            while (true) {
-		try {
-                    return timeFormat.parse(input);
-		} catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Enter time in format " + timeFormat.format(new Date()));
-		}
-            }
+	public static Time parseTime(String input) throws BaseException {
+            timeFormat = new SimpleDateFormat(TIME_FORMAT);          
+            try {
+                long ms = timeFormat.parse(input).getTime();
+                return new Time(ms);
+            } catch (Exception e) {
+                 throw new BaseException("Enter time in format " + timeFormat.format(new Date()));
+            }            
 	}
 
 	public static int parseNumber(String input, String errorMessage, int min, int max) {
