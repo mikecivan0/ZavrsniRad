@@ -99,7 +99,7 @@ public class BaseValues {
             String time = (i%2==0 || i==0) ? "22:00" : "00:00";
             regularWorkingHours.add(new RegularWorkingHours(
                             rwhItems.get(i),
-                            time,
+                            Tools.parseTime(time),
                             Tools.parseDate("15.11.2017."),
                             Tools.parseDate("15.12.2017."),
                             30
