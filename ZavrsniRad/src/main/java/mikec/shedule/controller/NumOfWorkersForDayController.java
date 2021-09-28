@@ -24,15 +24,15 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     
     @Override
     public List<NumOfWorkersForDay> read() {
-        return session.createQuery("from numsOfWorkersForDay group by starts order by starts").list();
+        return session.createQuery("FROM numsOfWorkersForDay GROUP BY starts ORDER BY starts").list();
     }
     
     public List<NumOfWorkersForDay> fetchAll() {
-        return session.createQuery("from numsOfWorkersForDay").list();
+        return session.createQuery("FROM numsOfWorkersForDay").list();
     }
     
      public List<NumOfWorkersForDay> fetchByStartsDate(Date startsDate) {
-        return session.createQuery("from numsOfWorkersForDay where starts=:starts")
+        return session.createQuery("FROM numsOfWorkersForDay WHERE starts=:starts")
                 .setParameter("starts", startsDate)
                 .list();
     }
@@ -55,7 +55,7 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     public void delete(Date date){        
           try {
            session.beginTransaction();
-           session.createQuery("delete from numsOfWorkersForDay where starts=:starts")
+           session.createQuery("DELETE FROM numsOfWorkersForDay WHERE starts=:starts")
                .setParameter("starts", date)
                .executeUpdate(); 
            session.getTransaction().commit();             
@@ -73,9 +73,9 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     
     private void checkInsertOverlap(Date date) throws BaseException{
         Long startRecordExists = (Long) session.createQuery(
-                "select count(id) from numsOfWorkersForDay where "
-                        + ":date between starts and expires "
-                        + "and numOfWorkersForDayItemId=:nwfd")
+                "SELECT COUNT(id) FROM numsOfWorkersForDay WHERE "
+                        + ":date BETWEEN starts AND expires "
+                        + "AND numOfWorkersForDayItemId=:nwfd")
                .setParameter("date", date)
                .setParameter("nwfd", entity.getNumOfWorkersForDayItem())
                .uniqueResult();        

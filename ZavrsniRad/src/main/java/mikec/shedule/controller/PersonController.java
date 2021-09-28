@@ -25,7 +25,7 @@ public class PersonController extends BaseController<Person>{
 
     @Override
     public List<Person> read() {
-        return session.createQuery("from persons").list();
+        return session.createQuery("FROM persons").list();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class PersonController extends BaseController<Person>{
     @Override
     protected void deleteControll() throws BaseException {
         Long personExistsAsUser = (Long) session.createQuery(
-                "select count(id) from users where person_id=:id")
+                "SELECT COUNT(id) FROM users WHERE person_id=:id")
                 .setParameter("id", entity.getId())
                 .uniqueResult();
         
@@ -90,12 +90,12 @@ public class PersonController extends BaseController<Person>{
     
     private void createExistsControll() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
-                "select count(id) from persons where "
+                "SELECT COUNT(id) FROM persons WHERE "
                         + "firstName=:firstName "
-                        + "and lastName=:lastName "
-                        + "and phoneNr=:phoneNr "
-                        + "and email=:email "
-                        + "and address=:address")
+                        + "AND lastName=:lastName "
+                        + "AND phoneNr=:phoneNr "
+                        + "AND email=:email "
+                        + "AND address=:address")
                .setParameter("firstName", entity.getFirstName())
                .setParameter("lastName", entity.getLastName())
                .setParameter("phoneNr", entity.getPhoneNr())
@@ -109,13 +109,13 @@ public class PersonController extends BaseController<Person>{
     
     private void updateExistsControll() throws BaseException{         
        Long personExists = (Long) session.createQuery(
-                "select count(id) from persons where "
+                 "SELECT COUNT(id) FROM persons WHERE "
                         + "firstName=:firstName "
-                        + "and lastName=:lastName "
-                        + "and phoneNr=:phoneNr "
-                        + "and email=:email "
-                        + "and address=:address "
-                        + "and id!=:id")
+                        + "AND lastName=:lastName "
+                        + "AND phoneNr=:phoneNr "
+                        + "AND email=:email "
+                        + "AND address=:address "
+                        + "AND id!=:id")
                .setParameter("firstName", entity.getFirstName())
                .setParameter("lastName", entity.getLastName())
                .setParameter("phoneNr", entity.getPhoneNr())

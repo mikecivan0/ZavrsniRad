@@ -22,7 +22,7 @@ public class RegularWorkingHoursItemController extends BaseController<RegularWor
 
     @Override
     public List<RegularWorkingHoursItem> read() {
-        return session.createQuery("from regularWorkingHoursItems").list();
+        return session.createQuery("FROM regularWorkingHoursItems").list();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class RegularWorkingHoursItemController extends BaseController<RegularWor
     
     public RegularWorkingHoursItem find(int i){
         return (RegularWorkingHoursItem) session.createQuery(
-                "from regularWorkingHoursItems where id=:id")
+                "FROM regularWorkingHoursItems WHERE id=:id")
                 .setParameter("id", i)
                 .uniqueResult();
     }

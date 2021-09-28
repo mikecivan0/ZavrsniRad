@@ -22,7 +22,7 @@ public class NumOfWorkersForDayItemController extends BaseController<NumOfWorker
 
     @Override
     public List<NumOfWorkersForDayItem> read() {
-        return session.createQuery("from numOfWorkersForDayItems").list();
+        return session.createQuery("FROM numOfWorkersForDayItems").list();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class NumOfWorkersForDayItemController extends BaseController<NumOfWorker
     
     public NumOfWorkersForDayItem find(int i){
         return (NumOfWorkersForDayItem) session.createQuery(
-                "from numOfWorkersForDayItems where id=:id")
+                "FROM numOfWorkersForDayItems WHERE id=:id")
                 .setParameter("id", i)
                 .uniqueResult();
     }
