@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timePicker2">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="resizable" type="boolean" value="false"/>
@@ -31,51 +35,40 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtBreakDuration" min="-2" pref="27" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="111" max="-2" attributes="0"/>
-                                  <Component id="dateStarts" min="-2" pref="150" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel2" min="-2" pref="69" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel3" min="-2" pref="76" max="-2" attributes="0"/>
-                                      <Component id="timeMonStarts" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtBreakDuration" min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jLabel7" min="-2" pref="69" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" alignment="1" min="-2" pref="69" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="timeThuStarts" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                                          <Component id="timeTueStarts" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="timeWedStarts" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel1" min="-2" pref="111" max="-2" attributes="0"/>
+                                      <Component id="dateStarts" min="-2" pref="150" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel10" min="-2" pref="69" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
+                                  <Component id="jLabel12" max="32767" attributes="0"/>
+                                  <Component id="jLabel11" max="32767" attributes="0"/>
+                                  <Component id="jLabel10" max="32767" attributes="0"/>
+                                  <Component id="jLabel9" max="32767" attributes="0"/>
+                                  <Component id="jLabel8" max="32767" attributes="0"/>
+                                  <Component id="jLabel7" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" pref="69" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="timeFriStarts" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                                  <Component id="timeSatStarts" min="-2" pref="87" max="-2" attributes="0"/>
-                                  <Component id="timeSunStarts" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel3" min="-2" pref="76" max="-2" attributes="0"/>
+                                  <Component id="timeMonStarts" pref="87" max="32767" attributes="0"/>
+                                  <Component id="timeTueStarts" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="timeWedStarts" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="timeThuStarts" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="timeFriStarts" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="timeSatStarts" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="timeSunStarts" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -83,14 +76,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" pref="76" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" pref="112" max="-2" attributes="0"/>
-                          <Component id="timeSunEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="timeSatEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="timeFriEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="timeThuEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="timeWedEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="timeTueEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
                           <Component id="dateExpires" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="timeMonEnds" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="timeSunEnds" alignment="0" max="32767" attributes="0"/>
+                              <Component id="timeSatEnds" alignment="0" max="32767" attributes="0"/>
+                              <Component id="timeFriEnds" alignment="0" max="32767" attributes="0"/>
+                              <Component id="timeThuEnds" alignment="0" max="32767" attributes="0"/>
+                              <Component id="timeWedEnds" alignment="0" max="32767" attributes="0"/>
+                              <Component id="timeTueEnds" alignment="0" max="32767" attributes="0"/>
+                              <Component id="timeMonEnds" alignment="0" pref="87" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -132,48 +127,50 @@
                           <Component id="timeMonStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="timeMonEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeTueEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="timeTueStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="timeTueEnds" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeTueStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="timeWedStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="timeWedEnds" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeWedStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="timeWedEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="timeThuStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeThuEnds" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeThuStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="timeThuEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="timeFriStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeFriEnds" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeFriStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="timeFriEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="timeSatStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeSatEnds" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeSatStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="timeSatEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="timeSunStarts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeSunEnds" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeSunStarts" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="timeSunEnds" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtBreakDuration" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -181,7 +178,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="441" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -251,42 +248,6 @@
         <Property name="text" type="java.lang.String" value="Expires date"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Tuesday"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Wednesday"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Thursday"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Friday"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Saturday"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Sunday"/>
-      </Properties>
-    </Component>
     <Component class="com.github.lgooddatepicker.components.DatePicker" name="dateStarts">
     </Component>
     <Component class="com.github.lgooddatepicker.components.DatePicker" name="dateExpires">
@@ -303,33 +264,9 @@
         <Property name="text" type="java.lang.String" value="End hours"/>
       </Properties>
     </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeWedEnds">
-    </Component>
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeMonStarts">
     </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeTueStarts">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeTueEnds">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeWedStarts">
-    </Component>
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeMonEnds">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeThuStarts">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeThuEnds">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFriStarts">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFriEnds">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSatStarts">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSatEnds">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSunStarts">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSunEnds">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -346,6 +283,66 @@
           <Dimension value="[7, 23]"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Tuesday"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeTueStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeTueEnds">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Wednesday"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeWedStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeWedEnds">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Thursday"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeThuStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeThuEnds">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel10">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Friday"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFriStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFriEnds">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Saturday"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSatStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSatEnds">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Sunday"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSunStarts">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeSunEnds">
     </Component>
   </SubComponents>
 </Form>
