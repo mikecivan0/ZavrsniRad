@@ -172,7 +172,7 @@ public class Tools {
                  .toLocalDate();
     }
     
-    public static LocalTime timetoLocalTime(Time time) {
+    public static LocalTime timeToLocalTime(Time time) {
         return time.toLocalTime();
     }
     
