@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import mikec.shedule.util.Tools;
 
 @Entity(name = "exceptionalWorkingHours")
 public class ExceptionalWorkingHours {
@@ -90,7 +91,13 @@ public class ExceptionalWorkingHours {
 	public void setBreakDuration(int breakDuration) {
 		this.breakDuration = breakDuration;
 	}
+
+    @Override
+    public String toString() {
+        return Tools.formatDate(date) + ", " + footnote;
+    }
 	
+        
 
 }
 
