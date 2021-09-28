@@ -66,4 +66,54 @@ public class RegularWorkingHours {
     )
     private int breakDurationInMinutes;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public RegularWorkingHoursItem getRegularWorkingHoursItem() {
+        return regularWorkingHoursItem;
+    }
+
+    public void setRegularWorkingHoursItem(RegularWorkingHoursItem regularWorkingHoursItem) {
+        this.regularWorkingHoursItem = regularWorkingHoursItem;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Date getStarts() {
+        return starts;
+    }
+
+    public void setStarts(Date starts) {
+        this.starts = starts;
+    }
+
+    public Date getExpires() {
+        return expires;
+    }
+
+    public void setExpires(Date expires) {
+        this.expires = expires;
+    }
+
+    public int getBreakDurationInMinutes() {
+        return breakDurationInMinutes;
+    }
+
+    public void setBreakDurationInMinutes(int breakDurationInMinutes) {
+        this.breakDurationInMinutes = breakDurationInMinutes;
+    }
+    
+    
+
 }
