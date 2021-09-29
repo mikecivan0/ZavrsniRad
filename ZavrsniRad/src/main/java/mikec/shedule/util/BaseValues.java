@@ -11,9 +11,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import mikec.shedule.controller.ExceptionalWorkingHoursController;
+import mikec.shedule.controller.LabelController;
 import mikec.shedule.controller.PersonController;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.ExceptionalWorkingHours;
+import mikec.shedule.model.Label;
 import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.model.NumOfWorkersForDayItem;
 import mikec.shedule.model.Person;
@@ -28,11 +30,13 @@ public class BaseValues {
     private List<RegularWorkingHoursItem> rwhItems;
     private List<NumOfWorkersForDayItem> nwfdItems;
     private static PersonController personController;
-    private static UserController userConttroler;    
+    private static UserController userController;    
+    private static LabelController labelController;    
     private static ExceptionalWorkingHoursController exceptionalWorkingHoursController;    
     private static Person person;
     private static ExceptionalWorkingHours exceptionalWorkingHours;
     private static User user;    
+    private static Label label;    
 
     public BaseValues(Session session) {
         this.session = session;
@@ -53,7 +57,7 @@ public class BaseValues {
         loadRegularWorkingHours();
         loadNumOfWorkersForDayItem();
         loadNumOfWorkersForDay();
-
+        loadLabels("Work","w");
     }  
     
     public static void loadPerson(String firstName, String lastName, String phoneNr, String email, String address) throws BaseException{
@@ -63,6 +67,18 @@ public class BaseValues {
         
         try {
             personController.create();
+        } catch (BaseException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static void loadLabels(String name, String abbreviation) throws BaseException{
+        labelController = new LabelController();
+        label = new Label(name, abbreviation);
+        labelController.setEntity(label);     
+        
+        try {
+            labelController.create();
         } catch (BaseException ex) {
             System.out.println(ex.getMessage());
         }
@@ -86,12 +102,12 @@ public class BaseValues {
     }
 
     private static void loadUser(Person person, String username, String pass, String prs_id, int level, boolean aktiv) throws BaseException {
-        userConttroler = new UserController();
+        userController = new UserController();
         user = new User(person, username, pass, prs_id, level, aktiv);
-        userConttroler.setEntity(user);     
+        userController.setEntity(user);     
         
         try {
-            userConttroler.create();
+            userController.create();
         } catch (BaseException ex) {
             System.out.println(ex.getMessage());
         }
