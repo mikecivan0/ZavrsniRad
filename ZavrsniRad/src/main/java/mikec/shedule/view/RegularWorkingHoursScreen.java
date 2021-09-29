@@ -343,14 +343,14 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
                }
                try {
                    controller.create();
+                   loadList();
+                   selectItem(controller.getEntity().getStarts());
                } catch (BaseException ex) {
                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                    proceed=false;
                }      
             }            
-        }
-       loadList();
-       selectItem(controller.getEntity().getStarts());
+        }       
     }//GEN-LAST:event_btnAddActionPerformed
     
     public void setEntityValuesInsert(RegularWorkingHoursItem rwhItem, int i) throws BaseException{   
@@ -447,12 +447,12 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
                 try {        
                     setEntityValuesUpdate(rwh, i++);
                     controller.update();
+                    loadList();
+                    selectItem(controller.getEntity().getStarts()); 
                 } catch (BaseException ex) {
                     JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                 }
-            }
-            loadList();
-            selectItem(controller.getEntity().getStarts()); 
+            }            
         }     
     }//GEN-LAST:event_btnEditActionPerformed
         
