@@ -41,32 +41,8 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
         setTitle(Application.getTitle("Regular working hours"));
         DatePickerSettings datePickerStartsSettings = new DatePickerSettings();
         DatePickerSettings datePickerExpiresSettings = new DatePickerSettings();
-        TimePickerSettings timePickerMonStartsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerMonEndsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerTueStartsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerTueEndsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerWedStartsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerWedEndsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerFriStartsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerFriEndsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerSatStartsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerSatEndsSettings = new TimePickerSettings();
-        TimePickerSettings timePickerSunStartsSettings = new TimePickerSettings();        
-        TimePickerSettings timePickerSunEndsSettings = new TimePickerSettings();
         datePickerStartsSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
         datePickerExpiresSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
-        timePickerMonStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerMonEndsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerTueStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerTueEndsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerWedStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerWedEndsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerFriStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerFriEndsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerSatStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerSatEndsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerSunStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerSunEndsSettings.setFormatForDisplayTime("HH:mm");
         dateStarts.setSettings(datePickerStartsSettings);
         dateExpires.setSettings(datePickerExpiresSettings);
     }
@@ -339,15 +315,15 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
                     JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                }
                try {
-                   controller.create();
-                   loadList();
-                   selectItem(controller.getEntity().getStarts());
+                   controller.create();                   
                } catch (BaseException ex) {
                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                    proceed=false;
                }      
             }            
-        }       
+        }
+        loadList();
+        selectItem(controller.getEntity().getStarts());
     }//GEN-LAST:event_btnAddActionPerformed
     
     public void setEntityValuesInsert(RegularWorkingHoursItem rwhItem, int i) throws BaseException{   
@@ -434,23 +410,23 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
         }  
         
         if(proceed){
-            int i = 1;
+            int i = 0;
             List<RegularWorkingHours> rwhByDateList = 
                     controller.fetchByStartsDate(
                             lstEntites.getSelectedValue().getStarts()
                     );
             for(RegularWorkingHours rwh : rwhByDateList){
                 controller.setEntity(rwh);
-                try {        
-                    setEntityValuesUpdate(rwh, i++);
-                    controller.update();
-                    loadList();
-                    selectItem(controller.getEntity().getStarts()); 
+                try {                    
+                    setEntityValuesUpdate(rwh, ++i);                   
+                    controller.update();                   
                 } catch (BaseException ex) {
                     JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                 }
             }            
-        }     
+        }   
+        loadList();
+        selectItem(controller.getEntity().getStarts()); 
     }//GEN-LAST:event_btnEditActionPerformed
         
     public void setEntityValuesUpdate(RegularWorkingHours rwh, int i) throws BaseException{   
@@ -531,8 +507,8 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
          switch(i){
              case 1 -> val = timeMonStarts.getTime();
              case 2 -> val = timeMonEnds.getTime();
-             case 3 -> val = timeMonStarts.getTime();
-             case 4 -> val = timeMonEnds.getTime();
+             case 3 -> val = timeTueStarts.getTime();
+             case 4 -> val = timeTueEnds.getTime();
              case 5 -> val = timeWedStarts.getTime();
              case 6 -> val = timeWedEnds.getTime();
              case 7 -> val = timeThuStarts.getTime();         
