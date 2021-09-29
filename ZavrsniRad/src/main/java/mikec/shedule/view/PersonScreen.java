@@ -25,6 +25,7 @@ public class PersonScreen extends javax.swing.JFrame{
         controller = new PersonController();
         settings();
         loadList();
+        selectFirstItemOnList();
     }
     
     public void settings(){
@@ -176,6 +177,7 @@ public class PersonScreen extends javax.swing.JFrame{
         try {
             controller.create();
             loadList();
+            selectItem(controller.getEntity().getFirstName(), controller.getEntity().getLastName());
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }        
@@ -186,6 +188,7 @@ public class PersonScreen extends javax.swing.JFrame{
         try {
             controller.update();
             loadList();
+            selectItem(controller.getEntity().getFirstName(), controller.getEntity().getLastName());
         } catch (BaseException ex) {
            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }
@@ -200,6 +203,7 @@ public class PersonScreen extends javax.swing.JFrame{
             try {
                 controller.delete();
                 loadList();
+                selectFirstItemOnList();
             } catch (BaseException ex) {
                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             }
@@ -228,6 +232,20 @@ public class PersonScreen extends javax.swing.JFrame{
         e.setPhoneNr(txtPhoneNr.getText());
         e.setEmail(txtEmail.getText());
         e.setAddress(txtAddress.getText());        
+    }
+     
+    public void selectFirstItemOnList(){
+       lstEntites.setSelectedIndex(0);
+    }
+    
+    public void selectItem(String firstName, String lastName){
+        for(int i = 0; i< lstEntites.getModel().getSize();i++){
+            if(lstEntites.getModel().getElementAt(i).getFirstName().equals(firstName)
+                    && lstEntites.getModel().getElementAt(i).getLastName().equals(lastName)){
+                lstEntites.setSelectedIndex(i);
+                return;
+            }
+        }
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

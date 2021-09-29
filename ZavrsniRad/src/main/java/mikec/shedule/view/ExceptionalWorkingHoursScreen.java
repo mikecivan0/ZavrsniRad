@@ -222,6 +222,7 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
         try {
             controller.create();
             loadList();
+            selectItem(controller.getEntity().getDate());
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }        
@@ -264,6 +265,7 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
         try {
             controller.update();
             loadList();
+            selectItem(controller.getEntity().getDate());
         } catch (BaseException ex) {
            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }
@@ -277,11 +279,12 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
                JOptionPane.WARNING_MESSAGE)==0){
            try {
                controller.delete();
+               loadList();
+               selectFirstItemOnList();
            } catch (BaseException ex) {
                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
            }
-           loadList();
-           selectFirstItemOnList();
+           
        }       
     }//GEN-LAST:event_btnDeleteActionPerformed
 
