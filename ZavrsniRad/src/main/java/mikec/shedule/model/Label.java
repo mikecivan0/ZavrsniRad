@@ -33,7 +33,7 @@ public class Label {
     private Long id;
     
     @OneToMany(mappedBy = "label")
-    private Set<Record> rasporedi = new HashSet<>();
+    private Set<Record> records = new HashSet<>();
  
     @Column(
             columnDefinition = "VARCHAR(30)",
@@ -57,12 +57,12 @@ public class Label {
         this.id = id;
     }
 
-    public Set<Record> getRasporedi() {
-        return rasporedi;
+    public Set<Record> getRecords() {
+        return records;
     }
 
-    public void setRasporedi(Set<Record> rasporedi) {
-        this.rasporedi = rasporedi;
+    public void setRecords(Set<Record> records) {
+        this.records = records;
     }
 
     public String getName() {
