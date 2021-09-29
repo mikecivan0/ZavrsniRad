@@ -53,7 +53,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>mikec.shedule.Start.java</mainClass>
+                            <mainClass>mikec.shedule.Start</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
