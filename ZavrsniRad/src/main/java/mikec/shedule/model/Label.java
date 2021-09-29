@@ -61,10 +61,6 @@ public class Label {
         return records;
     }
 
-    public void setRecords(Set<Record> records) {
-        this.records = records;
-    }
-
     public String getName() {
         return name;
     }
