@@ -19,10 +19,6 @@ import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.model.NumOfWorkersForDayItem;
 import mikec.shedule.util.Tools;
 
-/**
- *
- * @author dell
- */
 public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     
     private NumOfWorkersForDayController controller;

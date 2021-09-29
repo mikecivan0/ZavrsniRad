@@ -21,10 +21,6 @@ import mikec.shedule.model.RegularWorkingHours;
 import mikec.shedule.model.RegularWorkingHoursItem;
 import mikec.shedule.util.Tools;
 
-/**
- *
- * @author dell
- */
 public class RegularWorkingHoursScreen extends javax.swing.JFrame{
     
     private RegularWorkingHoursController controller;

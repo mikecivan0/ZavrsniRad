@@ -16,10 +16,6 @@ import mikec.shedule.controller.ExceptionalWorkingHoursController;
 import mikec.shedule.model.ExceptionalWorkingHours;
 import mikec.shedule.util.Tools;
 
-/**
- *
- * @author dell
- */
 public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
     
     private ExceptionalWorkingHoursController controller;

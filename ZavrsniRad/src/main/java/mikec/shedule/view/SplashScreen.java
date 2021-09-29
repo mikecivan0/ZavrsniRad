@@ -5,8 +5,6 @@
  */
 package mikec.shedule.view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;

@@ -5,26 +5,15 @@
  */
 package mikec.shedule.view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import mikec.shedule.controller.PersonController;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
 public class AdminMainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Izbornik
-     */
     public AdminMainScreen() throws BaseException {
         initComponents();
         settings();
-        PersonController pc = new PersonController();
     }
     
    private void settings(){

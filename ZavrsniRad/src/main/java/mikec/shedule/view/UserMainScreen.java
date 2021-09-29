@@ -13,9 +13,6 @@ import mikec.shedule.util.Application;
  */
 public class UserMainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Izbornik
-     */
     public UserMainScreen() {
         initComponents();
         settings();

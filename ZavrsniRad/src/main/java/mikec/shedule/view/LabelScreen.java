@@ -12,10 +12,6 @@ import mikec.shedule.util.BaseException;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author dell
- */
 public class LabelScreen extends javax.swing.JFrame{
     
     private LabelController controller;
