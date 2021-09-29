@@ -6,8 +6,6 @@
 package mikec.shedule.view;
 
 import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.User;
@@ -22,10 +20,7 @@ import mikec.shedule.util.Tools;
 public class Auth extends javax.swing.JFrame {
     
     private UserController userController;
-
-    /**
-     * Creates new form Azrotizacija
-     */
+    
     public Auth() {
         initComponents();
         try {
@@ -33,10 +28,10 @@ public class Auth extends javax.swing.JFrame {
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }
-        postavke();
+        settings();
     }
     
-    private void postavke(){
+    private void settings(){
         setTitle(Application.getTitle("Authorization"));
     }
 
@@ -152,14 +147,13 @@ public class Auth extends javax.swing.JFrame {
             return;
         }
         
-        String lozinka = String.copyValueOf(pswPass.getPassword());
-        System.out.println(lozinka);
-        if(lozinka.trim().length()==0){
+        String password = String.copyValueOf(pswPass.getPassword());
+        if(password.trim().length()==0){
             JOptionPane.showMessageDialog(getRootPane(), "Password is required");
             return;
         }
         
-        User oper = userController.authorize(txtUsername.getText(), lozinka);
+        User oper = userController.authorize(txtUsername.getText(), password);
         
         if(oper==null){
             JOptionPane.showMessageDialog(getRootPane(), "Username and password do not match");
