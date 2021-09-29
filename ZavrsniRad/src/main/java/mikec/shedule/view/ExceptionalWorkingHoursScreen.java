@@ -31,11 +31,7 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
     public void settings(){
         setTitle(Application.getTitle("Exceptional working hours"));
         DatePickerSettings datePickerDateSettings = new DatePickerSettings();
-        TimePickerSettings timePickerStartsSettings = new TimePickerSettings();        
-        TimePickerSettings timePickerEndsSettings = new TimePickerSettings();
         datePickerDateSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
-        timePickerStartsSettings.setFormatForDisplayTime("HH:mm");
-        timePickerEndsSettings.setFormatForDisplayTime("HH:mm");
         dateDate.setSettings(datePickerDateSettings);
     }
     
@@ -217,12 +213,12 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
         controller.setEntity(new ExceptionalWorkingHours());
         setEntityValues();        
         try {
-            controller.create();
-            loadList();
-            selectItem(controller.getEntity().getDate());
+            controller.create();           
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
-        }        
+        }
+        loadList();
+        selectItem(controller.getEntity().getDate());        
     }//GEN-LAST:event_btnAddActionPerformed
     
     public void setEntityValues(){
@@ -260,12 +256,12 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         setEntityValues();
         try {
-            controller.update();
-            loadList();
-            selectItem(controller.getEntity().getDate());
+            controller.update();            
         } catch (BaseException ex) {
            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }
+        loadList();
+        selectItem(controller.getEntity().getDate());
     }//GEN-LAST:event_btnEditActionPerformed
    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -280,8 +276,7 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
                selectFirstItemOnList();
            } catch (BaseException ex) {
                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
-           }
-           
+           }           
        }       
     }//GEN-LAST:event_btnDeleteActionPerformed
 

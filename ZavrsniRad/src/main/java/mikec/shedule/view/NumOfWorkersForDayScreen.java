@@ -49,9 +49,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         DefaultListModel<NumOfWorkersForDay> m = new DefaultListModel<>();        
         controller.read().forEach(p->{m.addElement(p);});        
         lstEntites.setModel(m);
-    }
-    
-    
+    }    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -320,15 +318,15 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                }
                try {
                    controller.create();
-                   loadList();
-                   selectItem(controller.getEntity().getStarts());
+                  
                } catch (BaseException ex) {
                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                    proceed=false;
                }      
             }            
         }
-      
+        loadList();
+        selectItem(controller.getEntity().getStarts());
     }//GEN-LAST:event_btnAddActionPerformed
     
     public void setEntityValuesInsert(NumOfWorkersForDayItem nwfdItem, int i) throws BaseException{   
@@ -374,14 +372,14 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
                 controller.setEntity(nwfd);
                 try {        
                     setEntityValuesUpdate(nwfd, i++);
-                    controller.update();
-                    loadList();
-                    selectItem(controller.getEntity().getStarts()); 
+                    controller.update();                    
                 } catch (BaseException ex) {
                     JOptionPane.showMessageDialog(getParent(), ex.getMessage());
                 }
             }
-        }     
+        }  
+        loadList();
+        selectItem(controller.getEntity().getStarts()); 
     }//GEN-LAST:event_btnEditActionPerformed
         
     public void setEntityValuesUpdate(NumOfWorkersForDay nwfd, int i) throws BaseException{   

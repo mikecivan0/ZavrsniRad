@@ -204,9 +204,7 @@ public class PersonScreen extends javax.swing.JFrame{
             } catch (BaseException ex) {
                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             }
-       }
-        
-       
+       }       
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void lstEntitesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitesValueChanged
