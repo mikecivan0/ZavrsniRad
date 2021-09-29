@@ -34,7 +34,21 @@ public class Label {
     
     @OneToMany(mappedBy = "label")
     private Set<Record> rasporedi = new HashSet<>();
-
+ 
+    @Column(
+            columnDefinition = "VARCHAR(30)",
+            unique = true,
+            nullable = false
+    )
+    private String name;
+    
+    @Column(
+            columnDefinition = "VARCHAR(3)",
+            unique = true,
+            nullable = false
+    )
+    private String abbreviation;
+    
     public Long getId() {
         return id;
     }
@@ -66,19 +80,11 @@ public class Label {
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
-    
-    @Column(
-            columnDefinition = "VARCHAR(30)",
-            unique = true,
-            nullable = false
-    )
-    private String name;
-    
-    @Column(
-            columnDefinition = "VARCHAR(3)",
-            unique = true,
-            nullable = false
-    )
-    private String abbreviation;
+
+    @Override
+    public String toString() {
+        return name + " (" + abbreviation + ")";
+    }
+   
     
 }
