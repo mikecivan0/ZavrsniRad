@@ -54,12 +54,7 @@ public class PersonController extends BaseController<Person>{
 
     @Override
     protected void deleteControll() throws BaseException {
-        Long personExistsAsUser = (Long) session.createQuery(
-                "SELECT COUNT(id) FROM users WHERE person_id=:id")
-                .setParameter("id", entity.getId())
-                .uniqueResult();
-        
-        if(personExistsAsUser!=0){
+        if(entity.getUser()!=null){
             throw new BaseException("Person cannot be deleted because it is a user");
         }
     }

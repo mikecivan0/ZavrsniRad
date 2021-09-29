@@ -33,7 +33,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "userId")
     private User user;
     

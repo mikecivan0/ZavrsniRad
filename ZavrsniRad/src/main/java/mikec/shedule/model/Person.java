@@ -6,12 +6,12 @@
 
 package mikec.shedule.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @Entity(name = "persons")
@@ -28,7 +28,8 @@ public class Person {
         this.address = address;
     }
     
-    
+    @OneToOne(mappedBy = "person")
+    private User user;
 
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY )
@@ -53,6 +54,10 @@ public class Person {
     
     @Column(columnDefinition = "VARCHAR(100)")
     private String address;
+    
+    public User getUser() {
+        return user;
+    }
 
     public String getFirstName() {
         return firstName;
