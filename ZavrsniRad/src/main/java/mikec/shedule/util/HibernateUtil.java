@@ -40,7 +40,7 @@ public class HibernateUtil {
                 if (registry != null) {
                     StandardServiceRegistryBuilder.destroy(registry);
                 }
-               throw new BaseException(null);                
+               throw new BaseException(e.getMessage());                
             }
         }
         return session;
