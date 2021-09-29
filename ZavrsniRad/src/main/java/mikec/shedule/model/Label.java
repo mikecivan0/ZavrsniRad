@@ -57,14 +57,6 @@ public class Label {
         this.id = id;
     }
 
-    public Set<Record> getRecords() {
-        return records;
-    }
-
-    public void setRecords(Set<Record> records) {
-        this.records = records;
-    }
-
     public String getName() {
         return name;
     }
