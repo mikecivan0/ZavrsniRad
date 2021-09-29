@@ -7,16 +7,10 @@ package mikec.shedule.controller;
 
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mikec.shedule.model.Person;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
 public class PersonController extends BaseController<Person>{
 
     public PersonController() throws BaseException {        

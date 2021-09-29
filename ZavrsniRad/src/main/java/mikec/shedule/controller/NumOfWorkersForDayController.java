@@ -12,10 +12,6 @@ import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
 
-/**
- *
- * @author Ivan
- */
 public class NumOfWorkersForDayController extends BaseController<NumOfWorkersForDay>{
 
     public NumOfWorkersForDayController() throws BaseException {

@@ -12,10 +12,6 @@ import mikec.shedule.model.RegularWorkingHours;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
 
-/**
- *
- * @author Ivan
- */
 public class RegularWorkingHoursController extends BaseController<RegularWorkingHours>{
 
     public RegularWorkingHoursController() throws BaseException {

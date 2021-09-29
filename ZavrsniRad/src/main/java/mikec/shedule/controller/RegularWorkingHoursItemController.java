@@ -10,10 +10,6 @@ import java.util.List;
 import mikec.shedule.model.RegularWorkingHoursItem;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
 public class RegularWorkingHoursItemController extends BaseController<RegularWorkingHoursItem>{
 
     public RegularWorkingHoursItemController() throws BaseException {

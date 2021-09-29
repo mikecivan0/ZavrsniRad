@@ -10,10 +10,7 @@ import java.util.List;
 import mikec.shedule.model.NumOfWorkersForDayItem;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
+
 public class NumOfWorkersForDayItemController extends BaseController<NumOfWorkersForDayItem>{
 
     public NumOfWorkersForDayItemController() throws BaseException {

@@ -7,10 +7,6 @@ import javax.swing.JOptionPane;
 import mikec.shedule.model.Label;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
 public class LabelController extends BaseController<Label>{
 
     public LabelController() throws BaseException {        

@@ -10,10 +10,6 @@ import mikec.shedule.util.BaseException;
 import mikec.shedule.util.HibernateUtil;
 import org.hibernate.Session;
 
-/**
- *
- * @author Ivan
- */
 public abstract class BaseController<T> {
     
     protected Session session;

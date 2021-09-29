@@ -7,17 +7,13 @@ package mikec.shedule.controller;
 
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.NoResultException;
+import javax.swing.JOptionPane;
 import mikec.shedule.model.User;
 import mikec.shedule.util.Tools;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
+
 public class UserController extends BaseController<User>{
 
     public UserController() throws BaseException {
@@ -83,7 +79,7 @@ public class UserController extends BaseController<User>{
             Method method = User.class.getDeclaredMethod("get" + variable, null);
             text = (String) method.invoke(entity, null);           
         } catch (Exception ex) {
-            Logger.getLogger(PersonController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }        
        return text;
     }

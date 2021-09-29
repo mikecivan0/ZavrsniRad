@@ -11,10 +11,6 @@ import javax.swing.JOptionPane;
 import mikec.shedule.model.ExceptionalWorkingHours;
 import mikec.shedule.util.BaseException;
 
-/**
- *
- * @author Ivan
- */
 public class ExceptionalWorkingHoursController extends BaseController<ExceptionalWorkingHours>{
 
     public ExceptionalWorkingHoursController() throws BaseException {        
