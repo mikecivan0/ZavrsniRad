@@ -22,8 +22,7 @@ public class Label {
     public Label() {
     }
 
-    public Label(Long id, String name, String abbreviation) {
-        this.id = id;
+    public Label(String name, String abbreviation) {
         this.name = name;
         this.abbreviation = abbreviation;
     }
