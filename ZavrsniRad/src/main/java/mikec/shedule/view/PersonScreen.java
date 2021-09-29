@@ -62,6 +62,7 @@ public class PersonScreen extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstEntites.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstEntites.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstEntitesValueChanged(evt);

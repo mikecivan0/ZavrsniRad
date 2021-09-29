@@ -122,6 +122,7 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        lstEntites.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstEntites.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstEntitesValueChanged(evt);
