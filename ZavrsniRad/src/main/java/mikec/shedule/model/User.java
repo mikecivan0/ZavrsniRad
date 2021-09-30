@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity(name = "users")
 public class User{
@@ -23,7 +22,6 @@ public class User{
     }
     
     public User(Person person, String username, String pass, String prs_id, int level, boolean aktiv) {
-        this.id = id;
         this.person = person;
         this.username = username;
         this.pass = pass;
@@ -132,5 +130,12 @@ public class User{
     public void setAktiv(boolean aktiv) {
         this.aktiv = aktiv;
     }
+
+    @Override
+    public String toString() {
+        return person.toString();
+    }
+    
+    
 
 }
