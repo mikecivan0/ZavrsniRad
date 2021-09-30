@@ -26,4 +26,8 @@ public class Application {
                 + Application.user.getPerson().getLastName();
     }
     
+    public static User getUser(){
+      return user;
+    }
+    
 }
