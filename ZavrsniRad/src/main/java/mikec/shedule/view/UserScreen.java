@@ -5,12 +5,18 @@
  */
 package mikec.shedule.view;
 
+import java.awt.Dialog;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.User;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import mikec.shedule.controller.PersonController;
 import mikec.shedule.model.Person;
@@ -19,10 +25,12 @@ import mikec.shedule.util.Tools;
 public class UserScreen extends javax.swing.JFrame{
     
     private UserController controller;
+    private PersonController personController;
 
     public UserScreen() throws BaseException {
         initComponents();
         controller = new UserController();
+        personController = new PersonController();
         settings();
         loadList();
         loadPersons();
@@ -41,7 +49,7 @@ public class UserScreen extends javax.swing.JFrame{
     
     public void loadPersons() throws BaseException{
         DefaultComboBoxModel<Person> mp = new DefaultComboBoxModel<>();
-        new PersonController().read().forEach(pr->{mp.addElement(pr);});
+        personController.read().forEach(pr->{mp.addElement(pr);});
         cmbPerson.setModel(mp);
     }
     
@@ -75,6 +83,7 @@ public class UserScreen extends javax.swing.JFrame{
         rbtUser = new javax.swing.JRadioButton();
         rbtAdmin = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
+        btnNewPerson = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,6 +136,13 @@ public class UserScreen extends javax.swing.JFrame{
 
         jLabel4.setText("Level");
 
+        btnNewPerson.setText("New Person");
+        btnNewPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewPersonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,32 +152,38 @@ public class UserScreen extends javax.swing.JFrame{
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6)
-                    .addComponent(cmbPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtPersonalNumber, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pswPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                        .addComponent(pswRePassword, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(chbAktiv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbtUser)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPersonalNumber, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pswPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                .addComponent(pswRePassword, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(chbAktiv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbtUser)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtAdmin))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
+                                    .addComponent(btnAdd)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(209, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbPerson, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(rbtAdmin))
-                    .addComponent(jLabel4)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 21, Short.MAX_VALUE))
+                        .addComponent(btnNewPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +194,9 @@ public class UserScreen extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNewPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -272,13 +296,7 @@ public class UserScreen extends javax.swing.JFrame{
         }
         controller.setEntity(lstEntites.getSelectedValue());
         var e = controller.getEntity();
-        DefaultComboBoxModel<Person> m = (DefaultComboBoxModel<Person>) cmbPerson.getModel();
-        for(int i=0;i<m.getSize();i++){
-            if(m.getElementAt(i).getId().equals(e.getPerson().getId())){
-                cmbPerson.setSelectedIndex(i);
-                break;
-            }
-        }
+        selectItemInComboBox(e.getPerson());
         txtUsername.setText(e.getUsername());
         txtPersonalNumber.setText(e.getPrs_id());
         if(e.getLevel() == 1) {
@@ -288,6 +306,30 @@ public class UserScreen extends javax.swing.JFrame{
         }
         chbAktiv.setSelected(e.isAktiv());        
     }//GEN-LAST:event_lstEntitesValueChanged
+
+    private void btnNewPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPersonActionPerformed
+        try {
+            NewPersonDialogScreen dialog = new NewPersonDialogScreen(this, true);
+            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setLocationRelativeTo(this);
+            dialog.addWindowListener(new WindowAdapter() 
+            {
+              public void windowClosed(WindowEvent e)
+              {
+                  try {
+                      loadPersons();
+                      selectItemInComboBox(personController.getLastAddedPerson());
+                  } catch (BaseException ex) {
+                      JOptionPane.showMessageDialog(null, ex.getMessage());
+                  }
+              }
+            });
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnNewPersonActionPerformed
    
      public void setEntityValues(boolean addPass){
         var e = controller.getEntity();
@@ -312,6 +354,16 @@ public class UserScreen extends javax.swing.JFrame{
                 return;
             }
         }
+    }
+    
+    private void selectItemInComboBox(Person person){
+        DefaultComboBoxModel<Person> m = (DefaultComboBoxModel<Person>) cmbPerson.getModel();
+        for(int i=0;i<m.getSize();i++){
+            if(m.getElementAt(i).getId().equals(person.getId())){
+                cmbPerson.setSelectedIndex(i);
+                break;
+            }
+        }    
     }
     
     private void checkAreDatesValid() throws BaseException{
@@ -345,6 +397,7 @@ public class UserScreen extends javax.swing.JFrame{
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.ButtonGroup btnGroupLevel;
+    private javax.swing.JButton btnNewPerson;
     private javax.swing.JCheckBox chbAktiv;
     private javax.swing.JComboBox<Person> cmbPerson;
     private javax.swing.JLabel jLabel1;
