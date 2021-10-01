@@ -30,7 +30,9 @@ public class UserController extends BaseController<User>{
         notEmptyControll("Username");
         notEmptyControll("Prs_id");
         lengthControll("Username", 50);
-        createExistsControll();
+        createUsernameExistsControll();
+        createPersonIsUserControll();
+        createPrsIdExistsControll();
     }
     
     @Override
@@ -38,7 +40,9 @@ public class UserController extends BaseController<User>{
         notEmptyControll("Username");
         notEmptyControll("Prs_id");
         lengthControll("Username", 50);
-        updateExistsControll();
+        updateUsernameExistsControll();
+        updatePersonIsUserControll();
+        updatePrsIdExistsControll();
     }
 
     @Override
@@ -48,14 +52,14 @@ public class UserController extends BaseController<User>{
         }
     }   
     
-    public User authorize(String username, String pass){
+    public User authorize(String username, String pass) throws BaseException {
         User user = null;
         
         try {
             user = (User) session.createQuery("FROM users WHERE username=:username")
                 .setParameter("username", username).getSingleResult();
         } catch (NoResultException e) {
-            System.out.println(e.getMessage());
+            throw new BaseException(e.getMessage());
         }
         
         if(user==null){
@@ -89,7 +93,7 @@ public class UserController extends BaseController<User>{
        return text;
     }
 
-    private void createExistsControll() throws BaseException{         
+    private void createUsernameExistsControll() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM users WHERE "
                         + "username=:username")
@@ -100,16 +104,64 @@ public class UserController extends BaseController<User>{
         }
     }
     
-    private void updateExistsControll() throws BaseException{         
+    private void updateUsernameExistsControll() throws BaseException{         
        Long personExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM users WHERE "
                         + "username=:username "
-                         + "AND id=:id")
+                         + "AND id!=:id")
                .setParameter("username", entity.getUsername())
                .setParameter("id", entity.getId())
                .uniqueResult(); 
         if(personExists!=0){
             throw new BaseException("Username allready taken");
+        }
+    }
+    
+    private void createPersonIsUserControll() throws BaseException{         
+        Long recordExists = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM users WHERE "
+                        + "person_id=:person")
+               .setParameter("person", entity.getPerson())
+               .uniqueResult();      
+        if(recordExists!=0){
+            throw new BaseException("Person is allready a user/admin");
+        }
+    }
+    
+    private void updatePersonIsUserControll() throws BaseException{         
+        Long recordExists = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM users WHERE "
+                        + "person_id=:person "
+                        + "AND id!=:id")
+               .setParameter("person", entity.getPerson())
+               .setParameter("id", entity.getId())
+               .uniqueResult();      
+        if(recordExists!=0){
+            throw new BaseException("Person is allready a user/admin");
+        }
+    }
+    
+    private void createPrsIdExistsControll() throws BaseException{         
+        Long recordExists = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM users WHERE "
+                        + "prs_id=:prsId")
+               .setParameter("prsId", entity.getPrs_id())
+               .uniqueResult();      
+        if(recordExists!=0){
+            throw new BaseException("Personal id allready taken");
+        }
+    }
+    
+    private void updatePrsIdExistsControll() throws BaseException{         
+        Long recordExists = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM users WHERE "
+                        + "prs_id=:prsId "
+                        + "AND id!=:id")
+               .setParameter("prsId", entity.getPrs_id())
+               .setParameter("id", entity.getId())
+               .uniqueResult();      
+        if(recordExists!=0){
+             throw new BaseException("Personal id allready taken");
         }
     }
     

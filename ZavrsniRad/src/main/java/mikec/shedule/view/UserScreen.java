@@ -221,7 +221,7 @@ public class UserScreen extends javax.swing.JFrame{
             return;
         }
         controller.setEntity(new User());
-        setEntityValues(false);        
+        setEntityValues(true);        
         try {
             controller.create();
             loadList();
@@ -239,7 +239,8 @@ public class UserScreen extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             return;
         }
-        setEntityValues(true);
+        controller.setEntity(lstEntites.getSelectedValue());
+        setEntityValues(String.copyValueOf(pswPassword.getPassword()).length()>0);
         try {
             controller.update();
             loadList();
@@ -288,13 +289,15 @@ public class UserScreen extends javax.swing.JFrame{
         chbAktiv.setSelected(e.isAktiv());        
     }//GEN-LAST:event_lstEntitesValueChanged
    
-     public void setEntityValues(boolean update){
+     public void setEntityValues(boolean addPass){
         var e = controller.getEntity();
+        e.setPerson((Person) cmbPerson.getSelectedItem());
         e.setUsername(txtUsername.getText());
-        if(update){
+        e.setPrs_id(txtPersonalNumber.getText());
+        if(addPass){
             e.setPass(Tools.hashPass(String.copyValueOf(pswPassword.getPassword())));
         }        
-        e.setLevel((rbtUser.isSelected()) ? 1 : 2);
+        e.setLevel((rbtUser.isSelected()) ? 1 : 2);        
         e.setAktiv(chbAktiv.isSelected());
     }
      
@@ -315,12 +318,6 @@ public class UserScreen extends javax.swing.JFrame{
         if(txtUsername.getText().trim().length()==0){
             throw new BaseException("Username cannot be empty");
         }
-        if(String.copyValueOf(pswPassword.getPassword()).trim().length()==0){
-            throw new BaseException("Password cannot be empty");
-        }
-        if(String.copyValueOf(pswRePassword.getPassword()).trim().length()==0){
-            throw new BaseException("Retype password cannot be empty");
-        }
          if(txtPersonalNumber.getText().trim().length()==0){
             throw new BaseException("Personal number cannot be empty");
         }
@@ -336,8 +333,9 @@ public class UserScreen extends javax.swing.JFrame{
     }
     
     private void checkPasswordMatch() throws BaseException{
-        if(String.copyValueOf(pswPassword.getPassword()) 
-                != String.copyValueOf(pswRePassword.getPassword())){
+        String pass = String.copyValueOf(pswPassword.getPassword());
+        String rePass = String.copyValueOf(pswRePassword.getPassword());
+        if(!pass.equals(rePass)){
             throw new BaseException("Password and Retype password not match");
         }
     }
