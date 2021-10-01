@@ -5,6 +5,7 @@
  */
 package mikec.shedule.view;
 
+import java.awt.event.KeyEvent;
 import mikec.shedule.controller.LabelController;
 import mikec.shedule.model.Label;
 import mikec.shedule.util.Application;
@@ -66,7 +67,19 @@ public class LabelScreen extends javax.swing.JFrame{
 
         jLabel1.setText("Name");
 
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNameKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Abbreviation");
+
+        txtAbbreviation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAbbreviationKeyPressed(evt);
+            }
+        });
 
         btnAdd.setText("Add new");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +202,16 @@ public class LabelScreen extends javax.swing.JFrame{
         txtName.setText(e.getName());
         txtAbbreviation.setText(e.getAbbreviation());
     }//GEN-LAST:event_lstEntitesValueChanged
+
+    private void txtNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtAbbreviation.requestFocus();
+        }
+    }//GEN-LAST:event_txtNameKeyPressed
+
+    private void txtAbbreviationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbbreviationKeyPressed
+        btnAddActionPerformed(null);
+    }//GEN-LAST:event_txtAbbreviationKeyPressed
    
      public void setEntityValues(){
         var e = controller.getEntity();

@@ -5,6 +5,7 @@
  */
 package mikec.shedule.view;
 
+import java.awt.event.KeyEvent;
 import mikec.shedule.controller.PersonController;
 import mikec.shedule.model.Person;
 import mikec.shedule.util.Application;
@@ -57,13 +58,43 @@ public class NewPersonDialogScreen extends javax.swing.JDialog {
 
         jLabel4.setText("Email");
 
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("First Name");
 
         jLabel5.setText("Address");
 
+        txtFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFirstNameKeyPressed(evt);
+            }
+        });
+
+        txtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAddressKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Last Name");
 
+        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLastNameKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Phone Nr.");
+
+        txtPhoneNr.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPhoneNrKeyPressed(evt);
+            }
+        });
 
         btnAdd.setText("Add person");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +195,36 @@ public class NewPersonDialogScreen extends javax.swing.JDialog {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtFirstNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirstNameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtLastName.requestFocus();
+        }
+    }//GEN-LAST:event_txtFirstNameKeyPressed
+
+    private void txtLastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtPhoneNr.requestFocus();
+        }
+    }//GEN-LAST:event_txtLastNameKeyPressed
+
+    private void txtPhoneNrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNrKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtEmail.requestFocus();
+        }
+    }//GEN-LAST:event_txtPhoneNrKeyPressed
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtAddress.requestFocus();
+        }
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void txtAddressKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAddressKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAddActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtAddressKeyPressed
     
      public void setEntityValues(){
         var e = controller.getEntity();

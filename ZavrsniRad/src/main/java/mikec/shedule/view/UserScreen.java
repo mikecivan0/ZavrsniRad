@@ -6,6 +6,7 @@
 package mikec.shedule.view;
 
 import java.awt.Dialog;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
@@ -97,9 +98,21 @@ public class UserScreen extends javax.swing.JFrame{
 
         jLabel1.setText("Username");
 
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Password");
 
         jLabel3.setText("Personal number");
+
+        txtPersonalNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPersonalNumberKeyPressed(evt);
+            }
+        });
 
         btnAdd.setText("Add new");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +132,12 @@ public class UserScreen extends javax.swing.JFrame{
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
+            }
+        });
+
+        pswPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pswPasswordKeyPressed(evt);
             }
         });
 
@@ -330,6 +349,24 @@ public class UserScreen extends javax.swing.JFrame{
            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btnNewPersonActionPerformed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtPersonalNumber.requestFocus();
+        }
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtPersonalNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPersonalNumberKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pswPassword.requestFocus();
+        }
+    }//GEN-LAST:event_txtPersonalNumberKeyPressed
+
+    private void pswPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswPasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pswRePassword.requestFocus();
+        }
+    }//GEN-LAST:event_pswPasswordKeyPressed
    
      public void setEntityValues(boolean addPass){
         var e = controller.getEntity();

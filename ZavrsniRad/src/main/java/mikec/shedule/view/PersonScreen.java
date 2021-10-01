@@ -5,6 +5,7 @@
  */
 package mikec.shedule.view;
 
+import java.awt.event.KeyEvent;
 import mikec.shedule.controller.PersonController;
 import mikec.shedule.model.Person;
 import mikec.shedule.util.Application;
@@ -72,9 +73,27 @@ public class PersonScreen extends javax.swing.JFrame{
 
         jLabel1.setText("First Name");
 
+        txtFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFirstNameKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Last Name");
 
+        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLastNameKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Phone Nr.");
+
+        txtPhoneNr.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPhoneNrKeyPressed(evt);
+            }
+        });
 
         btnAdd.setText("Add new");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +117,12 @@ public class PersonScreen extends javax.swing.JFrame{
         });
 
         jLabel4.setText("Email");
+
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+        });
 
         jLabel5.setText("Address");
 
@@ -219,6 +244,30 @@ public class PersonScreen extends javax.swing.JFrame{
         txtEmail.setText(e.getEmail());
         txtAddress.setText(e.getAddress());
     }//GEN-LAST:event_lstEntitesValueChanged
+
+    private void txtFirstNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirstNameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtLastName.requestFocus();
+        }
+    }//GEN-LAST:event_txtFirstNameKeyPressed
+
+    private void txtLastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtPhoneNr.requestFocus();
+        }
+    }//GEN-LAST:event_txtLastNameKeyPressed
+
+    private void txtPhoneNrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNrKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtEmail.requestFocus();
+        }
+    }//GEN-LAST:event_txtPhoneNrKeyPressed
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtAddress.requestFocus();
+        }
+    }//GEN-LAST:event_txtEmailKeyPressed
    
      public void setEntityValues(){
         var e = controller.getEntity();
