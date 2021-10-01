@@ -96,6 +96,11 @@ public class PersonController extends BaseController<Person>{
         }
     }
     
+    public Person getLastAddedPerson(){
+        List<Person> persons = read();
+        return persons.get(persons.size()-1);
+    }
+    
     private void updateExistsControll() throws BaseException{         
        Long personExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM persons WHERE "
