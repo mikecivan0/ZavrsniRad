@@ -5,9 +5,7 @@
  */
 package mikec.shedule.controller;
 
-import java.lang.reflect.Method;
 import java.util.List;
-import javax.swing.JOptionPane;
 import mikec.shedule.model.Record;
 import mikec.shedule.model.User;
 import mikec.shedule.util.BaseException;
@@ -26,42 +24,19 @@ public class RecordController extends BaseController<Record>{
     
     @Override
     protected void createControll() throws BaseException {
-        notEmptyControll("User");
-        notEmptyControll("Label");
-        notEmptyControll("Date");
-//        createRecordExistsControll();
+        createRecordExistsControll();
     }
     
     @Override
-    protected void updateControll() throws BaseException {
-        notEmptyControll("User");
-        notEmptyControll("Label");
-        notEmptyControll("Date");
-//        updateRecordExistsControll();
+    protected void updateControll() throws BaseException {       
+        updateRecordExistsControll();
     }
 
     @Override
     protected void deleteControll() throws BaseException {
        
     }   
-   
-    private void notEmptyControll(String variable) throws BaseException{        
-        if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
-           throw new BaseException("Input '" + variable + "' cannot be empty");
-       }    
-    }
-    
-    private String getVariable(String variable){            
-        String text = "";
-        try { 
-            Method method = Record.class.getDeclaredMethod("get" + variable, null);
-            text = (String) method.invoke(entity, null);           
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }        
-       return text;
-    }
-    
+ 
     public List<Integer> getYears(){            
         return session.createNativeQuery("select distinct YEAR(date) as year from records")
                 .list();
@@ -82,7 +57,7 @@ public class RecordController extends BaseController<Record>{
                 .list();
     }
     
-    public List<Record> getRecordForDatehAndUser(Integer year, Integer month){            
+    public List<Record> getRecordForDateAndUser(Integer year, Integer month){            
         return session.createNativeQuery("select distinct userId from records "
                 + "where YEAR(date)=:year AND MONTH(date)=:month").
                 setParameter(year, year)
@@ -90,34 +65,34 @@ public class RecordController extends BaseController<Record>{
                 .list();
     }
 
-//    private void createRecordExistsControll() throws BaseException{         
-//        Long recordExists = (Long) session.createQuery(
-//                "SELECT COUNT(id) FROM users WHERE "
-//                        + "userId=:user "
-//                        + "AND YEAR(date)=:year "
-//                        + "AND MONTH(date)=:month")
-//               .setParameter("user", entity.getUser())
-//               .setParameter("year", entity.getUser())
-//               .setParameter("month", entity.getUser())
-//               .uniqueResult();      
-//        if(recordExists!=0){
-//            throw new BaseException("Username allready taken");
-//        }
-//    }
-//    
-//    private void updateRecordExistsControll() throws BaseException{         
-//       Long personExists = (Long) session.createQuery(
-//                 "SELECT COUNT(id) FROM users WHERE "
-//                        + "username=:username "
-//                         + "AND id!=:id")
-//               .setParameter("username", entity.getUsername())
-//               .setParameter("id", entity.getId())
-//               .uniqueResult(); 
-//        if(personExists!=0){
-//            throw new BaseException("Username allready taken");
-//        }
-//    }
-//    
+    private void createRecordExistsControll() throws BaseException{         
+        Long recordExists = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM records WHERE "
+                        + "userId=:user "
+                        + "AND date=:date")
+               .setParameter("user", entity.getUser())
+               .setParameter("date", entity.getDate())
+               .uniqueResult();      
+        if(recordExists!=0){
+            throw new BaseException("Record for that user on that date allready exists");
+        }
+    }
+    
+    private void updateRecordExistsControll() throws BaseException{         
+       Long personExists = (Long) session.createQuery(
+                 "SELECT COUNT(id) FROM records WHERE "
+                        + "userId=:user "
+                        + "AND date=:date"
+                         + "AND id!=:id")
+               .setParameter("user", entity.getUser())
+               .setParameter("date", entity.getDate())
+               .setParameter("id", entity.getId())
+               .uniqueResult(); 
+        if(personExists!=0){
+            throw new BaseException("Record for that user on that date allready exists");
+        }
+    }
+    
 
     
 }

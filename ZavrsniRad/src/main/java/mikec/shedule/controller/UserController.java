@@ -25,6 +25,11 @@ public class UserController extends BaseController<User>{
         return session.createQuery("FROM users").list();
     }
     
+    public List<User> getActiveUsers() {
+        return session.createQuery("FROM users WHERE "
+                + "aktiv IS TRUE").list();
+    }
+    
     @Override
     protected void createControll() throws BaseException {
         notEmptyControll("Username");

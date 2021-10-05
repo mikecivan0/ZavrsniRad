@@ -21,8 +21,7 @@ public class Record {
     public Record() {
     }
 
-    public Record(Long id, User user, Label label, Date date, boolean withBreak) {
-        this.id = id;
+    public Record(User user, Label label, Date date, boolean withBreak) {
         this.user = user;
         this.label = label;
         this.date = date;
