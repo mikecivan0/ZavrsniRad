@@ -13,8 +13,8 @@ import mikec.shedule.util.BaseException;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class LabelScreen extends javax.swing.JFrame{
-    
+public class LabelScreen extends javax.swing.JFrame {
+
     private LabelController controller;
 
     public LabelScreen() throws BaseException {
@@ -24,17 +24,18 @@ public class LabelScreen extends javax.swing.JFrame{
         loadList();
         selectFirstItemOnList();
     }
-    
-    public void settings(){
+
+    public void settings() {
         setTitle(Application.getTitle("Labels"));
     }
-    
-    public void loadList(){
-        DefaultListModel<Label> m = new DefaultListModel<>();        
-        controller.read().forEach(p->{m.addElement(p);});        
-        lstEntites.setModel(m);        
+
+    public void loadList() {
+        DefaultListModel<Label> m = new DefaultListModel<>();
+        controller.read().forEach(p -> {
+            m.addElement(p);
+        });
+        lstEntites.setModel(m);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,47 +155,53 @@ public class LabelScreen extends javax.swing.JFrame{
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         controller.setEntity(new Label());
-        setEntityValues();        
+        setEntityValues();
         try {
             controller.create();
             loadList();
             selectItem(controller.getEntity());
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
-        }        
+        }
     }//GEN-LAST:event_btnAddActionPerformed
-   
+
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-       setEntityValues();
-        try {
-            controller.update();
-            loadList();
-            selectItem(controller.getEntity());
-        } catch (BaseException ex) {
-           JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        if (controller.getEntity().getId() < 3) {
+            JOptionPane.showMessageDialog(getParent(), "This label is not allowed to modify");
+        } else {
+            setEntityValues();
+            try {
+                controller.update();
+                loadList();
+                selectItem(controller.getEntity());
+            } catch (BaseException ex) {
+                JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       if(JOptionPane.showConfirmDialog(
-               rootPane, 
-               "Do you really want to delete label " + controller.getEntity() + "?", 
-               "Label delete", 
-               JOptionPane.WARNING_MESSAGE)==0){
-            try {
-                controller.delete();
-                loadList();
-                selectFirstItemOnList();
-            } catch (BaseException ex) {
-               JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        if (JOptionPane.showConfirmDialog(
+                rootPane,
+                "Do you really want to delete label " + controller.getEntity() + "?",
+                "Label delete",
+                JOptionPane.WARNING_MESSAGE) == 0) {
+            if (controller.getEntity().getId() < 3) {
+                JOptionPane.showMessageDialog(getParent(), "This label is not allowed to delete");
+            } else {
+                try {
+                    controller.delete();
+                    loadList();
+                    selectFirstItemOnList();
+                } catch (BaseException ex) {
+                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+                }
             }
-       }
-        
-       
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void lstEntitesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitesValueChanged
-        if(evt.getValueIsAdjusting() || lstEntites.getSelectedValue()==null){
+        if (evt.getValueIsAdjusting() || lstEntites.getSelectedValue() == null) {
             return;
         }
         controller.setEntity(lstEntites.getSelectedValue());
@@ -210,30 +217,30 @@ public class LabelScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_txtNameKeyPressed
 
     private void txtAbbreviationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbbreviationKeyPressed
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnAddActionPerformed(null);
-        }        
+        }
     }//GEN-LAST:event_txtAbbreviationKeyPressed
-   
-     public void setEntityValues(){
+
+    public void setEntityValues() {
         var e = controller.getEntity();
         e.setName(txtName.getText());
         e.setAbbreviation(txtAbbreviation.getText());
     }
-     
-    public void selectFirstItemOnList(){
-       lstEntites.setSelectedIndex(0);
+
+    public void selectFirstItemOnList() {
+        lstEntites.setSelectedIndex(0);
     }
-    
-    public void selectItem(Label label){
-        for(int i = 0; i< lstEntites.getModel().getSize();i++){
-            if(lstEntites.getModel().getElementAt(i).getName().equals(label.getName())){
+
+    public void selectItem(Label label) {
+        for (int i = 0; i < lstEntites.getModel().getSize(); i++) {
+            if (lstEntites.getModel().getElementAt(i).getName().equals(label.getName())) {
                 lstEntites.setSelectedIndex(i);
                 return;
             }
         }
     }
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;

@@ -33,13 +33,19 @@ public class LabelController extends BaseController<Label>{
         notEmptyControll("Abbreviation");
         lengthControll("Name",30);
         lengthControll("Abbreviation",3);
-        updateExistsControll();        
+        updateExistsControll();  
+        if(entity.getId()<3){
+            throw new BaseException("This label is not allowed to modify");
+        }
     }
 
     @Override
     protected void deleteControll() throws BaseException {        
         if(entity.getRecords().size()>0){
             throw new BaseException("Label cannot be deleted becouse it is allready used in records");
+        }
+        if(entity.getId()<3){
+            throw new BaseException("This label is not allowed to delete");
         }
     }
     
