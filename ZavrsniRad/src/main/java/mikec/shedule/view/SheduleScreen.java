@@ -112,55 +112,51 @@ public class SheduleScreen {
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 Label selectedLabel = (Label) event.getItem();
-                User selectedUser = usersInMonth.get(table.getSelectedRow());                 
+                User selectedUser = usersInMonth.get(table.getSelectedRow());
                 try {
                     Date selectedDate = new Date();
                     selectedDate = Tools.parseDate(table.getSelectedColumn() + "." + strMonth + "." + strYear + ".");
-                    record = new Record(selectedUser, selectedLabel, selectedDate, true); 
-                    if(record.getLabel().getId()==null){
-                       recordDelete();
-                    }else{
+                    record = new Record(selectedUser, selectedLabel, selectedDate, true);
+                    if (record.getLabel().getId() == null) {
+                        recordDelete();
+                    } else {
                         recordInsertOrUpdate();
                     }
                 } catch (BaseException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-               
-                
             }
         }
+    }
 
-        private void recordDelete() {
-            Record foundedRecord = recordController.findRecord(record);
+    private void recordDelete() {
+        Record foundedRecord = recordController.findRecord(record);
+        recordController.setEntity(foundedRecord);
+        try {
+            recordController.delete();
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
+    private void recordInsertOrUpdate() {
+        Record foundedRecord = recordController.findRecord(record);
+        if (foundedRecord.getId() != null) {
+            foundedRecord.setLabel(record.getLabel());
             recordController.setEntity(foundedRecord);
             try {
-                recordController.delete();
+                recordController.update();
+            } catch (BaseException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        } else {
+            recordController.setEntity(record);
+            try {
+                recordController.create();
             } catch (BaseException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         }
-
-        private void recordInsertOrUpdate() {
-             Record foundedRecord = recordController.findRecord(record);
-             if(foundedRecord.getId()!=null){
-                foundedRecord.setLabel(record.getLabel());
-                recordController.setEntity(foundedRecord);
-                try {
-                    recordController.update();
-                } catch (BaseException ex) {
-                     JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
-             }else{
-                recordController.setEntity(record);
-                try {
-                    recordController.create();
-                } catch (BaseException ex) {
-                     JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
-             }
-            
-        }
-        
     }
 
     private void generateDefaultCBModel() {
@@ -218,10 +214,8 @@ public class SheduleScreen {
         }
 
         for (User u : usersInMonth) {
-
             Object[] array = new Object[numOfDaysInMoth + 1];
             array[0] = u.getPerson();
-
             for (int i = 1; i <= numOfDaysInMoth; i++) {
                 Date iterDate = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
                 for (Record rc : recordsForMonth) {
