@@ -142,35 +142,39 @@ public class Auth extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
-        if(txtUsername.getText().trim().length()==0){
-            JOptionPane.showMessageDialog(getRootPane(), "Username is required");
-            return;
-        }
-        
-        String password = String.copyValueOf(pswPass.getPassword());
-        if(password.trim().length()==0){
-            JOptionPane.showMessageDialog(getRootPane(), "Password is required");
-            return;
-        }
-        
-        User oper = userController.authorize(txtUsername.getText(), password);
-        
-        if(oper==null){
-            JOptionPane.showMessageDialog(getRootPane(), "Username and password do not match");
-            return;
-        }
-         
-        Application.user = oper;
-        if(oper.getLevel()==1){
-            new UserMainScreen().setVisible(true);
-        }else if(oper.getLevel()==2){
-            try {
-                new AdminMainScreen().setVisible(true);
-            } catch (BaseException ex) {
-               JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        try {
+            if(txtUsername.getText().trim().length()==0){
+                JOptionPane.showMessageDialog(getRootPane(), "Username is required");
+                return;
             }
-        }       
-        dispose();
+            
+            String password = String.copyValueOf(pswPass.getPassword());
+            if(password.trim().length()==0){
+                JOptionPane.showMessageDialog(getRootPane(), "Password is required");
+                return;
+            }
+            
+            User oper = userController.authorize(txtUsername.getText(), password);
+            
+            if(oper==null){
+                JOptionPane.showMessageDialog(getRootPane(), "Username and password do not match");
+                return;
+            }
+            
+            Application.user = oper;
+            if(oper.getLevel()==1){
+                new UserMainScreen().setVisible(true);
+            }else if(oper.getLevel()==2){
+                try {
+                    new AdminMainScreen().setVisible(true);
+                } catch (BaseException ex) {
+                    JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+                }
+            }
+            dispose();
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLinkGitCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkGitCodeActionPerformed
