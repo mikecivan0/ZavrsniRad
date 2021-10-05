@@ -5,6 +5,7 @@
  */
 package mikec.shedule.controller;
 
+import java.util.Date;
 import java.util.List;
 import mikec.shedule.model.Record;
 import mikec.shedule.model.User;
@@ -38,30 +39,22 @@ public class RecordController extends BaseController<Record>{
     }   
  
     public List<Integer> getYears(){            
-        return session.createNativeQuery("select distinct YEAR(date) as year from records")
+        return session.createNativeQuery("SELECT DISTINCT YEAR(date) AS year FROM records")
                 .list();
     }
     
     public List<Integer> getMonths(String year){            
-        return session.createNativeQuery("select distinct MONTH(date) as month "
+        return session.createNativeQuery("SELECT DISTINCT MONTH(date) as month "
                 + "from records where YEAR(date)=:year")
                 .setParameter("year", year)
                 .list();
     }
     
-    public List<User> getUsersForMonth(Integer year, Integer month){            
-        return session.createNativeQuery("select distinct userId from records "
-                + "where YEAR(date)=:year AND MONTH(date)=:month").
-                setParameter(year, year)
-                .setParameter("month", month)
-                .list();
-    }
-    
-    public List<Record> getRecordForDateAndUser(Integer year, Integer month){            
-        return session.createNativeQuery("select distinct userId from records "
-                + "where YEAR(date)=:year AND MONTH(date)=:month").
-                setParameter(year, year)
-                .setParameter("month", month)
+    public List<Record> getRecordsForMonth(String year, String month){            
+        return session.createQuery("FROM records "
+                + "WHERE YEAR(date)=:year AND MONTH(date)=:month").
+                setParameter("year", Integer.parseInt(year))
+                .setParameter("month", Integer.parseInt(month))
                 .list();
     }
 
@@ -82,7 +75,7 @@ public class RecordController extends BaseController<Record>{
        Long personExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM records WHERE "
                         + "userId=:user "
-                        + "AND date=:date"
+                        + "AND date=:date "
                          + "AND id!=:id")
                .setParameter("user", entity.getUser())
                .setParameter("date", entity.getDate())
@@ -91,6 +84,20 @@ public class RecordController extends BaseController<Record>{
         if(personExists!=0){
             throw new BaseException("Record for that user on that date allready exists");
         }
+    }
+
+    public Record findRecord(Record record) {
+        try {
+            return (Record) session.createQuery("FROM records WHERE "
+                        + "userId=:user "
+                        + "AND date=:date")
+               .setParameter("user", record.getUser())
+               .setParameter("date", record.getDate())
+               .getSingleResult();  
+        } catch (Exception e) {
+            return new Record();
+        }
+          
     }
     
 

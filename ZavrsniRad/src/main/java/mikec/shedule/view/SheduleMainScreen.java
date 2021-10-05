@@ -170,7 +170,8 @@ public class SheduleMainScreen extends javax.swing.JFrame{
             Integer year = (Integer) cmbYear.getSelectedItem();
             Integer month = (Integer) cmbMonth.getSelectedItem();
             try {
-                new SheduleTable(year,month).setVisible(true);
+                new SheduleScreen(String.valueOf(year),String.valueOf(month));
+                dispose();
             } catch (BaseException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
