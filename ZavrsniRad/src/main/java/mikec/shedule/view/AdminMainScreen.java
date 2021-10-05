@@ -65,7 +65,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem3.setText("Shedule records");
+        jMenuItem3.setText("Shedule");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -74,7 +74,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem4.setText("Shedule labels");
+        jMenuItem4.setText("Labels");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -209,7 +209,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         try {
-            new RecordDateChooseScreen().setVisible(true);
+            new SheduleMainScreen().setVisible(true);
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }
