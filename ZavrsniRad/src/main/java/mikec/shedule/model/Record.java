@@ -21,11 +21,10 @@ public class Record {
     public Record() {
     }
 
-    public Record(User user, Label label, Date date, boolean withBreak) {
+    public Record(User user, Label label, Date date) {
         this.user = user;
         this.label = label;
         this.date = date;
-        this.withBreak = withBreak;
     }
     
     @Id
@@ -43,9 +42,6 @@ public class Record {
     @Column(nullable = false)
     private Date date;
     
-    @Column(nullable = false)
-    private boolean withBreak;
-
     public Long getId() {
         return id;
     }
@@ -77,13 +73,4 @@ public class Record {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public boolean isWithBreak() {
-        return withBreak;
-    }
-
-    public void setWithBreak(boolean withBreak) {
-        this.withBreak = withBreak;
-    }   
-
 }

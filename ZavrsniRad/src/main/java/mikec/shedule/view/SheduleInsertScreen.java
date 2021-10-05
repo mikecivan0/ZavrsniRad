@@ -60,7 +60,6 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
         dtDate = new com.github.lgooddatepicker.components.DatePicker();
         cmbUser = new javax.swing.JComboBox<>();
         cmbLabel = new javax.swing.JComboBox<>();
-        chbBreak = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,8 +75,6 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
         });
 
         jLabel7.setText("Label");
-
-        chbBreak.setText("Work with break");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,8 +100,7 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chbBreak))))
+                            .addComponent(cmbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,9 +118,7 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
                 .addComponent(jLabel7)
                 .addGap(9, 9, 9)
                 .addComponent(cmbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(chbBreak)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnInsert)
                 .addGap(26, 26, 26))
         );
@@ -157,7 +151,6 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
         e.setDate(Tools.LocalDateToDate(dtDate.getDate()));
         e.setUser((User) cmbUser.getSelectedItem());
         e.setLabel((Label) cmbLabel.getSelectedItem());
-        e.setWithBreak(chbBreak.isSelected());
     }
     
     private void checkAreDatesValid() throws BaseException{
@@ -188,7 +181,6 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsert;
-    private javax.swing.JCheckBox chbBreak;
     private javax.swing.JComboBox<Label> cmbLabel;
     private javax.swing.JComboBox<User> cmbUser;
     private com.github.lgooddatepicker.components.DatePicker dtDate;

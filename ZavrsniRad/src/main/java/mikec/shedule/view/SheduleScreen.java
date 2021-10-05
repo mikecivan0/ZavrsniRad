@@ -116,7 +116,7 @@ public class SheduleScreen {
                 try {
                     Date selectedDate = new Date();
                     selectedDate = Tools.parseDate(table.getSelectedColumn() + "." + strMonth + "." + strYear + ".");
-                    record = new Record(selectedUser, selectedLabel, selectedDate, true);
+                    record = new Record(selectedUser, selectedLabel, selectedDate);
                     if (record.getLabel().getId() == null) {
                         recordDelete();
                     } else {
