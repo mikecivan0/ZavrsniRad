@@ -57,7 +57,8 @@ public class BaseValues {
         loadRegularWorkingHours();
         loadNumOfWorkersForDayItem();
         loadNumOfWorkersForDay();
-        loadLabels("Work","w");
+        loadLabels("Work with break","w");
+        loadLabels("Work without break","w*");
     }  
     
     public static void loadPerson(String firstName, String lastName, String phoneNr, String email, String address) throws BaseException{
