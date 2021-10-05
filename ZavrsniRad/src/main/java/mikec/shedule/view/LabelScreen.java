@@ -210,7 +210,9 @@ public class LabelScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_txtNameKeyPressed
 
     private void txtAbbreviationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAbbreviationKeyPressed
-        btnAddActionPerformed(null);
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAddActionPerformed(null);
+        }        
     }//GEN-LAST:event_txtAbbreviationKeyPressed
    
      public void setEntityValues(){
