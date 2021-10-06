@@ -63,7 +63,7 @@ public class SheduleScreen {
         monthInt = Integer.parseInt(month);
         strYear = year;
         strMonth = month;
-        labels = labelController.read();
+        labels = loadLabels();
         numOfDaysInMoth = calculateNumOfDaysInMonth(yearInt, monthInt);
         recordsForMonth = recordController.getRecordsForMonth(year, month);
         loadUsersInMonth();
@@ -87,7 +87,7 @@ public class SheduleScreen {
         int index = 0;
         DefaultComboBoxModel<Label> um = (DefaultComboBoxModel<Label>) cmbLabel.getModel();
         for (int i = 0; i < um.getSize(); i++) {
-            if (um.getElementAt(i).getId().equals(label.getId())) {
+            if (um.getElementAt(i).getAbbreviation()==(label.getAbbreviation())) {
                 index = i;
                 break;
             }
@@ -104,6 +104,15 @@ public class SheduleScreen {
     private void generateJComboBox() {
         cmbLabel = new JComboBox<>();
         cmbLabel.addItemListener(new ItemChangeListener());
+    }
+
+    private List<Label> loadLabels() {
+        List<Label> startList = new ArrayList<>();
+        startList.add(new Label("", "-"));
+        labelController.read().forEach(l -> {
+            startList.add(l);
+        });
+        return startList;
     }
 
     private class ItemChangeListener implements ItemListener {
@@ -131,11 +140,13 @@ public class SheduleScreen {
 
     private void recordDelete() {
         Record foundedRecord = recordController.findRecord(record);
-        recordController.setEntity(foundedRecord);
-        try {
-            recordController.delete();
-        } catch (BaseException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+        if (foundedRecord.getId() != null) {
+            recordController.setEntity(foundedRecord);
+            try {
+                recordController.delete();
+            } catch (BaseException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
     }
 
@@ -160,8 +171,7 @@ public class SheduleScreen {
     }
 
     private void generateDefaultCBModel() {
-        defaultCbModel = new DefaultComboBoxModel<>();
-        defaultCbModel.addElement(new Label("", "-"));
+        defaultCbModel = new DefaultComboBoxModel<>();        
         labels.forEach(s -> {
             defaultCbModel.addElement(s);
         });
@@ -217,12 +227,18 @@ public class SheduleScreen {
             Object[] array = new Object[numOfDaysInMoth + 1];
             array[0] = u.getPerson();
             for (int i = 1; i <= numOfDaysInMoth; i++) {
+                int index = 0;
                 Date iterDate = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
                 for (Record rc : recordsForMonth) {
-                    if (rc.getUser().getId().equals(u.getId()) && rc.getDate().equals(iterDate)) {
-                        array[i] = labels.get(1);
+                   String iterDateStr = Tools.formatDate(iterDate);
+                   String curDateStr = Tools.formatDate(rc.getDate());
+                   if (rc.getUser().getPrs_id().equals(u.getPrs_id()) &&                          
+                            iterDateStr.equals(curDateStr)) {
+                        index = getIndexOfLabel(rc.getLabel());
+                        break;
                     }
                 }
+                array[i] = labels.get(index);
             }
             defaultTableModel.addRow(array);
         }
