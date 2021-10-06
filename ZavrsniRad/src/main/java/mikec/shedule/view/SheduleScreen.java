@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import mikec.shedule.controller.LabelController;
 import mikec.shedule.controller.RecordController;
 import mikec.shedule.model.Label;
@@ -132,7 +131,7 @@ public class SheduleScreen {
                 } catch (BaseException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-            }
+            }            
         }
     }
 
