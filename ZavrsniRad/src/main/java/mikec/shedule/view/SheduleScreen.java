@@ -42,10 +42,8 @@ public class SheduleScreen {
     private DefaultTableModel defaultTableModel;
     private List<User> usersInMonth;
     private List<Record> recordsForMonth;
-    private TableColumn column;
     private JComboBox<Label> cmbLabel;
     private List<Label> labels;
-    private Label label;
     private RecordController recordController;
     private LabelController labelController;
     private Integer yearInt, monthInt, numOfDaysInMoth;
