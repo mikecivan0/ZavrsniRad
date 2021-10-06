@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import mikec.shedule.controller.LabelController;
 import mikec.shedule.controller.RecordController;
@@ -50,6 +49,7 @@ public class SheduleAdminScreen {
     private JTable table;
     private JFrame frame;
     private Record record;
+    
 
     public SheduleAdminScreen(String year, String month) throws BaseException {
         table = new JTable();
@@ -70,7 +70,7 @@ public class SheduleAdminScreen {
         setLabelModel();
         generateDefaultTableModel();
         createTable();
-        display();
+        display();        
     }
 
     private void createTable() throws BaseException {
@@ -113,11 +113,24 @@ public class SheduleAdminScreen {
     }
 
     private class ItemChangeListener implements ItemListener {
+
+        private int rowInListener;
+        private int columnInListener;
+
+        public ItemChangeListener() {
+            rowInListener = -1;
+            columnInListener = -1;
+        }     
+    
         @Override
         public void itemStateChanged(ItemEvent event) {
-            if (event.getStateChange() == ItemEvent.SELECTED) {
-                if (!table.getSelectionModel().isSelectionEmpty()) {                    
-                    JComboBox comboBox = (JComboBox) event.getSource();
+            if (event.getStateChange() == ItemEvent.SELECTED
+                    && (rowInListener == -1 || columnInListener == -1 
+                    || rowInListener != table.getSelectedRow() 
+                    || columnInListener != table.getSelectedColumn())) {
+                rowInListener = table.getSelectedRow();
+                columnInListener = table.getSelectedColumn();
+                if (!table.getSelectionModel().isSelectionEmpty()) {
                     Label selectedLabel = (Label) event.getItem();
                     User selectedUser = usersInMonth.get(table.getSelectedRow());
                     try {
@@ -129,6 +142,12 @@ public class SheduleAdminScreen {
                         } else {
                             recordInsertOrUpdate();
                         }
+
+                        table.changeSelection(0, 0, true, false);
+                        columnInListener = 0;
+                        rowInListener = 0;
+                        table.requestFocus();
+
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
