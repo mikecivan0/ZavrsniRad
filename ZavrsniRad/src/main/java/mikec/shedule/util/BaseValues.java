@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import mikec.shedule.model.Record;
 import mikec.shedule.controller.ExceptionalWorkingHoursController;
 import mikec.shedule.controller.LabelController;
 import mikec.shedule.controller.PersonController;
+import mikec.shedule.controller.RecordController;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.ExceptionalWorkingHours;
 import mikec.shedule.model.Label;
@@ -29,14 +31,16 @@ public class BaseValues {
     private Session session;
     private List<RegularWorkingHoursItem> rwhItems;
     private List<NumOfWorkersForDayItem> nwfdItems;
+    private List<Label> labels;
+    private List<User> users;
     private static PersonController personController;
     private static UserController userController;    
     private static LabelController labelController;    
+    private static RecordController recordController;    
     private static ExceptionalWorkingHoursController exceptionalWorkingHoursController;    
     private static Person person;
     private static ExceptionalWorkingHours exceptionalWorkingHours;
     private static User user;    
-    private static Label label;    
 
     public BaseValues(Session session) {
         this.session = session;
@@ -57,8 +61,8 @@ public class BaseValues {
         loadRegularWorkingHours();
         loadNumOfWorkersForDayItem();
         loadNumOfWorkersForDay();
-        loadLabels("Work with break","w");
-        loadLabels("Work without break","w*");
+        loadLabels();     
+        loadRecords();
     }  
     
     public static void loadPerson(String firstName, String lastName, String phoneNr, String email, String address) throws BaseException{
@@ -68,18 +72,6 @@ public class BaseValues {
         
         try {
             personController.create();
-        } catch (BaseException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-    public static void loadLabels(String name, String abbreviation) throws BaseException{
-        labelController = new LabelController();
-        label = new Label(name, abbreviation);
-        labelController.setEntity(label);     
-        
-        try {
-            labelController.create();
         } catch (BaseException ex) {
             System.out.println(ex.getMessage());
         }
@@ -212,6 +204,33 @@ public class BaseValues {
     private static int getRandomNumberInRange(int min, int max) {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
+    }
+
+    private void loadLabels() throws BaseException {
+        labelController = new LabelController();
+        labels = new ArrayList<Label>();
+        labels.add(new Label("Work with break","w"));
+        labels.add(new Label("Work without break","w*"));        
+        for(Label l : labels){
+            labelController.setEntity(l);       
+            try {
+                labelController.create();
+            } catch (BaseException ex) {
+                System.out.println(ex.getMessage());
+            }  
+        }
+        
+    }
+
+    private void loadRecords() throws BaseException {
+        recordController = new RecordController();
+        List<User> users = userController.read();
+        for(User u : users){
+            Record r = new Record(u, labels.get(0), Tools.parseDate("12.12.2020."));
+            recordController.setEntity(r);
+            recordController.create();
+        }
+        
     }
     
 }
