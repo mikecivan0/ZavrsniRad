@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import mikec.shedule.model.Record;
 import mikec.shedule.model.User;
+import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 
 
@@ -40,6 +41,13 @@ public class RecordController extends BaseController<Record>{
  
     public List<Integer> getYears(){            
         return session.createNativeQuery("SELECT DISTINCT YEAR(date) AS year FROM records")
+                .list();
+    }
+    
+    public List<Integer> getYearsForUser(){            
+        return session.createNativeQuery("SELECT DISTINCT YEAR(date) FROM records "
+                + "WHERE userId=:user")
+                .setParameter("user", Application.getUser())
                 .list();
     }
     
