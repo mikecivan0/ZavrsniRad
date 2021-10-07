@@ -28,7 +28,7 @@ import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
 
-public class SheduleAdminScreen {
+public class SheduleAdminDisplayTableScreen {
 
     private int rows;
     private int cols;
@@ -52,7 +52,7 @@ public class SheduleAdminScreen {
     private Record record;
     
 
-    public SheduleAdminScreen(String year, String month) throws BaseException {
+    public SheduleAdminDisplayTableScreen(String year, String month) throws BaseException {
         table = new JTable();
         frame = new JFrame();        
         recordController = new RecordController();

@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.controller.RecordController;
-public class SheduleMainAdiminScreen extends javax.swing.JFrame{
+public class SheduleAdiminChooseScreen extends javax.swing.JFrame{
     
     private RecordController controller;
 
-    public SheduleMainAdiminScreen() throws BaseException {
+    public SheduleAdiminChooseScreen() throws BaseException {
         initComponents();
         controller = new RecordController();
         settings();
@@ -174,7 +174,7 @@ public class SheduleMainAdiminScreen extends javax.swing.JFrame{
             Integer year = (Integer) cmbYear.getSelectedItem();
             Integer month = (Integer) cmbMonth.getSelectedItem();
             try {
-                new SheduleAdminScreen(String.valueOf(year),String.valueOf(month));                
+                new SheduleAdminDisplayTableScreen(String.valueOf(year),String.valueOf(month));                
             } catch (BaseException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
