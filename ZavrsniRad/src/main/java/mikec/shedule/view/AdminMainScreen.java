@@ -75,7 +75,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem10.setText("Display shedule for month");
+        jMenuItem10.setText("Display my shedule for month");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
