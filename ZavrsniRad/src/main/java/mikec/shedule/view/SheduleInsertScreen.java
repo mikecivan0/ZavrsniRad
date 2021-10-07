@@ -139,7 +139,7 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
         try {
             controller.create();
             JOptionPane.showMessageDialog(getParent(), "New record is saved");
-            new SheduleMainScreen().setVisible(true);
+            new SheduleMainAdiminScreen().setVisible(true);
             dispose();            
         } catch (BaseException ex) {
            JOptionPane.showMessageDialog(getParent(), ex.getMessage());

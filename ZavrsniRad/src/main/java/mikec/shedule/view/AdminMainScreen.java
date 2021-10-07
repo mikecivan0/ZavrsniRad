@@ -209,7 +209,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         try {
-            new SheduleMainScreen().setVisible(true);
+            new SheduleMainAdiminScreen().setVisible(true);
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
         }

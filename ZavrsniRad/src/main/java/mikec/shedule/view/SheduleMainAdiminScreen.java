@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.controller.RecordController;
-public class SheduleMainScreen extends javax.swing.JFrame{
+public class SheduleMainAdiminScreen extends javax.swing.JFrame{
     
     private RecordController controller;
 
-    public SheduleMainScreen() throws BaseException {
+    public SheduleMainAdiminScreen() throws BaseException {
         initComponents();
         controller = new RecordController();
         settings();
