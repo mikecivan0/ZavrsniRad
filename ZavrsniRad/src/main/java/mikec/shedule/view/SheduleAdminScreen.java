@@ -24,6 +24,7 @@ import mikec.shedule.controller.RecordController;
 import mikec.shedule.model.Label;
 import mikec.shedule.model.User;
 import mikec.shedule.model.Record;
+import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 import mikec.shedule.util.Tools;
 
@@ -53,13 +54,14 @@ public class SheduleAdminScreen {
 
     public SheduleAdminScreen(String year, String month) throws BaseException {
         table = new JTable();
-        frame = new JFrame();
+        frame = new JFrame();        
         recordController = new RecordController();
         labelController = new LabelController();
         yearInt = Integer.parseInt(year);
         monthInt = Integer.parseInt(month);
         strYear = year;
         strMonth = month;
+        frameSettings();
         labels = loadLabels();
         numOfDaysInMoth = calculateNumOfDaysInMonth(yearInt, monthInt);
         recordsForMonth = recordController.getRecordsForMonth(year, month);
@@ -110,6 +112,10 @@ public class SheduleAdminScreen {
             startList.add(l);
         });
         return startList;
+    }
+
+    private void frameSettings() {
+        frame.setTitle(Application.getTitle("Shedule for " + strMonth + "/" + strYear));
     }
 
     private class ItemChangeListener implements ItemListener {
