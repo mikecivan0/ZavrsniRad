@@ -20,8 +20,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import mikec.shedule.controller.LabelController;
+import mikec.shedule.controller.NumOfWorkersForDayController;
 import mikec.shedule.controller.RecordController;
 import mikec.shedule.model.Label;
+import mikec.shedule.model.NumOfWorkersForDay;
 import mikec.shedule.model.User;
 import mikec.shedule.model.Record;
 import mikec.shedule.util.Application;
@@ -45,18 +47,19 @@ public class SheduleAdminDisplayTableScreen {
     private List<Label> labels;
     private RecordController recordController;
     private LabelController labelController;
+    private NumOfWorkersForDayController nwfdController;
     private Integer yearInt, monthInt, numOfDaysInMoth;
     private String strYear, strMonth;
     private JTable table;
     private JFrame frame;
     private Record record;
-    
 
     public SheduleAdminDisplayTableScreen(String year, String month) throws BaseException {
         table = new JTable();
-        frame = new JFrame();        
+        frame = new JFrame();
         recordController = new RecordController();
         labelController = new LabelController();
+        nwfdController = new NumOfWorkersForDayController();
         yearInt = Integer.parseInt(year);
         monthInt = Integer.parseInt(month);
         strYear = year;
@@ -72,7 +75,7 @@ public class SheduleAdminDisplayTableScreen {
         setLabelModel();
         generateDefaultTableModel();
         createTable();
-        display();        
+        display();
     }
 
     private void createTable() throws BaseException {
@@ -126,13 +129,13 @@ public class SheduleAdminDisplayTableScreen {
         public ItemChangeListener() {
             rowInListener = -1;
             columnInListener = -1;
-        }     
-    
+        }
+
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED
-                    && (rowInListener == -1 || columnInListener == -1 
-                    || rowInListener != table.getSelectedRow() 
+                    && (rowInListener == -1 || columnInListener == -1
+                    || rowInListener != table.getSelectedRow()
                     || columnInListener != table.getSelectedColumn())) {
                 rowInListener = table.getSelectedRow();
                 columnInListener = table.getSelectedColumn();
@@ -153,7 +156,7 @@ public class SheduleAdminDisplayTableScreen {
                         columnInListener = 0;
                         rowInListener = 0;
                         table.requestFocus();
-
+                        populateLastRow();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
@@ -238,14 +241,22 @@ public class SheduleAdminDisplayTableScreen {
         }
     }
 
-    private void addRows() throws BaseException {
-        table.setModel(defaultTableModel);
-
-        for (int i = 1; i <= numOfDaysInMoth; i++) {
+    private void addRows() throws BaseException {        
+        defineCellEditors();
+        addUserRows();       
+        addLastTwoRows();
+        populateLastRow();
+    }
+    
+    
+    private void defineCellEditors() {
+       for (int i = 1; i <= numOfDaysInMoth; i++) {
             table.getColumnModel().getColumn(i).setCellEditor(new DefaultCellEditor(cmbLabel));
         }
-
-        for (User u : usersInMonth) {
+    }
+    
+    private void addUserRows() throws BaseException {
+      for (User u : usersInMonth) {
             Object[] array = new Object[numOfDaysInMoth + 1];
             array[0] = u.getPerson();
             for (int i = 1; i <= numOfDaysInMoth; i++) {
@@ -265,6 +276,62 @@ public class SheduleAdminDisplayTableScreen {
             defaultTableModel.addRow(array);
         }
     }
+    
+    private void addLastTwoRows() {
+        String[] array = new String[numOfDaysInMoth + 1];
+        for (int i = 0; i <= numOfDaysInMoth; i++) {           
+            array[i] = "";
+        }
+        defaultTableModel.addRow(array);
+        
+        array[0] = "Too many/deficit of workers";
+        for (int i = 1; i <= numOfDaysInMoth; i++) {           
+            array[i] = "";
+        }
+        defaultTableModel.addRow(array); 
+        
+        removeCellEditorFromLastTwoRows();
+    }
+    
+    private void removeCellEditorFromLastTwoRows() {
+        
+    }
+    
+    private void populateLastRow() throws BaseException {
+      for (int i = 1; i <= numOfDaysInMoth; i++) {
+            String result = "N/N", nwfd = "", enrolledWorkers = "";
+            Date date = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
+            
+            for(NumOfWorkersForDay numwfd : nwfdController.fetchAll()){
+                if(Tools.isDateBetween(numwfd.getStarts(), numwfd.getExpires(), date) 
+                        && Tools.isDayInWeek(
+                                String.valueOf(numwfd.getNumOfWorkersForDayItem().getName()), 
+                                                date)){
+                    nwfd = String.valueOf(numwfd.getValue());  
+                    break;
+                }
+            }
+            enrolledWorkers = String.valueOf(recordController.getNumberOfWorkersForDate(date));
+            
+            if(nwfd!=""){
+                int nwfdInt = Integer.parseInt(nwfd);
+                int enrolledWorkersInt = Integer.parseInt(enrolledWorkers);
+                int resultInt = enrolledWorkersInt-nwfdInt;
+                if(resultInt==0){
+                    result = "OK";
+                }else{
+                    result = formatSign(resultInt);
+                }
+                
+            }
+            
+            defaultTableModel.setValueAt(result, table.getRowCount()-1, i);
+        }
+    }
+    
+    private String formatSign(int number) {
+        return (number > 0 ? "+" : "" ) + number;
+    }
 
     private void setTableProperties() {
         table = new JTable(defaultTableModel);
@@ -274,6 +341,7 @@ public class SheduleAdminDisplayTableScreen {
             table.getColumnModel().getColumn(i).setPreferredWidth(dataColsWidth);
             table.getTableHeader().getColumnModel().getColumn(i).setPreferredWidth(dataColsWidth);
         }
+        table.setModel(defaultTableModel);
     }
 
     private void display() {

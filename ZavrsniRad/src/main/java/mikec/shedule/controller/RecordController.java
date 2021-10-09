@@ -7,6 +7,7 @@ package mikec.shedule.controller;
 
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import mikec.shedule.model.Record;
 import mikec.shedule.model.User;
 import mikec.shedule.util.Application;
@@ -106,6 +107,16 @@ public class RecordController extends BaseController<Record>{
             return new Record();
         }
           
+    }
+
+    public int getNumberOfWorkersForDate(Date date) {        
+        Long numberOfEnrolledWorkers = (Long) session.createQuery(
+                 "SELECT COUNT(id) FROM records WHERE "
+                        + "date=:date "
+                         + "AND (labelId=1 OR labelId=2)")
+               .setParameter("date", date)
+               .uniqueResult(); 
+        return  Math.toIntExact(numberOfEnrolledWorkers);
     }
     
 

@@ -211,7 +211,7 @@ public class Tools {
                 engName = "tue";
             case "sri" ->
                 engName = "wed";
-            case "cet" ->
+            case "čet" ->
                 engName = "thu";
             case "pet" ->
                 engName = "fri";
