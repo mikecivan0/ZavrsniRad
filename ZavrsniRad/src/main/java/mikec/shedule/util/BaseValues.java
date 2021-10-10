@@ -179,16 +179,16 @@ public class BaseValues {
             numOfWorkersForDay.add(new NumOfWorkersForDay(
                             nwfdItems.get(i),
                             getRandomNumberInRange(1, 7),
-                            Tools.parseDate("15.10.2017."),
-                            Tools.parseDate("14.11.2017.")
+                            Tools.parseDate("15.10.2021."),
+                            Tools.parseDate("14.11.2021.")
                     )
             );
             
             numOfWorkersForDay.add(new NumOfWorkersForDay(
                             nwfdItems.get(i),
                             getRandomNumberInRange(1, 7),
-                            Tools.parseDate("15.11.2018."),
-                            Tools.parseDate("15.12.2018.")
+                            Tools.parseDate("15.9.2021."),
+                            Tools.parseDate("5.110.2021.")
                     )
             );
         }
@@ -226,7 +226,7 @@ public class BaseValues {
         recordController = new RecordController();
         List<User> users = userController.read();
         for(User u : users){
-            Record r = new Record(u, labels.get(0), Tools.parseDate("12.12.2020."));
+            Record r = new Record(u, labels.get(0), Tools.parseDate("12.10.2021."));
             recordController.setEntity(r);
             recordController.create();
         }
