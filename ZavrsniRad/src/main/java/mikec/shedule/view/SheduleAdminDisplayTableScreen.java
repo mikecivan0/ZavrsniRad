@@ -57,6 +57,7 @@ public class SheduleAdminDisplayTableScreen {
     public SheduleAdminDisplayTableScreen(String year, String month) throws BaseException {
         table = new JTable();
         frame = new JFrame();
+        frame.setIconImage(Application.getIcon());
         recordController = new RecordController();
         labelController = new LabelController();
         nwfdController = new NumOfWorkersForDayController();

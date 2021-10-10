@@ -36,6 +36,7 @@ public class SheduleInsertScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Insert new record"));
+        setIconImage(Application.getIcon());
     }   
     
     public void load(){

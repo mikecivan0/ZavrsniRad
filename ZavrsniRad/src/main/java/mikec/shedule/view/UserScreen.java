@@ -38,6 +38,7 @@ public class UserScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Users"));
+        setIconImage(Application.getIcon());
     }
     
     public void loadList(){

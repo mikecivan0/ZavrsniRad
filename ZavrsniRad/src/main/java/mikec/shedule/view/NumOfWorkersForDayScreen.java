@@ -37,12 +37,13 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Number of workers for day"));
+        setIconImage(Application.getIcon());
         DatePickerSettings datePickerStartsSettings = new DatePickerSettings();
         DatePickerSettings datePickerExpiresSettings = new DatePickerSettings();
         datePickerStartsSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
         datePickerExpiresSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
         dateStarts.setSettings(datePickerStartsSettings);
-        dateExpires.setSettings(datePickerExpiresSettings);
+        dateExpires.setSettings(datePickerExpiresSettings);        
     }
     
     public void loadList(){

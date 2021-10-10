@@ -25,6 +25,7 @@ public class SheduleUserChooseScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Records date choose"));
+        setIconImage(Application.getIcon());
     }
     
     public void loadYears(){

@@ -30,9 +30,10 @@ public class ExceptionalWorkingHoursScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Exceptional working hours"));
+        setIconImage(Application.getIcon());
         DatePickerSettings datePickerDateSettings = new DatePickerSettings();
         datePickerDateSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");
-        dateDate.setSettings(datePickerDateSettings);
+        dateDate.setSettings(datePickerDateSettings);        
     }
     
     public void loadList(){

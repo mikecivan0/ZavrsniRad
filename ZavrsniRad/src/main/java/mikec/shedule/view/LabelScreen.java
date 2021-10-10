@@ -27,6 +27,7 @@ public class LabelScreen extends javax.swing.JFrame {
 
     public void settings() {
         setTitle(Application.getTitle("Labels"));
+        setIconImage(Application.getIcon());
     }
 
     public void loadList() {

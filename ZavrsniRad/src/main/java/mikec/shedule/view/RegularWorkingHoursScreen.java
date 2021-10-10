@@ -39,6 +39,7 @@ public class RegularWorkingHoursScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Regular working hours"));
+        setIconImage(Application.getIcon());
         DatePickerSettings datePickerStartsSettings = new DatePickerSettings();
         DatePickerSettings datePickerExpiresSettings = new DatePickerSettings();
         datePickerStartsSettings.setFormatForDatesCommonEra("dd.MM.yyyy.");

@@ -32,7 +32,8 @@ public class Auth extends javax.swing.JFrame {
     }
     
     private void settings(){
-        setTitle(Application.getTitle("Authorization"));
+        setTitle(Application.getTitle("Authorization"));       
+        setIconImage(Application.getIcon());
     }
 
     /**

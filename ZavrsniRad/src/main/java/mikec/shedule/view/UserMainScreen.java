@@ -22,6 +22,7 @@ public class UserMainScreen extends javax.swing.JFrame {
     
    private void settings(){
         setTitle(Application.getTitle("User main window"));
+        setIconImage(Application.getIcon());
     }
 
     /**

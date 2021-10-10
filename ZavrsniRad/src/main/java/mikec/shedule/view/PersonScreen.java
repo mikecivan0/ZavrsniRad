@@ -27,6 +27,7 @@ public class PersonScreen extends javax.swing.JFrame{
     
     public void settings(){
         setTitle(Application.getTitle("Persons"));
+        setIconImage(Application.getIcon());
     }
     
     public void loadList(){

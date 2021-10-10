@@ -30,6 +30,7 @@ public class NewPersonDialogScreen extends javax.swing.JDialog {
     
      public void settings(){
         setTitle(Application.getTitle("New person"));
+        setIconImage(Application.getIcon());
     }
 
     /**
