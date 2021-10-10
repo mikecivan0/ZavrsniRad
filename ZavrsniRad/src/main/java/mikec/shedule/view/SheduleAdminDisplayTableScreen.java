@@ -217,18 +217,25 @@ public class SheduleAdminDisplayTableScreen {
         }
     }
 
-    private void generateDefaultTableModel() {
-        defaultTableModel = new DefaultTableModel();
+     private void generateDefaultTableModel() {
+        defaultTableModel = new DefaultTableModel() {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+
+                return column>0 && (row<rows-2 || row==0);
+            }
+        };
     }
 
     private void setProperties() {
-        rows = usersInMonth.size() + 1;
+        rows = usersInMonth.size();
         cols = numOfDaysInMoth;
         nameColWidth = 250;
         dataColsWidth = 25;
         rowsHeigth = 30;
         totalWidth = cols * dataColsWidth + nameColWidth;
-        totalHeigth = rows * rowsHeigth + 50;
+        totalHeigth = rows * rowsHeigth + 100;
     }
 
     private void addUsersColumn() {
@@ -289,11 +296,6 @@ public class SheduleAdminDisplayTableScreen {
             array[i] = "";
         }
         defaultTableModel.addRow(array); 
-        
-        removeCellEditorFromLastTwoRows();
-    }
-    
-    private void removeCellEditorFromLastTwoRows() {
         
     }
     
