@@ -223,7 +223,7 @@ public class SheduleAdminDisplayTableScreen {
             @Override
             public boolean isCellEditable(int row, int column) {
 
-                return column>0 && (row<rows-2 || row==0);
+                return column>0 && row<rows;
             }
         };
     }
