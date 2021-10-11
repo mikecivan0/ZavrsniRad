@@ -5,8 +5,8 @@
  */
 package mikec.shedule.view;
 
-import java.net.URL;
-import javax.swing.ImageIcon;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
@@ -21,6 +21,14 @@ public class AdminMainScreen extends javax.swing.JFrame {
    private void settings(){
         setTitle(Application.getTitle("Admin main window"));
         setIconImage(Application.getIcon());
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                Application.removeTrayIcon();               
+            }
+        });
     }
 
     /**

@@ -31,6 +31,7 @@ public class SplashScreen extends javax.swing.JFrame {
         updateHeader.start(); 
         ProgressBar progressBar = new ProgressBar();
         progressBar.start();
+        Application.initializeTrayIcon();
     }
     
     private class Load extends Thread{          

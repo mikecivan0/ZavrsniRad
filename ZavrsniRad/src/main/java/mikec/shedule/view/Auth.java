@@ -6,6 +6,8 @@
 package mikec.shedule.view;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import mikec.shedule.controller.UserController;
 import mikec.shedule.model.User;
@@ -22,7 +24,7 @@ public class Auth extends javax.swing.JFrame {
     private UserController userController;
     
     public Auth() {
-        initComponents();
+        initComponents();        
         try {
             userController = new UserController();
         } catch (BaseException ex) {
@@ -32,8 +34,16 @@ public class Auth extends javax.swing.JFrame {
     }
     
     private void settings(){
-        setTitle(Application.getTitle("Authorization"));       
+        setTitle(Application.getTitle("Authorization"));
         setIconImage(Application.getIcon());
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                Application.removeTrayIcon();               
+            }
+        });
     }
 
     /**
