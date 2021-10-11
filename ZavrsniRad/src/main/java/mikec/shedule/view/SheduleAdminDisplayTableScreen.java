@@ -302,7 +302,7 @@ public class SheduleAdminDisplayTableScreen {
     
     private void populateLastRow() throws BaseException {
       for (int i = 1; i <= numOfDaysInMoth; i++) {
-            String result = "N/N", nwfd = "", enrolledWorkers = "";
+            String result = "N/A", nwfd = "", enrolledWorkers = "";
             Date date = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
             
             for(NumOfWorkersForDay numwfd : nwfdController.fetchAll()){
