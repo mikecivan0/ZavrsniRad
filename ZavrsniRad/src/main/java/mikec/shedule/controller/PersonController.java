@@ -23,44 +23,44 @@ public class PersonController extends BaseController<Person>{
     }
 
     @Override
-    protected void createControll() throws BaseException {
-        notEmptyControll("FirstName");
-        notEmptyControll("LastName");
-        lengthControll("FirstName",25);
-        lengthControll("LastName",25);
-        lengthControll("Address",100);
-        lengthControll("PhoneNr",50);
-        lengthControll("Email",50);
-        createExistsControll();
+    protected void createControl() throws BaseException {
+        notEmptyControl("FirstName");
+        notEmptyControl("LastName");
+        lengthControl("FirstName",25);
+        lengthControl("LastName",25);
+        lengthControl("Address",100);
+        lengthControl("PhoneNr",50);
+        lengthControl("Email",50);
+        createExistsControl();
     }
 
     @Override
-    protected void updateControll() throws BaseException {
-        notEmptyControll("FirstName");
-        notEmptyControll("LastName");
-        lengthControll("FirstName",25);
-        lengthControll("LastName",25);
-        lengthControll("Address",100);
-        lengthControll("PhoneNr",50);
-        lengthControll("Email",50);
-        updateExistsControll();        
+    protected void updateControl() throws BaseException {
+        notEmptyControl("FirstName");
+        notEmptyControl("LastName");
+        lengthControl("FirstName",25);
+        lengthControl("LastName",25);
+        lengthControl("Address",100);
+        lengthControl("PhoneNr",50);
+        lengthControl("Email",50);
+        updateExistsControl();        
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControl() throws BaseException {
         if(entity.getUser()!=null){
             throw new BaseException("Person cannot be deleted because it is a user");
         }
     }
     
-    private void lengthControll(String variable, Integer length) throws BaseException{   
+    private void lengthControl(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Value of input field '" + variable + 
                     "' must not exceed " + length + " characters");
         }    
     }
     
-    private void notEmptyControll(String variable) throws BaseException{        
+    private void notEmptyControl(String variable) throws BaseException{        
         if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
            throw new BaseException("Input '" + variable + "' cannot be empty");
        }    
@@ -77,7 +77,7 @@ public class PersonController extends BaseController<Person>{
        return text;
     }
     
-    private void createExistsControll() throws BaseException{         
+    private void createExistsControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM persons WHERE "
                         + "firstName=:firstName "
@@ -101,7 +101,7 @@ public class PersonController extends BaseController<Person>{
         return persons.get(persons.size()-1);
     }
     
-    private void updateExistsControll() throws BaseException{         
+    private void updateExistsControl() throws BaseException{         
        Long personExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM persons WHERE "
                         + "firstName=:firstName "

@@ -34,17 +34,17 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
     }
 
     @Override
-    protected void createControll() throws BaseException {
-        createExistsControll();
+    protected void createControl() throws BaseException {
+        createExistsControl();
     }
 
     @Override
-    protected void updateControll() throws BaseException {
+    protected void updateControl() throws BaseException {
 
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControl() throws BaseException {
 
     }
 
@@ -60,7 +60,7 @@ public class NumOfWorkersForDayController extends BaseController<NumOfWorkersFor
         }
     }
 
-    private void createExistsControll() throws BaseException {
+    private void createExistsControl() throws BaseException {
         List<Date> datesBetween = Tools.getDatesBetweenTwoDates(entity.getStarts(), entity.getExpires());
         for (Date date : datesBetween) {
             checkInsertOverlap(date);

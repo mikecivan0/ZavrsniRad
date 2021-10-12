@@ -23,28 +23,28 @@ public class ExceptionalWorkingHoursController extends BaseController<Exceptiona
     }
 
     @Override
-    protected void createControll() throws BaseException {
-        createExistsControll();
+    protected void createControl() throws BaseException {
+        createExistsControl();
     }
 
     @Override
-    protected void updateControll() throws BaseException {
-        updateExistsControll();        
+    protected void updateControl() throws BaseException {
+        updateExistsControl();        
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControl() throws BaseException {
        
     }
     
-    private void lengthControll(String variable, Integer length) throws BaseException{   
+    private void lengthControl(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Value of input field '" + variable + 
                     "' must not exceed " + length + " characters");
         }    
     }
     
-    private void notEmptyControll(String variable) throws BaseException{        
+    private void notEmptyControl(String variable) throws BaseException{        
         if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
            throw new BaseException("Input '" + variable + "' cannot be empty");
        }    
@@ -61,7 +61,7 @@ public class ExceptionalWorkingHoursController extends BaseController<Exceptiona
        return text;
     }
     
-    private void createExistsControll() throws BaseException{         
+    private void createExistsControl() throws BaseException{         
         Long recordDateExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM exceptionalWorkingHours WHERE "
                         + "date=:date")
@@ -81,7 +81,7 @@ public class ExceptionalWorkingHoursController extends BaseController<Exceptiona
         }
     }
     
-    private void updateExistsControll() throws BaseException{         
+    private void updateExistsControl() throws BaseException{         
        Long recordDateExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM exceptionalWorkingHours WHERE "
                         + "date=:date AND id!=:id")

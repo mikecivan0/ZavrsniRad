@@ -22,17 +22,17 @@ public class RegularWorkingHoursItemController extends BaseController<RegularWor
     }
 
     @Override
-    protected void createControll() throws BaseException {
+    protected void createControl() throws BaseException {
            
     }
 
     @Override
-    protected void updateControll() throws BaseException {
+    protected void updateControl() throws BaseException {
       
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControl() throws BaseException {
        
     }
     

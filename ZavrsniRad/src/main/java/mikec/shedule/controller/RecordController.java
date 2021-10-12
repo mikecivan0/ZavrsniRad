@@ -26,17 +26,17 @@ public class RecordController extends BaseController<Record>{
     }
     
     @Override
-    protected void createControll() throws BaseException {
-        createRecordExistsControll();
+    protected void createControl() throws BaseException {
+        createRecordExistsControl();
     }
     
     @Override
-    protected void updateControll() throws BaseException {       
-        updateRecordExistsControll();
+    protected void updateControl() throws BaseException {       
+        updateRecordExistsControl();
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControl() throws BaseException {
        
     }   
  
@@ -67,7 +67,7 @@ public class RecordController extends BaseController<Record>{
                 .list();
     }
 
-    private void createRecordExistsControll() throws BaseException{         
+    private void createRecordExistsControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM records WHERE "
                         + "userId=:user "
@@ -80,7 +80,7 @@ public class RecordController extends BaseController<Record>{
         }
     }
     
-    private void updateRecordExistsControll() throws BaseException{         
+    private void updateRecordExistsControl() throws BaseException{         
        Long personExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM records WHERE "
                         + "userId=:user "

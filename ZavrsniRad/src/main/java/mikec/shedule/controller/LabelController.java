@@ -19,28 +19,28 @@ public class LabelController extends BaseController<Label>{
     }
 
     @Override
-    protected void createControll() throws BaseException {
-        notEmptyControll("Name");
-        notEmptyControll("Abbreviation");
-        lengthControll("Name",30);
-        lengthControll("Abbreviation",3);
-        createExistsControll();
+    protected void createControl() throws BaseException {
+        notEmptyControl("Name");
+        notEmptyControl("Abbreviation");
+        lengthControl("Name",30);
+        lengthControl("Abbreviation",3);
+        createExistsControl();
     }
 
     @Override
-    protected void updateControll() throws BaseException {
-        notEmptyControll("Name");
-        notEmptyControll("Abbreviation");
-        lengthControll("Name",30);
-        lengthControll("Abbreviation",3);
-        updateExistsControll();  
+    protected void updateControl() throws BaseException {
+        notEmptyControl("Name");
+        notEmptyControl("Abbreviation");
+        lengthControl("Name",30);
+        lengthControl("Abbreviation",3);
+        updateExistsControl();  
         if(entity.getId()<3){
             throw new BaseException("This label is not allowed to modify");
         }
     }
 
     @Override
-    protected void deleteControll() throws BaseException {        
+    protected void deleteControl() throws BaseException {        
         if(entity.getRecords().size()>0){
             throw new BaseException("Label cannot be deleted becouse it is already used in records");
         }
@@ -49,14 +49,14 @@ public class LabelController extends BaseController<Label>{
         }
     }
     
-    private void lengthControll(String variable, Integer length) throws BaseException{   
+    private void lengthControl(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Value of input field '" + variable + 
                     "' must not exceed " + length + " characters");
         }    
     }
     
-    private void notEmptyControll(String variable) throws BaseException{        
+    private void notEmptyControl(String variable) throws BaseException{        
         if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
            throw new BaseException("Input '" + variable + "' cannot be empty");
        }    
@@ -73,7 +73,7 @@ public class LabelController extends BaseController<Label>{
        return text;
     }
     
-    private void createExistsControll() throws BaseException{         
+    private void createExistsControl() throws BaseException{         
         Long recordNameExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM labels WHERE "
                         + "name=:name")
@@ -93,7 +93,7 @@ public class LabelController extends BaseController<Label>{
         }
     }
     
-    private void updateExistsControll() throws BaseException{         
+    private void updateExistsControl() throws BaseException{         
        Long recordNameExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM labels WHERE "
                         + "name=:name "

@@ -31,27 +31,27 @@ public class UserController extends BaseController<User>{
     }
     
     @Override
-    protected void createControll() throws BaseException {
-        notEmptyControll("Username");
-        notEmptyControll("Prs_id");
-        lengthControll("Username", 50);
-        createUsernameExistsControll();
-        createPersonIsUserControll();
-        createPrsIdExistsControll();
+    protected void createControl() throws BaseException {
+        notEmptyControl("Username");
+        notEmptyControl("Prs_id");
+        lengthControl("Username", 50);
+        createUsernameExistsControl();
+        createPersonIsUserControl();
+        createPrsIdExistsControl();
     }
     
     @Override
-    protected void updateControll() throws BaseException {
-        notEmptyControll("Username");
-        notEmptyControll("Prs_id");
-        lengthControll("Username", 50);
-        updateUsernameExistsControll();
-        updatePersonIsUserControll();
-        updatePrsIdExistsControll();
+    protected void updateControl() throws BaseException {
+        notEmptyControl("Username");
+        notEmptyControl("Prs_id");
+        lengthControl("Username", 50);
+        updateUsernameExistsControl();
+        updatePersonIsUserControl();
+        updatePrsIdExistsControl();
     }
 
     @Override
-    protected void deleteControll() throws BaseException {
+    protected void deleteControl() throws BaseException {
         if(entity.getRecords().size()>0){
             throw new BaseException("User cannot be deleted because it is already in shedule");
         }
@@ -74,14 +74,14 @@ public class UserController extends BaseController<User>{
         return Tools.verifyPass(user.getPass(), pass) ? user : null;       
     }   
     
-    private void lengthControll(String variable, Integer length) throws BaseException{   
+    private void lengthControl(String variable, Integer length) throws BaseException{   
         if(getVariable(variable).length()>length){
             throw new BaseException("Input lenth of '" + variable 
                     + "' cannot be greather from " + length + " chars");
         }    
     }
     
-    private void notEmptyControll(String variable) throws BaseException{        
+    private void notEmptyControl(String variable) throws BaseException{        
         if(getVariable(variable)==null || getVariable(variable).trim().length()==0){
            throw new BaseException("Input '" + variable + "' cannot be empty");
        }    
@@ -98,7 +98,7 @@ public class UserController extends BaseController<User>{
        return text;
     }
 
-    private void createUsernameExistsControll() throws BaseException{         
+    private void createUsernameExistsControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM users WHERE "
                         + "username=:username")
@@ -109,7 +109,7 @@ public class UserController extends BaseController<User>{
         }
     }
     
-    private void updateUsernameExistsControll() throws BaseException{         
+    private void updateUsernameExistsControl() throws BaseException{         
        Long personExists = (Long) session.createQuery(
                  "SELECT COUNT(id) FROM users WHERE "
                         + "username=:username "
@@ -122,7 +122,7 @@ public class UserController extends BaseController<User>{
         }
     }
     
-    private void createPersonIsUserControll() throws BaseException{         
+    private void createPersonIsUserControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM users WHERE "
                         + "person_id=:person")
@@ -133,7 +133,7 @@ public class UserController extends BaseController<User>{
         }
     }
     
-    private void updatePersonIsUserControll() throws BaseException{         
+    private void updatePersonIsUserControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM users WHERE "
                         + "person_id=:person "
@@ -146,7 +146,7 @@ public class UserController extends BaseController<User>{
         }
     }
     
-    private void createPrsIdExistsControll() throws BaseException{         
+    private void createPrsIdExistsControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM users WHERE "
                         + "prs_id=:prsId")
@@ -157,7 +157,7 @@ public class UserController extends BaseController<User>{
         }
     }
     
-    private void updatePrsIdExistsControll() throws BaseException{         
+    private void updatePrsIdExistsControl() throws BaseException{         
         Long recordExists = (Long) session.createQuery(
                 "SELECT COUNT(id) FROM users WHERE "
                         + "prs_id=:prsId "
