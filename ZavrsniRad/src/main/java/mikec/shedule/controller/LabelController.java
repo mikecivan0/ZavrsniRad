@@ -42,7 +42,7 @@ public class LabelController extends BaseController<Label>{
     @Override
     protected void deleteControll() throws BaseException {        
         if(entity.getRecords().size()>0){
-            throw new BaseException("Label cannot be deleted becouse it is allready used in records");
+            throw new BaseException("Label cannot be deleted becouse it is already used in records");
         }
         if(entity.getId()<3){
             throw new BaseException("This label is not allowed to delete");

@@ -53,7 +53,7 @@ public class UserController extends BaseController<User>{
     @Override
     protected void deleteControll() throws BaseException {
         if(entity.getRecords().size()>0){
-            throw new BaseException("User cannot be deleted because it is allready in shedule");
+            throw new BaseException("User cannot be deleted because it is already in shedule");
         }
     }   
     
@@ -105,7 +105,7 @@ public class UserController extends BaseController<User>{
                .setParameter("username", entity.getUsername())
                .uniqueResult();      
         if(recordExists!=0){
-            throw new BaseException("Username allready taken");
+            throw new BaseException("Username already taken");
         }
     }
     
@@ -118,7 +118,7 @@ public class UserController extends BaseController<User>{
                .setParameter("id", entity.getId())
                .uniqueResult(); 
         if(personExists!=0){
-            throw new BaseException("Username allready taken");
+            throw new BaseException("Username already taken");
         }
     }
     
@@ -129,7 +129,7 @@ public class UserController extends BaseController<User>{
                .setParameter("person", entity.getPerson())
                .uniqueResult();      
         if(recordExists!=0){
-            throw new BaseException("Person is allready a user/admin");
+            throw new BaseException("Person is already a user/admin");
         }
     }
     
@@ -142,7 +142,7 @@ public class UserController extends BaseController<User>{
                .setParameter("id", entity.getId())
                .uniqueResult();      
         if(recordExists!=0){
-            throw new BaseException("Person is allready a user/admin");
+            throw new BaseException("Person is already a user/admin");
         }
     }
     
@@ -153,7 +153,7 @@ public class UserController extends BaseController<User>{
                .setParameter("prsId", entity.getPrs_id())
                .uniqueResult();      
         if(recordExists!=0){
-            throw new BaseException("Personal id allready taken");
+            throw new BaseException("Personal id already taken");
         }
     }
     
@@ -166,7 +166,7 @@ public class UserController extends BaseController<User>{
                .setParameter("id", entity.getId())
                .uniqueResult();      
         if(recordExists!=0){
-             throw new BaseException("Personal id allready taken");
+             throw new BaseException("Personal id already taken");
         }
     }
     

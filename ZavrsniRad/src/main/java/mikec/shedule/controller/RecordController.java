@@ -76,7 +76,7 @@ public class RecordController extends BaseController<Record>{
                .setParameter("date", entity.getDate())
                .uniqueResult();      
         if(recordExists!=0){
-            throw new BaseException("Record for that user on that date allready exists");
+            throw new BaseException("Record for that user on that date already exists");
         }
     }
     
@@ -91,7 +91,7 @@ public class RecordController extends BaseController<Record>{
                .setParameter("id", entity.getId())
                .uniqueResult(); 
         if(personExists!=0){
-            throw new BaseException("Record for that user on that date allready exists");
+            throw new BaseException("Record for that user on that date already exists");
         }
     }
 
