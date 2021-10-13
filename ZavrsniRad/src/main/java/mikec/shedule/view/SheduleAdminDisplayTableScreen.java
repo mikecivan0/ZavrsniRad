@@ -9,7 +9,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -39,11 +41,11 @@ public class SheduleAdminDisplayTableScreen {
     private int rowsHeigth;
     private int totalWidth;
     private int totalHeigth;
-    private DefaultComboBoxModel<Label> defaultCbModel;
+    private DefaultComboBoxModel<Labela> defaultCbModel;
     private DefaultTableModel defaultTableModel;
     private List<User> usersInMonth;
     private List<Record> recordsForMonth;
-    private JComboBox<Label> cmbLabel;
+    private JComboBox<Labela> cmbLabel;
     private List<Label> labels;
     private RecordController recordController;
     private LabelController labelController;
@@ -54,8 +56,12 @@ public class SheduleAdminDisplayTableScreen {
     private JFrame frame;
     private Record record;
 
+    private int tablicaRed = 0;
+    private int tablicaKolona = 0;
+
     public SheduleAdminDisplayTableScreen(String year, String month) throws BaseException {
         table = new JTable();
+
         frame = new JFrame();
         frame.setIconImage(Application.getIcon());
         recordController = new RecordController();
@@ -71,9 +77,6 @@ public class SheduleAdminDisplayTableScreen {
         recordsForMonth = recordController.getRecordsForMonth(year, month);
         loadUsersInMonth();
         setProperties();
-        generateJComboBox();
-        generateDefaultCBModel();
-        setLabelModel();
         generateDefaultTableModel();
         createTable();
         display();
@@ -86,17 +89,7 @@ public class SheduleAdminDisplayTableScreen {
         addRows();
     }
 
-    private int getIndexOfLabel(Label label) {
-        int index = 0;
-        DefaultComboBoxModel<Label> um = (DefaultComboBoxModel<Label>) cmbLabel.getModel();
-        for (int i = 0; i < um.getSize(); i++) {
-            if (um.getElementAt(i).getAbbreviation() == (label.getAbbreviation())) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
+ 
 
     private Integer calculateNumOfDaysInMonth(Integer yearInt, Integer monthInt) {
         YearMonth obj;
@@ -104,10 +97,7 @@ public class SheduleAdminDisplayTableScreen {
         return obj.lengthOfMonth();
     }
 
-    private void generateJComboBox() {
-        cmbLabel = new JComboBox<>();
-        cmbLabel.addItemListener(new ItemChangeListener());
-    }
+
 
     private List<Label> loadLabels() {
         List<Label> startList = new ArrayList<>();
@@ -124,45 +114,22 @@ public class SheduleAdminDisplayTableScreen {
 
     private class ItemChangeListener implements ItemListener {
 
-        private int rowInListener;
-        private int columnInListener;
 
-        public ItemChangeListener() {
-            rowInListener = -1;
-            columnInListener = -1;
-        }
 
         @Override
         public void itemStateChanged(ItemEvent event) {
-            if (event.getStateChange() == ItemEvent.SELECTED
-                    && (rowInListener == -1 || columnInListener == -1
-                    || rowInListener != table.getSelectedRow()
-                    || columnInListener != table.getSelectedColumn())) {
-                rowInListener = table.getSelectedRow();
-                columnInListener = table.getSelectedColumn();
-                if (!table.getSelectionModel().isSelectionEmpty()) {
-                    Label selectedLabel = (Label) event.getItem();
-                    User selectedUser = usersInMonth.get(table.getSelectedRow());
-                    try {
-                        Date selectedDate = new Date();
-                        selectedDate = Tools.parseDate(table.getSelectedColumn() + "." + strMonth + "." + strYear + ".");
-                        record = new Record(selectedUser, selectedLabel, selectedDate);
-                        if (record.getLabel().getId() == null) {
-                            recordDelete();
-                        } else {
-                            recordInsertOrUpdate();
-                        }
-
-                        table.changeSelection(0, 0, true, false);
-                        columnInListener = 0;
-                        rowInListener = 0;
-                        table.requestFocus();
-                        populateLastRow();
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
-                }
+            if (event.getStateChange() == 1) {
+               // System.out.println(event.getStateChange());
+                Labela l = (Labela) event.getItem();
+                System.out.println(l.getLabel().getAbbreviation());
+               // System.out.println(l.getLabel().getId());
+                 User selectedUser = usersInMonth.get(table.getSelectedRow());
+                System.out.println(Tools.formatDate(l.getDate()));
+                System.out.println(selectedUser.getUsername());
+                System.out.println("------");
+                //ovdje spremiti,promjeniti ili obrisati
             }
+
         }
     }
 
@@ -198,16 +165,9 @@ public class SheduleAdminDisplayTableScreen {
         }
     }
 
-    private void generateDefaultCBModel() {
-        defaultCbModel = new DefaultComboBoxModel<>();
-        labels.forEach(s -> {
-            defaultCbModel.addElement(s);
-        });
-    }
+  
 
-    private void setLabelModel() {
-        cmbLabel.setModel(defaultCbModel);
-    }
+ 
 
     private void loadUsersInMonth() {
         usersInMonth = new ArrayList<>();
@@ -218,13 +178,13 @@ public class SheduleAdminDisplayTableScreen {
         }
     }
 
-     private void generateDefaultTableModel() {
+    private void generateDefaultTableModel() {
         defaultTableModel = new DefaultTableModel() {
 
             @Override
             public boolean isCellEditable(int row, int column) {
 
-                return column>0 && row<rows;
+                return column > 0 && row < rows;
             }
         };
     }
@@ -249,22 +209,39 @@ public class SheduleAdminDisplayTableScreen {
         }
     }
 
-    private void addRows() throws BaseException {        
+    private void addRows() throws BaseException {
         defineCellEditors();
-        addUserRows();       
+        addUserRows();
         addLastTwoRows();
         populateLastRow();
     }
-    
-    
+
     private void defineCellEditors() {
-       for (int i = 1; i <= numOfDaysInMoth; i++) {
+        for (int i = 1; i <= numOfDaysInMoth; i++) {
+
+            defaultCbModel = new DefaultComboBoxModel<>();
+            for (Label s : labels) {
+                Labela l = new Labela();
+                l.setLabel(s);
+                //l.setUser();
+                GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+                gc.set(Calendar.YEAR, yearInt);
+                gc.set(Calendar.MONTH, monthInt - 1);
+                gc.set(Calendar.DAY_OF_MONTH, i);
+                l.setDate(gc.getTime());
+                //System.out.println(Tools.formatDate(s.getDatum()));
+                defaultCbModel.addElement(l);
+            }
+            cmbLabel = new JComboBox<>();
+            cmbLabel.addItemListener(new ItemChangeListener());
+            cmbLabel.setModel(defaultCbModel);
             table.getColumnModel().getColumn(i).setCellEditor(new DefaultCellEditor(cmbLabel));
+
         }
     }
-    
+
     private void addUserRows() throws BaseException {
-      for (User u : usersInMonth) {
+        for (User u : usersInMonth) {
             Object[] array = new Object[numOfDaysInMoth + 1];
             array[0] = u.getPerson();
             for (int i = 1; i <= numOfDaysInMoth; i++) {
@@ -275,7 +252,8 @@ public class SheduleAdminDisplayTableScreen {
                     String curDateStr = Tools.formatDate(rc.getDate());
                     if (rc.getUser().getPrs_id().equals(u.getPrs_id())
                             && iterDateStr.equals(curDateStr)) {
-                        index = getIndexOfLabel(rc.getLabel());
+                        //ovdje se pozabaviti
+                        //index = getIndexOfLabel(rc.getLabel());
                         break;
                     }
                 }
@@ -284,60 +262,61 @@ public class SheduleAdminDisplayTableScreen {
             defaultTableModel.addRow(array);
         }
     }
-    
+
     private void addLastTwoRows() {
         String[] array = new String[numOfDaysInMoth + 1];
-        for (int i = 0; i <= numOfDaysInMoth; i++) {           
+        for (int i = 0; i <= numOfDaysInMoth; i++) {
             array[i] = "";
         }
         defaultTableModel.addRow(array);
-        
+
         array[0] = "Too many/deficit of workers";
-        for (int i = 1; i <= numOfDaysInMoth; i++) {           
+        for (int i = 1; i <= numOfDaysInMoth; i++) {
             array[i] = "";
         }
-        defaultTableModel.addRow(array); 
-        
+        defaultTableModel.addRow(array);
+
     }
-    
+
     private void populateLastRow() throws BaseException {
-      for (int i = 1; i <= numOfDaysInMoth; i++) {
+        for (int i = 1; i <= numOfDaysInMoth; i++) {
             String result = "N/A", nwfd = "", enrolledWorkers = "";
             Date date = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
-            
-            for(NumOfWorkersForDay numwfd : nwfdController.fetchAll()){
-                if(Tools.isDateBetween(numwfd.getStarts(), numwfd.getExpires(), date) 
+
+            for (NumOfWorkersForDay numwfd : nwfdController.fetchAll()) {
+                if (Tools.isDateBetween(numwfd.getStarts(), numwfd.getExpires(), date)
                         && Tools.isDayInWeek(
-                                String.valueOf(numwfd.getNumOfWorkersForDayItem().getName()), 
-                                                date)){
-                    nwfd = String.valueOf(numwfd.getValue());  
+                                String.valueOf(numwfd.getNumOfWorkersForDayItem().getName()),
+                                date)) {
+                    nwfd = String.valueOf(numwfd.getValue());
                     break;
                 }
             }
             enrolledWorkers = String.valueOf(recordController.getNumberOfWorkersForDate(date));
-            
-            if(nwfd!=""){
+
+            if (nwfd != "") {
                 int nwfdInt = Integer.parseInt(nwfd);
                 int enrolledWorkersInt = Integer.parseInt(enrolledWorkers);
-                int resultInt = enrolledWorkersInt-nwfdInt;
-                if(resultInt==0){
+                int resultInt = enrolledWorkersInt - nwfdInt;
+                if (resultInt == 0) {
                     result = "OK";
-                }else{
+                } else {
                     result = formatSign(resultInt);
                 }
-                
+
             }
-            
-            defaultTableModel.setValueAt(result, table.getRowCount()-1, i);
+
+            defaultTableModel.setValueAt(result, table.getRowCount() - 1, i);
         }
     }
-    
+
     private String formatSign(int number) {
-        return (number > 0 ? "+" : "" ) + number;
+        return (number > 0 ? "+" : "") + number;
     }
 
     private void setTableProperties() {
         table = new JTable(defaultTableModel);
+
         table.getColumnModel().getColumn(0).setPreferredWidth(nameColWidth);
         table.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(nameColWidth);
         for (int i = 1; i <= cols; i++) {
@@ -356,4 +335,35 @@ public class SheduleAdminDisplayTableScreen {
         frame.add(new JScrollPane(table));
     }
 
+    private class Labela{
+        private Label label;
+        private Date date;
+
+        
+        public Label getLabel() {
+            return label;
+        }
+
+        public void setLabel(Label label) {
+            this.label = label;
+        }
+
+        public Date getDate() {
+            return date;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
+        }
+
+        @Override
+        public String toString() {
+            return label.toString();
+        }
+        
+        
+        
+        
+    }
+    
 }
