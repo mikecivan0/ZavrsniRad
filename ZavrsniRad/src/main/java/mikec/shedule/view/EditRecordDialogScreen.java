@@ -8,6 +8,8 @@ package mikec.shedule.view;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import mikec.shedule.controller.RecordController;
 import mikec.shedule.model.Record;
@@ -120,17 +122,6 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
         dpDate.setDate(Tools.dateToLocalDate(record.getDate()));
     }
 
-    private void showTable() {
-        String year = Tools.formatYear(Tools.LocalDateToDate(dpDate.getDate()));
-        String month = Tools.formatMonth(Tools.LocalDateToDate(dpDate.getDate()));
-        try {
-            dispose();
-            new SheduleAdminDisplayTableScreen(String.valueOf(year), String.valueOf(month));
-        } catch (BaseException ex) {
-
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,7 +134,7 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
+        btnApply = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         cmbLabel = new javax.swing.JComboBox<>();
         cmbUser = new javax.swing.JComboBox<>();
@@ -157,10 +148,10 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
 
         jLabel3.setText("Date");
 
-        btnAdd.setText("Add / Edit / Delete");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnApply.setText("Add / Edit / Delete");
+        btnApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnApplyActionPerformed(evt);
             }
         });
 
@@ -180,7 +171,7 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnApply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(cmbUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,7 +199,7 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
                 .addComponent(dpDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnApply)
                     .addComponent(btnClose))
                 .addGap(20, 20, 20))
         );
@@ -216,28 +207,39 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        recordController.setEntity(new Record());
-        setEntityValues();
-        try {
-            recordController.create();
-            btnCloseActionPerformed(null);
-        } catch (BaseException ex) {
-            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+    private void btnApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyActionPerformed
+        Label l = (Label) cmbLabel.getSelectedItem();
+        if (l.getAbbreviation() == "-") {
+                recordDelete();
+        } else {
+            recordInsertOrUpdate();
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+        btnCloseActionPerformed(null);
+    }//GEN-LAST:event_btnApplyActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    public void setEntityValues() {
+    private void setEntityValues() {
         var e = recordController.getEntity();
         e.setUser((User) cmbUser.getSelectedItem());
+        e.setLabel((Label) cmbLabel.getSelectedItem());
+        e.setDate(Tools.LocalDateToDate(dpDate.getDate()));
+    }
+
+    private void recordDelete() {
+        if (record.getId() != null) {
+            recordController.deleteById(record.getId());           
+        }
+    }
+
+    private void recordInsertOrUpdate() {
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnApply;
     private javax.swing.JButton btnClose;
     private javax.swing.JComboBox<Label> cmbLabel;
     private javax.swing.JComboBox<User> cmbUser;

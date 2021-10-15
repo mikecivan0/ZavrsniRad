@@ -118,7 +118,12 @@ public class RecordController extends BaseController<Record>{
                .uniqueResult(); 
         return  Math.toIntExact(numberOfEnrolledWorkers);
     }
-    
 
-    
+    public void deleteById(Long id) {
+        session.beginTransaction();
+        session.createQuery("DELETE FROM records WHERE id=:id")
+               .setParameter("id", id)
+               .executeUpdate(); 
+        session.getTransaction().commit();
+    }   
 }
