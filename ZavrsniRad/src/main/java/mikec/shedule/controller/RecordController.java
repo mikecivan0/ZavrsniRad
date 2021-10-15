@@ -7,9 +7,7 @@ package mikec.shedule.controller;
 
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
 import mikec.shedule.model.Record;
-import mikec.shedule.model.User;
 import mikec.shedule.util.Application;
 import mikec.shedule.util.BaseException;
 
