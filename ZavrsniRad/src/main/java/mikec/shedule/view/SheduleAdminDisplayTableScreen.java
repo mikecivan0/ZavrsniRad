@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -48,6 +47,7 @@ public class SheduleAdminDisplayTableScreen {
     private JTable table;
     private JFrame frame;
     private Record record;
+    private int selectedRow, selectedColumn;
 
     public SheduleAdminDisplayTableScreen(String year, String month) throws BaseException {
         table = new JTable();
@@ -144,12 +144,14 @@ public class SheduleAdminDisplayTableScreen {
                 Date iterDate = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
                 rec.setDate(iterDate);
                 rec.setLabel(null);
+                rec.setId(null);
                 for (Record rc : recordsForMonth) {
                     String iterDateStr = Tools.formatDate(iterDate);
                     String curDateStr = Tools.formatDate(rc.getDate());
                     if (rc.getUser().getPrs_id().equals(u.getPrs_id())
                             && iterDateStr.equals(curDateStr)) {
                         rec.setLabel(rc.getLabel());
+                        rec.setId(rc.getId());
                         break;
                     }
                 }
@@ -176,8 +178,13 @@ public class SheduleAdminDisplayTableScreen {
 
     private void populateLastRow() throws BaseException {
         for (int i = 1; i <= numOfDaysInMoth; i++) {
+            updateNumberOfWorkersForCell(i);
+        }
+    }
+    
+    private void updateNumberOfWorkersForCell(int column) throws BaseException {
             String result = "N/A", nwfd = "", enrolledWorkers = "";
-            Date date = Tools.parseDate(i + "." + strMonth + "." + strYear + ".");
+            Date date = Tools.parseDate(column + "." + strMonth + "." + strYear + ".");
 
             for (NumOfWorkersForDay numwfd : nwfdController.fetchAll()) {
                 if (Tools.isDateBetween(numwfd.getStarts(), numwfd.getExpires(), date)
@@ -202,8 +209,8 @@ public class SheduleAdminDisplayTableScreen {
 
             }
 
-            defaultTableModel.setValueAt(result, table.getRowCount() - 1, i);
-        }
+            table.setValueAt(result, table.getRowCount() - 1, column);
+     
     }
 
     private String formatSign(int number) {
@@ -228,10 +235,10 @@ public class SheduleAdminDisplayTableScreen {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int row = table.rowAtPoint(e.getPoint());
-                    int col = table.columnAtPoint(e.getPoint());
+                    selectedRow = table.rowAtPoint(e.getPoint());
+                    selectedColumn = table.columnAtPoint(e.getPoint());
                     try {
-                        record = (Record) table.getValueAt(row, col);
+                        record = (Record) table.getValueAt(selectedRow, selectedColumn);
                         displayDialog();
                     } catch (Exception ex) {
                         
@@ -250,14 +257,20 @@ public class SheduleAdminDisplayTableScreen {
             {
               public void windowClosed(WindowEvent e)
               {
-                  try {
-                      populateLastRow();
-                  } catch (BaseException ex) {
-                      
-                  }
-              }
+                updateValuesAfterChange();                 
+              }           
             });
         dialog.setVisible(true);
+    }
+    
+    private void updateValuesAfterChange() {
+        Record newRecord = recordController.findRecord(record);
+        table.setValueAt(newRecord, selectedRow, selectedColumn);
+        try {
+            updateNumberOfWorkersForCell(selectedColumn);
+        } catch (BaseException ex) {
+            
+        }
     }
 
     private void display() {
