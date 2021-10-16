@@ -187,7 +187,7 @@ public class Auth extends javax.swing.JFrame {
             }
             dispose();
         } catch (BaseException ex) {
-            JOptionPane.showMessageDialog(getParent(), ex.getMessage());
+            JOptionPane.showMessageDialog(getParent(), "No such user in database");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

@@ -23,15 +23,16 @@ public class SplashScreen extends javax.swing.JFrame {
      * Creates new form SplashScreen
      */
     public SplashScreen() {
-        initComponents();          
+        initComponents();   
+        setIconImage(Application.getIcon());
+        Application.initializeTrayIcon();
         loadEnd = false;
         Load load = new Load();
         load.start(); 
         UpdateHeader updateHeader = new UpdateHeader();        
         updateHeader.start(); 
         ProgressBar progressBar = new ProgressBar();
-        progressBar.start();
-        Application.initializeTrayIcon();
+        progressBar.start();        
     }
     
     private class Load extends Thread{          

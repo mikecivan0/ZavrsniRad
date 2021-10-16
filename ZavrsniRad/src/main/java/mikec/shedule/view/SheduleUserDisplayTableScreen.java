@@ -160,7 +160,7 @@ public class SheduleUserDisplayTableScreen {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
+                if (e.getClickCount() == 2) {
                     JTable target = (JTable) e.getSource();
                     int column = target.getSelectedColumn();
                     try {
@@ -197,7 +197,7 @@ public class SheduleUserDisplayTableScreen {
                     "<html>Date: " + dateStr + "<br>"
                     + "Starts: " + workStartHours + "<br>"
                     + "Ends: " + workEndHours + "<br>"
-                    + "Break: " + breakDuration + " minutes</html>");
+                    + "Break in minutes: " + breakDuration + "</html>");
             add(workingHoursLabel);
         }
 
@@ -210,11 +210,11 @@ public class SheduleUserDisplayTableScreen {
                     breakDuration = String.valueOf(rwh.getBreakDurationInMinutes());
                     if (rwh.getRegularWorkingHoursItem().getName().contains("Starts")) {
                         workStartHours = Tools.formatTime(rwh.getValue())
-                                .substring(0, workEndHours.length() - 2);
+                                .substring(0, workEndHours.length() - 4);
                     }
                     if (rwh.getRegularWorkingHoursItem().getName().contains("Ends")) {
                         workEndHours = Tools.formatTime(rwh.getValue())
-                                .substring(0, workEndHours.length() - 2);
+                                .substring(0, workEndHours.length() - 4);
                         break;
                     }
                 }
@@ -223,9 +223,9 @@ public class SheduleUserDisplayTableScreen {
                 if (date.equals(ewh.getDate())) {
                     breakDuration = String.valueOf(ewh.getBreakDuration());
                     workStartHours = Tools.formatTime(ewh.getStartTime())
-                            .substring(0, workEndHours.length() - 2);
+                            .substring(0, workEndHours.length() - 4);
                     workEndHours = Tools.formatTime(ewh.getEndTime())
-                            .substring(0, workEndHours.length() - 2);
+                            .substring(0, workEndHours.length() - 4);
                     dateStr += " (" + ewh.getFootnote() + ")";
                     break;
                 }
@@ -234,7 +234,6 @@ public class SheduleUserDisplayTableScreen {
     }
 
     private void display() {
-        table.setRowSelectionInterval(0, table.getRowCount() - 1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(totalWidth, totalHeigth);
         frame.setResizable(true);
