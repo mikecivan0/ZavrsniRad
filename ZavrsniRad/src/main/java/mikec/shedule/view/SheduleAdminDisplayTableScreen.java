@@ -249,7 +249,7 @@ public class SheduleAdminDisplayTableScreen {
     }
 
     private void displayDialog() throws BaseException {
-        EditRecordDialogScreen dialog = new EditRecordDialogScreen(frame, true, record);
+        RecordEditDialogScreen dialog = new RecordEditDialogScreen(frame, true, record);
         dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(frame);

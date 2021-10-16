@@ -26,7 +26,7 @@ import mikec.shedule.util.Tools;
  *
  * @author Ivan
  */
-public class EditRecordDialogScreen extends javax.swing.JDialog {
+public class RecordEditDialogScreen extends javax.swing.JDialog {
 
     private LabelController labelController;
     private UserController userController;
@@ -35,7 +35,7 @@ public class EditRecordDialogScreen extends javax.swing.JDialog {
     private List<User> userList;
     private Record record;
 
-    public EditRecordDialogScreen(java.awt.Frame parent, boolean modal, Record record) throws BaseException {
+    public RecordEditDialogScreen(java.awt.Frame parent, boolean modal, Record record) throws BaseException {
         super(parent, modal);
         initComponents();
         this.record = record;
