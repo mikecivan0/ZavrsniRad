@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -263,8 +264,12 @@ public class SheduleAdminDisplayTableScreen {
         dialog.setVisible(true);
     }
     
-    private void updateValuesAfterChange() {
+    private void updateValuesAfterChange() {        
         Record newRecord = recordController.findRecord(record);
+        if(newRecord.getId()==null){
+            newRecord.setDate(record.getDate());
+            newRecord.setUser(record.getUser());
+        }
         table.setValueAt(newRecord, selectedRow, selectedColumn);
         try {
             updateNumberOfWorkersForCell(selectedColumn);

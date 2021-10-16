@@ -162,6 +162,10 @@ public class RecordEditDialogScreen extends javax.swing.JDialog {
             }
         });
 
+        cmbUser.setEnabled(false);
+
+        dpDate.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,10 +213,10 @@ public class RecordEditDialogScreen extends javax.swing.JDialog {
 
     private void btnApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyActionPerformed
         Label l = (Label) cmbLabel.getSelectedItem();
-        if (l.getAbbreviation() == "-") {
-                recordDelete();
+        if ("-".equals(l.getAbbreviation())) {
+            recordDelete();
         } else {
-            recordInsertOrUpdate();
+            recordCreateOrUpdate();
         }
         btnCloseActionPerformed(null);
     }//GEN-LAST:event_btnApplyActionPerformed
@@ -230,12 +234,39 @@ public class RecordEditDialogScreen extends javax.swing.JDialog {
 
     private void recordDelete() {
         if (record.getId() != null) {
-            recordController.deleteById(record.getId());           
+            recordController.deleteById(record.getId());
         }
     }
 
-    private void recordInsertOrUpdate() {
+    private void recordCreateOrUpdate() {
+        if (record.getId() == null) {
+            recordCreate();
+        } else {
+            recordUpdate();
+        }
+    }
 
+    private void recordCreate() {
+        recordController.setEntity(new Record());
+        setEntityValues();
+        try {
+            recordController.create();
+        } catch (BaseException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
+    private void recordUpdate() {
+        Label selectedLabel = (Label) cmbLabel.getSelectedItem();
+        if (record.getLabel().getAbbreviation() != selectedLabel.getAbbreviation()) {
+            recordController.setEntity(recordController.findRecord(record));
+            setEntityValues();
+            try {
+                recordController.update();
+            } catch (BaseException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
