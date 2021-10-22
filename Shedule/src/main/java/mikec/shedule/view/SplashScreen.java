@@ -73,7 +73,7 @@ public class SplashScreen extends javax.swing.JFrame {
         }          
         
         private String generateHeaderMessage(){
-            String hederBaseText = "Loading " + Application.APP_TITLE;
+            String hederBaseText = "Loading " + Application.getAppTitle();
             switch(sufix){
                 case "" -> { sufix = "."; }
                 case "." -> { sufix = ".."; }

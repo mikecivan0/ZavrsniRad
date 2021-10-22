@@ -18,12 +18,12 @@ import mikec.shedule.model.User;
  */
 public class Application {
 
-    public static final String APP_TITLE = "Shedule App";
-    public static User user = new User();
-    public static final String LINK_GITHUB = "https://github.com/mikecivan0/ZavrsniRad";
-    public static final String LINK_ER_DIAGRAM = "https://github.com/mikecivan0/ZavrsniRad/blob/main/Shedule/database.png";
-    public static final String PATH_ICON = "src/main/resources/icon.png";
-    public static final String PATH_TRAY_ICON = "src/main/resources/trayIcon.png";
+    private static final String APP_TITLE = "Shedule App";
+    private static User user = new User();
+    private static final String LINK_GITHUB = "https://github.com/mikecivan0/ZavrsniRad";
+    private static final String LINK_ER_DIAGRAM = "https://github.com/mikecivan0/ZavrsniRad/blob/main/Shedule/database.png";
+    private static final String PATH_ICON = "src/main/resources/icon.png";
+    private static final String PATH_TRAY_ICON = "src/main/resources/trayIcon.png";
     private static TrayIcon trayIcon;
     private static SystemTray tray;
 
@@ -67,6 +67,18 @@ public class Application {
     
     public static void setUser(User user){
         Application.user=user;
+    }
+    
+    public static String getAppTitle(){
+        return Application.APP_TITLE;
+    }
+    
+    public static String getGitHubLink(){
+        return Application.LINK_GITHUB;
+    }
+    
+    public static String getErDiagramLink(){
+        return Application.LINK_ER_DIAGRAM;
     }
 
 }

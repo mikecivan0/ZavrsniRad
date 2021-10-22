@@ -175,7 +175,7 @@ public class Auth extends javax.swing.JFrame {
                 return;
             }
             
-            Application.user = oper;
+            Application.setUser(oper);
             if(oper.getLevel()==1){
                 new UserMainScreen().setVisible(true);
             }else if(oper.getLevel()==2){
@@ -192,11 +192,11 @@ public class Auth extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLinkGitCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkGitCodeActionPerformed
-        Tools.openLink(Application.LINK_GITHUB);
+        Tools.openLink(Application.getGitHubLink());
     }//GEN-LAST:event_btnLinkGitCodeActionPerformed
 
     private void btnLinkErDiagramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkErDiagramActionPerformed
-         Tools.openLink(Application.LINK_ER_DIAGRAM);
+         Tools.openLink(Application.getErDiagramLink());
     }//GEN-LAST:event_btnLinkErDiagramActionPerformed
 
     private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
