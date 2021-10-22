@@ -45,7 +45,7 @@ public class SheduleUserChooseScreen extends javax.swing.JFrame{
     }
     
     public void loadMonths(){
-        List<Integer> months = controller.getMonths(String.valueOf(cmbYear.getSelectedItem()));       
+        List<Integer> months = controller.getMonthsForUser(String.valueOf(cmbYear.getSelectedItem()));       
         DefaultComboBoxModel monthComboBox = new DefaultComboBoxModel();
         for(Integer month : months){
             monthComboBox.addElement(month);

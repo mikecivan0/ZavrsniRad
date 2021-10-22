@@ -57,6 +57,15 @@ public class RecordController extends BaseController<Record>{
                 .list();
     }
     
+    public List<Integer> getMonthsForUser(String year){            
+        return session.createNativeQuery("SELECT DISTINCT MONTH(date) as month "
+                + "from records where YEAR(date)=:year "
+                + "AND userId=:user")
+                .setParameter("year", year)
+                .setParameter("user", Application.getUser())
+                .list();
+    }
+    
     public List<Record> getRecordsForMonth(String year, String month){            
         return session.createQuery("FROM records "
                 + "WHERE YEAR(date)=:year AND MONTH(date)=:month").
