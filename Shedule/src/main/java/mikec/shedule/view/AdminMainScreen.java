@@ -62,6 +62,8 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/shedule.gif"))); // NOI18N
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(797, 30));
+
         jMenu4.setBorder(null);
         jMenu4.setMnemonic('s');
         jMenu4.setText("Shedule");

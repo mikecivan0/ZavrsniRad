@@ -56,6 +56,8 @@ public class UserMainScreen extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/shedule.gif"))); // NOI18N
 
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(229, 30));
+
         jMenu1.setBorder(null);
         jMenu1.setMnemonic('m');
         jMenu1.setText("View my shedules");
