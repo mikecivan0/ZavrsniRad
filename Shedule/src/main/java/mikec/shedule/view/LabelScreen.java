@@ -167,7 +167,8 @@ public class LabelScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        if (controller.getEntity().getId() < 3) {
+        if ("w".equals(controller.getEntity().getAbbreviation()) || 
+                "w*".equals(controller.getEntity().getAbbreviation())) {
             JOptionPane.showMessageDialog(getParent(), "This label is not allowed to modify");
         } else {
             setEntityValues();

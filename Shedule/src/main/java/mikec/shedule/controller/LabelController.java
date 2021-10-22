@@ -24,6 +24,7 @@ public class LabelController extends BaseController<Label>{
         notEmptyControl("Abbreviation");
         lengthControl("Name",30);
         lengthControl("Abbreviation",3);
+        isAbbreviationMinusControll();
         createExistsControl();
     }
 
@@ -34,6 +35,7 @@ public class LabelController extends BaseController<Label>{
         lengthControl("Name",30);
         lengthControl("Abbreviation",3);
         updateExistsControl();  
+        isAbbreviationMinusControll();
         if(entity.getId()<3){
             throw new BaseException("This label is not allowed to modify");
         }
@@ -91,6 +93,12 @@ public class LabelController extends BaseController<Label>{
         if(recordAbbreviationExists!=0){
             throw new BaseException("Label with that abbreviation already exists in database");
         }
+    }
+    
+    private void isAbbreviationMinusControll() throws BaseException{         
+       if("-".equals(entity.getAbbreviation().trim())){
+           throw new BaseException("Label abbreviation cannot be named '-'");
+       }
     }
     
     private void updateExistsControl() throws BaseException{         
