@@ -21,7 +21,7 @@ public class Application {
     public static final String APP_TITLE = "Shedule App";
     public static User user = new User();
     public static final String LINK_GITHUB = "https://github.com/mikecivan0/ZavrsniRad";
-    public static final String LINK_ER_DIAGRAM = "https://github.com/mikecivan0/ZavrsniRad/blob/main/ZavrsniRad/database.png";
+    public static final String LINK_ER_DIAGRAM = "https://github.com/mikecivan0/ZavrsniRad/blob/main/Shedule/database.png";
     public static final String PATH_ICON = "src/main/resources/icon.png";
     public static final String PATH_TRAY_ICON = "src/main/resources/trayIcon.png";
     private static TrayIcon trayIcon;
