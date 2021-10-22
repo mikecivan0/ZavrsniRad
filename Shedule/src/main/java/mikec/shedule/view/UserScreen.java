@@ -75,7 +75,7 @@ public class UserScreen extends javax.swing.JFrame{
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         pswPassword = new javax.swing.JPasswordField();
-        chbAktiv = new javax.swing.JCheckBox();
+        chbActive = new javax.swing.JCheckBox();
         cmbPerson = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         pswRePassword = new javax.swing.JPasswordField();
@@ -141,7 +141,7 @@ public class UserScreen extends javax.swing.JFrame{
             }
         });
 
-        chbAktiv.setText("Is activ");
+        chbActive.setText("Is active");
 
         jLabel6.setText("Person");
 
@@ -188,7 +188,7 @@ public class UserScreen extends javax.swing.JFrame{
                                 .addComponent(pswPassword, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                                 .addComponent(pswRePassword, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(chbAktiv, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chbActive, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rbtUser)
                                 .addGap(18, 18, 18)
@@ -250,7 +250,7 @@ public class UserScreen extends javax.swing.JFrame{
                             .addComponent(rbtUser)
                             .addComponent(rbtAdmin))
                         .addGap(7, 7, 7)
-                        .addComponent(chbAktiv)
+                        .addComponent(chbActive)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAdd)
@@ -334,7 +334,7 @@ public class UserScreen extends javax.swing.JFrame{
         }else{
             rbtAdmin.setSelected(true); 
         }
-        chbAktiv.setSelected(e.isAktiv());        
+        chbActive.setSelected(e.isActive());        
     }//GEN-LAST:event_lstEntitesValueChanged
 
     private void btnNewPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPersonActionPerformed
@@ -394,7 +394,7 @@ public class UserScreen extends javax.swing.JFrame{
             e.setPass(Tools.hashPass(String.copyValueOf(pswPassword.getPassword())));
         }        
         e.setLevel((rbtUser.isSelected()) ? 1 : 2);        
-        e.setAktiv(chbAktiv.isSelected());
+        e.setActive(chbActive.isSelected());
     }
      
     public void selectFirstItemOnList(){
@@ -453,7 +453,7 @@ public class UserScreen extends javax.swing.JFrame{
     private javax.swing.ButtonGroup btnGroupLevel;
     private javax.swing.JButton btnNewPerson;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JCheckBox chbAktiv;
+    private javax.swing.JCheckBox chbActive;
     private javax.swing.JComboBox<Person> cmbPerson;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

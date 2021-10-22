@@ -94,9 +94,9 @@ public class BaseValues {
         }
     }
 
-    private static void loadUser(Person person, String username, String pass, String prs_id, int level, boolean aktiv) throws BaseException {
+    private static void loadUser(Person person, String username, String pass, String prs_id, int level, boolean active) throws BaseException {
         userController = new UserController();
-        user = new User(person, username, pass, prs_id, level, aktiv);
+        user = new User(person, username, pass, prs_id, level, active);
         userController.setEntity(user);     
         
         try {

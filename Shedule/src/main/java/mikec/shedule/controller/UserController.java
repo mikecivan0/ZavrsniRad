@@ -27,7 +27,7 @@ public class UserController extends BaseController<User>{
     
     public List<User> getActiveUsers() {
         return session.createQuery("FROM users WHERE "
-                + "aktiv IS TRUE").list();
+                + "active IS TRUE").list();
     }
     
     @Override

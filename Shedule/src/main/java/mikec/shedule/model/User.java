@@ -21,13 +21,13 @@ public class User{
     public User() {
     }
     
-    public User(Person person, String username, String pass, String prs_id, int level, boolean aktiv) {
+    public User(Person person, String username, String pass, String prs_id, int level, boolean active) {
         this.person = person;
         this.username = username;
         this.pass = pass;
         this.prs_id = prs_id;
         this.level = level;
-        this.aktiv = aktiv;
+        this.active = active;
     }
     
     @Id
@@ -73,7 +73,7 @@ public class User{
     private int level;
     
     @Column(nullable = false)
-    private boolean aktiv;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -123,12 +123,12 @@ public class User{
         this.level = level;
     }
 
-    public boolean isAktiv() {
-        return aktiv;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setAktiv(boolean aktiv) {
-        this.aktiv = aktiv;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
