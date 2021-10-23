@@ -175,6 +175,11 @@ public class Auth extends javax.swing.JFrame {
                 return;
             }
             
+            if(!oper.isActive()){
+                JOptionPane.showMessageDialog(getRootPane(), "You are not active user");
+                return;
+            }
+            
             Application.setUser(oper);
             if(oper.getLevel()==1){
                 new UserMainScreen().setVisible(true);
