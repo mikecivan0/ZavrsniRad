@@ -303,6 +303,7 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try {
             checkAreDatesValid();
+            checkNumbersNotNegativ();
         } catch (BaseException ex) {
             JOptionPane.showMessageDialog(getParent(), ex.getMessage());
             return;
@@ -350,10 +351,27 @@ public class NumOfWorkersForDayScreen extends javax.swing.JFrame{
         }
     }
     
+    private void checkNumbersNotNegativ() throws BaseException{
+        int mon=0, tue=0, wed=0, thu=0, fri=0, sat=0, sun=0;
+        
+            mon = Integer.parseInt(txtMondayNum.getText());
+            tue = Integer.parseInt(txtTuesdayNum.getText());
+            wed = Integer.parseInt(txtWednesdayNum.getText());
+            thu = Integer.parseInt(txtThursdayNum.getText());
+            fri = Integer.parseInt(txtFridayNum.getText());
+            sat = Integer.parseInt(txtSaturdayNum.getText());
+            sun = Integer.parseInt(txtSundayNum.getText());    
+        
+        if(mon<0 || tue<0 || wed<0 || thu<0 || fri<0 || sat<0 || sun<0){
+            throw new BaseException("All numbers must be positive");
+        }
+    }
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         boolean proceed = true;
         try {
             checkAreDatesValid(); 
+            checkNumbersNotNegativ();
             controller.checkUpdateOverlap(
                     Tools.LocalDateToDate(dateStarts.getDate()), 
                     Tools.LocalDateToDate(dateExpires.getDate()), 
