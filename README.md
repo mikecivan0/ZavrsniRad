@@ -1,7 +1,7 @@
-# ZavrsniRad
-raspored rada GUI
+# Raspored rada GUI
+Završni rad za Edunovu
 
-Aplikacija za vođenje rasopreda rada po uzoru na rad osoblja za čišćenje u KissSalis Therme Bad Kissingen
+Aplikacija za vođenje rasporeda rada po uzoru na rad osoblja za čišćenje u KissSalis Therme Bad Kissingen
 
 
 
